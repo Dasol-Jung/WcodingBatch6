@@ -12,4 +12,5 @@
 <body>
     <?= $content ?>
 </body>
+<script src="public/js/frontend/carosel.js"></script>
 </html>
