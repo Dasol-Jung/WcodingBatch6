@@ -24,7 +24,7 @@
     </div>
 </form>
 <script src= "../../public/js/frontend/utils.js"></script>
-<script src= "../../public/js/frontend/login.js"></script>
+<script src= "../../public/js/frontend/signUp.js"></script>
 <?php $content=ob_get_clean();?>
 
 <?php include '../template.php'?>
