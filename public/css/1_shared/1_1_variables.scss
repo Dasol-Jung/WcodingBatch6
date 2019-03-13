@@ -1,0 +1,36 @@
+@font-face {
+	font-family: "DIN alternate";
+	src: url("public/css/fonts/DIN Alternate Regular.otf");
+}
+
+$primary-font: "DIN alternate";
+$primary-dark: #2f2f2f;
+$primary-light: white;
+$primary-red: #d56c6c;
+
+$secondary-dark: #404040;
+$secondary-light: #dbdbdb;
+
+$priority-none: #efefef;
+$priority-high: #f7e1e1;
+$priority-mid: #e1ecf7;
+$priority-low: #d5f0e0;
+
+$signup-btn: #35499a;
+$kakao: #ffce04;
+
+$round: 13px;
+$round-top: 13px 13px 0 0;
+$box-shadow: -1px -1px 7px 0px;
+
+@mixin round($round) {
+	border-radius: $round;
+}
+
+@mixin roundTop($round-top) {
+	border-radius: $round-top;
+}
+
+@mixin boxShadow($box-shadow) {
+	box-shadow: $box-shadow;
+}
