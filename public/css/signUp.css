@@ -80,5 +80,10 @@
 .loginForm input.errorBorder {
 	border: 2px solid #d56c6c;
 }
+.socialSignup {
+	font-size: 0.8rem;
+	margin-top: 1rem;
+	display: block;
+}
 
 /*# sourceMappingURL=login.css.map */
