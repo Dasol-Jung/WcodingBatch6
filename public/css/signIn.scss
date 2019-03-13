@@ -1,0 +1,92 @@
+@import '1_shared/1_1_variables.scss';
+
+.loginForm {
+	font-family: $primary-font;
+	padding: 1rem;
+	width: 350px;
+	margin: 0 auto;
+
+	button {
+		font-size: 0.85rem;
+		height: 2.3rem;
+		cursor: pointer;
+		border: none;
+	}
+
+	label {
+		display: block;
+		&[for='password'] {
+			margin-top: 1rem;
+		}
+	}
+
+	input {
+		width: 100%;
+		display: block;
+		border: $form-border;
+		height: 2.3rem;
+		font-size: 1rem;
+		padding-left: 0.8rem;
+		margin-top: 0.5rem;
+		box-sizing: border-box;
+	}
+
+	#signInBtn {
+		display: block;
+		width: 100%;
+		background-color: $signup-btn;
+		color: white;
+		font-weight: 300;
+	}
+
+	.socialSigninContainer {
+		margin-top: 1rem;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 0.5rem;
+
+		.googleSignin {
+			background-color: $secondary-light;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			img#googleLogo {
+				height: 1.3rem;
+				margin-right: 1.5rem;
+			}
+		}
+
+		.kakaoSignin {
+			background-color: $kakao;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			img#kakaoLogo {
+				height: 2rem;
+				margin-right: 1.5rem;
+				position: relative;
+				top: 0.25rem;
+			}
+		}
+	}
+
+	span.toSignup {
+		display: inline-block;
+		margin-top: 1rem;
+		font-size: 0.8rem;
+		a {
+			text-decoration: none;
+			color: #3f68b5;
+		}
+	}
+	span.error {
+		display: block;
+		font-size: 0.8rem;
+		height: 1rem;
+		margin: 0.5rem 0;
+		color: $primary-red;
+	}
+	input.errorBorder {
+		border: 2px solid $primary-red;
+	}
+}

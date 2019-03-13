@@ -5,23 +5,22 @@
 
     <label for="email">Email</label>
     <input name="email" id="email" type="text"/>
-    <span class='error' id='error_email'></span>
     <label for="password">Password</label>
     <input name="password" id="password" type="password"/>
-    <span class='error' id='error_password'></span>
+    <span class='error' id='error_message'></span>
 
-    <button id="signInBtn">Sign Up</button>
-    <div class="socialLoginContainer">
-        <button class="googleSignup"><img id="googleLogo" src="../../public/images/googleLogo.png"/><span>Google</span></button>
-        <button class="kakaoSignup"><img id="kakaoLogo" src="../../public/images/kakaoLogo.png"/><span>Sign Up</span></button>
+    <button id="signInBtn">Sign In</button>
+    <div class="socialSigninContainer">
+        <button class="googleSignin"><img id="googleLogo" src="../../public/images/googleLogo.png"/><span>Google</span></button>
+        <button class="kakaoSignin"><img id="kakaoLogo" src="../../public/images/kakaoLogo.png"/><span>Kakao</span></button>
     </div>
     
-    <div class="toSigninContainer">
-        <span class="toSignin">Already have an account? <a href="index.php/signin">Sign in</a></span>
+    <div class="toSignUpContainer">
+        <span class="toSignup">You don't have an account? <a href="index.php/signup">Sign Up</a></span>
     </div>
 </form>
 <script src= "../../public/js/frontend/utils.js"></script>
-<script src= "../../public/js/frontend/signUp.js"></script>
+<script src= "../../public/js/frontend/signIn.js"></script>
 <?php $content=ob_get_clean();?>
 
 <?php include '../template.php'?>
