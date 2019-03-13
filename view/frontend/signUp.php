@@ -14,7 +14,7 @@
     <span class='error' id='error_confirmPassword'></span>
 
     <button id="signupBtn">Sign Up</button>
-    <div class="socialLoginContainer">
+    <div class="socialSignupContainer">
         <button class="googleSignup"><img id="googleLogo" src="../../public/images/googleLogo.png"/><span>Google</span></button>
         <button class="kakaoSignup"><img id="kakaoLogo" src="../../public/images/kakaoLogo.png"/><span>Sign Up</span></button>
     </div>
