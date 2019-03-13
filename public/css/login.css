@@ -5,7 +5,7 @@
 .loginForm {
   font-family: "DIN alternate";
   padding: 1rem;
-  width: 300px;
+  width: 350px;
   margin: 0 auto;
 }
 .loginForm button {
@@ -19,7 +19,7 @@
 .loginForm input {
   width: 100%;
   display: block;
-  border: 1px solid #707070;
+  border: 1px solid #ccc;
   height: 2.3rem;
   font-size: 1rem;
   padding-left: 0.8rem;
@@ -73,9 +73,12 @@
 .loginForm span.error {
   display: block;
   font-size: 0.8rem;
-  height: 1.5rem;
-  margin: 0.5rem 0 1rem 0;
+  height: 1rem;
+  margin: 0.5rem 0;
   color: #d56c6c;
+}
+.loginForm input.errorBorder {
+  border: 2px solid #d56c6c;
 }
 
 /*# sourceMappingURL=login.css.map */

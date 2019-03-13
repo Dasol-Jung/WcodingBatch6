@@ -48,7 +48,9 @@ const clientUtils = (() => {
 		let inputs = form.querySelectorAll('input'),
 			errorMsg = {},
 			//at least one special character, alphabet, and number. Should be 8 characters or longer
-			passwordReg = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+			passwordLengthReg = /^(?=.{8,})/,
+			passwordSpecialReg = /^(?=.*[!@#\$%\^&\*])/,
+			passwordLetterReg = /^(?=.*[a-z])(?=.*[0-9])/,
 			emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		inputs.forEach(input => {
 			switch (input.name) {
@@ -59,10 +61,16 @@ const clientUtils = (() => {
 					break;
 
 				case 'password':
-					if (!passwordReg.test(String(input.value))) {
-						errorMsg['password'] =
-							'The password should have at least one special character, number, alphabet and be at least 8 character';
+					if (!passwordLetterReg.test(String(input.value))) {
+						errorMsg['password'] = 'The password should have at least one number and alphabet';
 					}
+					if (!passwordSpecialReg.test(String(input.value))) {
+						errorMsg['password'] = 'The password should have at least one special character';
+					}
+					if (!passwordLengthReg.test(String(input.value))) {
+						errorMsg['password'] = 'The password should be at least 8 characters';
+					}
+
 					break;
 
 				case 'confirmPassword':
@@ -96,7 +104,13 @@ const clientUtils = (() => {
 		let inputs = form.querySelectorAll('input');
 		inputs.forEach(input => {
 			let errorMsg = form.querySelector(`span#error_${input.name}`);
-			errorMsg.textContent = errors[input.name] ? errors[input.name] : '';
+			if (errors[input.name]) {
+				errorMsg.textContent = errors[input.name];
+				input.classList.add('errorBorder');
+			} else {
+				errorMsg.textContent = '';
+				input.classList.remove('errorBorder');
+			}
 		});
 	}
 
