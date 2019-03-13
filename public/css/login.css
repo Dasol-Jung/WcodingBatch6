@@ -9,8 +9,9 @@
   margin: 0 auto;
 }
 .loginForm button {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   height: 2.3rem;
+  cursor: pointer;
 }
 .loginForm label {
   display: block;
@@ -21,6 +22,8 @@
   border: 1px solid #707070;
   height: 2.3rem;
   margin: 1rem 0 1.5rem 0;
+  font-size: 1rem;
+  padding-left: 0.8rem;
 }
 .loginForm #signupBtn {
   display: block;
