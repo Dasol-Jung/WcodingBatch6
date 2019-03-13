@@ -1,0 +1,70 @@
+@font-face {
+  font-family: "DIN alternate";
+  src: url("public/css/fonts/DIN Alternate Regular.otf");
+}
+.loginForm {
+  font-family: "DIN alternate";
+  padding: 1rem;
+  width: 300px;
+  margin: 0 auto;
+}
+.loginForm button {
+  font-size: 0.8rem;
+  height: 2.3rem;
+}
+.loginForm label {
+  display: block;
+}
+.loginForm input {
+  width: 100%;
+  display: block;
+  border: 1px solid #707070;
+  height: 2.3rem;
+  margin: 1rem 0 1.5rem 0;
+}
+.loginForm #signupBtn {
+  display: block;
+  width: 100%;
+  background-color: #35499a;
+  color: white;
+  font-weight: 300;
+}
+.loginForm .socialLoginContainer {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0.5rem;
+}
+.loginForm .socialLoginContainer .googleSignup {
+  background-color: #dbdbdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loginForm .socialLoginContainer .googleSignup img#googleLogo {
+  height: 1.3rem;
+  margin-right: 1.5rem;
+}
+.loginForm .socialLoginContainer .kakaoSignup {
+  background-color: #ffce04;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loginForm .socialLoginContainer .kakaoSignup img#kakaoLogo {
+  height: 2rem;
+  margin-right: 1.5rem;
+  position: relative;
+  top: 0.25rem;
+}
+.loginForm span.toSignin {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+}
+.loginForm span.toSignin a {
+  text-decoration: none;
+  color: #3f68b5;
+}
+
+/*# sourceMappingURL=login.css.map */
