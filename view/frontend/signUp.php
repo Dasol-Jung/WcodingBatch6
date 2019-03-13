@@ -1,6 +1,6 @@
 <?php ob_start();?>
 
-<link rel="stylesheet" href="../../public/css/login.css"/>
+<link rel="stylesheet" href="../../public/css/signUp.css"/>
 <form class="loginForm" action="index.php" method="POST">
 
     <label for="email">Email</label>
