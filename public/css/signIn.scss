@@ -29,6 +29,9 @@
 		padding-left: 0.8rem;
 		margin-top: 0.5rem;
 		box-sizing: border-box;
+		&:focus {
+			outline: 2px solid #3f68b5;
+		}
 	}
 
 	#signInBtn {

@@ -27,6 +27,9 @@
 	margin-top: 0.5rem;
 	box-sizing: border-box;
 }
+.loginForm input:focus {
+	outline: 2px solid #3f68b5;
+}
 .loginForm #signupBtn {
 	display: block;
 	width: 100%;

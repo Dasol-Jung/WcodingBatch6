@@ -4,7 +4,7 @@
 <form class="loginForm" action="index.php" method="POST">
 
     <label for="email">Email</label>
-    <input name="email" id="email" type="text"/>
+    <input name="email" id="email" type="email"/>
     <label for="password">Password</label>
     <input name="password" id="password" type="password"/>
     <span class='error' id='error_message'></span>
