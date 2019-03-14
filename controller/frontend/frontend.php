@@ -3,7 +3,10 @@
 require_once('model/ManagerDB.php');
 
 function viewHome()
-{
+{ 
+    ob_start();
+        require('view/frontend/viewSignUp.php');
+    $rightSection = ob_get_clean();
     require('view/frontend/viewHome.php');
 }
 
@@ -13,7 +16,10 @@ function viewCalendar()
 }
 
 function viewLogin(){
-    require("view/frontend/viewLogin.php");
+    ob_start();
+        require("view/frontend/viewLogin.php");
+    $rightSection = ob_get_clean();
+    require('view/frontend/viewHome.php');
 }
 
 function viewWelcome(){

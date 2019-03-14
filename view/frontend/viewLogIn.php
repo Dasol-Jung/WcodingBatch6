@@ -1,6 +1,4 @@
-<?php ob_start();?>
-
-<link rel="stylesheet" href="../../public/css/signIn.css"/>
+<?php $styles[]='<link rel="stylesheet" href="public/css/signIn.css"/>'?>
 <form class="loginForm" action="index.php" method="POST">
 
     <label for="email">Email</label>
@@ -20,11 +18,8 @@
     </div>
     
     <div class="toSignUpContainer">
-        <span class="toSignup">You don't have an account? <a href="index.php/signup">Sign Up</a></span>
+        <span class="toSignup">You don't have an account? <a href="index.php">Sign Up</a></span>
     </div>
 </form>
 <script src= "../../public/js/frontend/utils.js"></script>
 <script src= "../../public/js/frontend/login.js"></script>
-<?php $content=ob_get_clean();?>
-
-<?php include 'view/template.php'?>

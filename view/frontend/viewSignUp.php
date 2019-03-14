@@ -1,5 +1,4 @@
-
-<link rel="stylesheet" href="../../public/css/signUp.css"/>
+<?php $styles[]="<link rel='stylesheet' href='../../public/css/signUp.css'/>"?>
 <form class="loginForm" action="index.php" method="POST">
 
     <label for="email">Email</label>
@@ -24,7 +23,7 @@
     </div>
     
     <div class="toSigninContainer">
-        <span class="toSignin">Already have an account? <a href="?action=login">Sign in</a></span>
+        <span class="toSignin">Already have an account? <a href="http://localhost:8888/index.php?action=login">Sign in</a></span>
     </div>
 </form>
 <script src= "../../public/js/frontend/utils.js"></script>

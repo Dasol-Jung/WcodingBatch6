@@ -1,12 +1,13 @@
 @font-face {
   font-family: "DIN alternate";
-  src: url("fonts/DIN Alternate Regular.otf");
+  src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
 }
 .loginForm {
   font-family: "DIN alternate";
   padding: 1rem;
   width: 350px;
-  margin: 0 auto;
+  margin: 2rem auto;
+  background-color: white;
 }
 .loginForm button {
   font-size: 0.85rem;

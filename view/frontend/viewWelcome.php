@@ -1,5 +1,6 @@
 <?php
 session_start();
+$style="<link rel='stylesheet' href='../../public/css/welcome.css'/>";
 ob_start();
 ?>
 
