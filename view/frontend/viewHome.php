@@ -1,4 +1,3 @@
-<?php $title = 'Weekly Scheduler'; ?>
 <?php ob_start(); ?>
 
 <?php require_once "carousel.php"?>
