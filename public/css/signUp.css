@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "DIN alternate";
-	src: url("public/css/fonts/DIN Alternate Regular.otf");
+	src: url("./fonts/DIN Alternate Regular.otf");
 }
 .loginForm {
 	font-family: "DIN alternate";

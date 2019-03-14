@@ -10,6 +10,8 @@
     <title><?= $title ?></title>
 </head>
 <body>
+<?php require_once "view/frontend/header.php"?>
     <?= $content ?>
+<?php require_once "view/frontend/footer.php"?>
 </body>
 </html>

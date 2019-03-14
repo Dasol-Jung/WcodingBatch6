@@ -16,15 +16,14 @@
 			let formData = new FormData(form);
 			formData.append('action', 'signup');
 			xhr.open('POST', 'index.php');
-			xhr.setRequestHeader('Content-Type', 'application/form-data');
 			xhr.onreadystatechange = function() {
-				if (xhr.readyState != 4) {
-					alert('something went wrong');
-					return;
-				}
-				if (xhr.status >= 200 && xhr.status < 300) {
+				if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
+					if (xhr.response == 'success') {
+						window.location.href = 'http://localhost:8888/index.php?action=welcome';
+					} else {
+						alert(xhr.response);
+					}
 					// redirect to signup page
-					window.location = 'signup.php';
 					return;
 				}
 				if (xhr.status >= 400) {
