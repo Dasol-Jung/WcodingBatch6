@@ -1,6 +1,6 @@
 @font-face {
   font-family: "DIN alternate";
-  src: url("public/css/fonts/DIN Alternate Regular.otf");
+  src: url("fonts/DIN Alternate Regular.otf");
 }
 .loginForm {
   font-family: "DIN alternate";
@@ -86,6 +86,22 @@
 }
 .loginForm input.errorBorder {
   border: 2px solid #d56c6c;
+}
+.loginForm .keepLoggedIn-container {
+  font-size: 0.8rem;
+  display: grid;
+  grid-gap: 5px;
+  align-items: center;
+  grid-template-columns: min-content 15px;
+}
+.loginForm .keepLoggedIn-container input#keepLoggedIn {
+  margin: 0;
+}
+.loginForm .keepLoggedIn-container input#keepLoggedIn:focus {
+  outline: none;
+}
+.loginForm .keepLoggedIn-container label {
+  white-space: nowrap;
 }
 
 /*# sourceMappingURL=signIn.css.map */

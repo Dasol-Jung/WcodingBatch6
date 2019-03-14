@@ -42,5 +42,34 @@
             $_SESSION['firstName'] = parent::findByEmail($emailCleaned)['first_name'];
             return "success";
         }
+
+        public function login($email,$password,$keepLoggedIn){
+            $db = parent::dbConnect();
+            $emailCleaned = addslashes(htmlspecialchars(htmlentities(trim($email))));
+            $findUserQuery = 'SELECT email, password, first_name, internal_uid FROM internal_user WHERE email=:email';
+            $findUser = $db->prepare($findUserQuery);
+            $findUser->bindParam(":email",$emailCleaned,PDO::PARAM_STR);
+            $findUser->execute();
+            if($user=$findUser->fetch()){
+                
+                if(password_verify($password,$user['password'])){
+                    $_SESSION['isLoggedIn']=true;
+                    $_SESSION['firstName']=$user['first_name'];
+                    $_SESSION['internalUid']=$user['internal_uid'];
+                    
+                    if($keepLoggedIn){
+                        setcookie('keepLoggedIn', true, time()+3600*24*365,'/');
+                        setcookie('firstName', $user['first_name'], time()+3600*24*365,'/');
+                        setcookie('internalUid', $user['internal_uid'], time()+3600*24*365,'/');
+                    }
+                    
+                    return "success";
+                }else{
+                    return "User email or password is not correct";
+                }
+            }else{
+                return "User email or password is not correct";
+            }
+        }
     }
 ?>

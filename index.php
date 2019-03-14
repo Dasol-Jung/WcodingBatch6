@@ -33,6 +33,14 @@ try{
                 }
                 break;
 
+            case 'login':
+                if(isset($_POST['email']) && isset($_POST['password'])){
+                    $email = $_POST['email'];
+                    $password = $_POST['password'];
+                    $keepLoggedIn = $_POST['keepLoggedIn']=="1" ? true : false;
+                    login($email,$password, $keepLoggedIn);
+                }
+
             default :
                 break;
         }

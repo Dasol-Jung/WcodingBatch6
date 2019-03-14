@@ -92,4 +92,20 @@
 	input.errorBorder {
 		border: 2px solid $primary-red;
 	}
+	.keepLoggedIn-container {
+		font-size: 0.8rem;
+		input#keepLoggedIn {
+			margin: 0;
+			&:focus {
+				outline: none;
+			}
+		}
+		label {
+			white-space: nowrap;
+		}
+		display: grid;
+		grid-gap: 5px;
+		align-items: center;
+		grid-template-columns: min-content 15px;
+	}
 }
