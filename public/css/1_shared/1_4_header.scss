@@ -1,1 +1,36 @@
-@import './1_3_overall.scss';
+@import '1_1_variables.scss';
+
+header {
+	position: absolute;
+	width: 100%;
+	.logoContainer {
+		float: left;
+		width: 30px;
+		height: 30px;
+		margin: 10px 0 0 10px;
+		#logo {
+			height: 100%;
+		}
+	}
+	nav {
+		float: right;
+	}
+	ul {
+		display: flex;
+		justify-content: flex-end;
+		list-style: none;
+		.menuItem {
+			margin: 0 1rem;
+		}
+		.menuLink {
+			padding: 1rem;
+			text-decoration: none;
+			color: $primary-light;
+			font-family: $primary-font;
+			font-weight: bold;
+			:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}

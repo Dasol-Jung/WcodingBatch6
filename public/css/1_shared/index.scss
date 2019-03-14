@@ -1,0 +1,15 @@
+@import '1_1_variables.scss';
+
+.bodyWrapper {
+	height: 100%;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 10px 2fr;
+	justify-content: center;
+	align-items: center;
+	background-color: $primary-dark;
+	.divider {
+		background-color: $primary-red;
+		height: 100%;
+	}
+}
