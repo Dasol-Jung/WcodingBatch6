@@ -51,7 +51,8 @@ const clientUtils = (() => {
 			passwordLengthReg = /^(?=.{8,})/,
 			passwordSpecialReg = /^(?=.*[!@#\$%\^&\*])/,
 			passwordLetterReg = /^(?=.*[a-z])(?=.*[0-9])/,
-			emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+			firstNameReg = /^(?=.{1,})/;
 		inputs.forEach(input => {
 			switch (input.name) {
 				case 'email':
@@ -80,7 +81,14 @@ const clientUtils = (() => {
 					}
 					break;
 
+				case 'firstName':
+					if (!firstNameReg.test(String(input.value))) {
+						errorMsg['firstName'] = "First Name can't be empty";
+					}
+					break;
+
 				default:
+					break;
 			}
 		});
 
