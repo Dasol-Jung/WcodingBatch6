@@ -5,6 +5,10 @@ try{
         if ($_GET['action'] == 'viewCalendar') {
             viewCalendar();
         }
+        elseif ($_GET['action'] == 'loggedIn') {
+            $googleInfo = json_decode(file_get_contents("php://input"), TRUE);
+            loggedInGoogle($googleInfo);
+        }
     }
     else {
         viewHome();
