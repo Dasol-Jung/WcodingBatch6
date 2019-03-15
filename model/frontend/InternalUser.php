@@ -1,8 +1,11 @@
 <?php
-    session_start();
-    // error_reporting(E_ALL);
-    // ini_set('display_errors', 1);  
+     if(!isset($_SESSION)) 
+     { 
+         session_start(); 
+     } 
+
     require_once('User.php');
+    
     class InternalUser extends User{
 
         public function userSignUp($email,$password,$confirmPassword,$firstName){
@@ -38,12 +41,14 @@
             $signUpReq->execute();
 
             //find user id by email and set session;
+            $_SESSION['isLoggedIn']=true;
             $_SESSION['internalUid'] = parent::findByEmail($emailCleaned)['internal_uid'];
             $_SESSION['firstName'] = parent::findByEmail($emailCleaned)['first_name'];
             return "success";
         }
 
         public function login($email,$password,$keepLoggedIn){
+
             $db = parent::dbConnect();
             $emailCleaned = addslashes(htmlspecialchars(htmlentities(trim($email))));
             $findUserQuery = 'SELECT email, password, first_name, internal_uid FROM internal_user WHERE email=:email';
@@ -58,18 +63,57 @@
                     $_SESSION['internalUid']=$user['internal_uid'];
                     
                     if($keepLoggedIn){
-                        setcookie('keepLoggedIn', true, time()+3600*24*365,'/');
+                        //create a token to remember the user
+                        $rememberMeToken = uniqid("",true);
+
+                        //save the token on database
+                        $rememberMeQuery = 'UPDATE internal_user SET remember_me_token = :remember_me_token WHERE internal_uid=:internal_uid';
+                        $rememberMeReq = $db->prepare($rememberMeQuery);
+                        $rememberMeReq->bindParam(":remember_me_token",$rememberMeToken,PDO::PARAM_STR);
+                        $rememberMeReq->bindParam(":internal_uid",$user['internal_uid'],PDO::PARAM_STR);
+                        $rememberMeReq->execute();
+
+                        setcookie('rememberMeToken', $rememberMeToken, time()+3600*24*365,'/');
                         setcookie('firstName', $user['first_name'], time()+3600*24*365,'/');
                         setcookie('internalUid', $user['internal_uid'], time()+3600*24*365,'/');
                     }
                     
                     return "success";
+
                 }else{
                     return "User email or password is not correct";
                 }
             }else{
                 return "User email or password is not correct";
             }
+        }
+
+        public function checkRememberMe(){
+            
+            if(isset($_COOKIE['internal_uid']) && isset($_COOKIE['rememberMeToken'])){
+                $db = parent::dbConnect();
+                $checkRememberQuery = "SELECT internal_uid, first_name FROM internal_user WHERE internal_uid=:internal_uid AND remember_me_token =:remember_me_token";
+                $checkRememberReq = $db->prepare($checkRememberQuery);
+                $checkRememberReq->bindParam(":internal_uid",$_COOKIE['internal_uid'],PDO::PARAM_STR);
+                $checkRememberReq->bindParam(":remember_me_token",$_COOKIE['rememberMeToken'],PDO::PARAM_STR);
+                $checkRememberReq->execute();
+                $user = $checkRememberReq->fetch(PDO::FETCH_ASSOC);
+                $isRememberMeCookieValid = $user == false ? false : true;
+                if($isRememberMeCookieValid==true){
+                    $_SESSION['isLoggedIn']=true;
+                    $_SESSION['firstName']=user['first_name'];
+                    $_SESSION['internalUid']=$user['internal_uid'];
+                }
+            }
+        }
+
+        public function userLogout(){
+
+            setcookie('rememberMeToken');
+            setcookie('firstName');
+            setcookie('internalUid');
+            session_destroy();
+            header("Location: index.php");
         }
     }
 ?>

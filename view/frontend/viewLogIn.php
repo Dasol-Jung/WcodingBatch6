@@ -6,8 +6,8 @@
     <label for="password">Password</label>
     <input name="password" id="password" type="password"/>
     <div class="keepLoggedIn-container">
-        <label for="keepLoggedIn">Remember Me</label>
         <input name="keepLoggedIn" value="1" id="keepLoggedIn" type="checkbox"/>
+        <label for="keepLoggedIn">Remember Me</label>
     </div>
     <span class='error' id='error_message'></span>
 

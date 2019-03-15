@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);  
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);  
 require('./controller/frontend/frontend.php');
 try{
     if (isset($_GET['action'])) {
@@ -8,7 +8,20 @@ try{
             viewCalendar();
         }
         if($_GET['action'] == 'login'){
+            // redirect to index.php if the user is already logged in
+            if($_SESSION['isLoggedIn']==true){
+                while(ob_get_level()){
+                    ob_end_clean();
+                }
+                ob_start();
+                header("Location: index.php");
+                ob_end_clean();
+            }
+            //if the user is not logged in, show login form
             viewLogin();
+        }
+        if($_GET['action'] == 'logout'){
+            logout();
         }
         if($_GET['action'] == 'welcome'){
             viewWelcome();
@@ -34,6 +47,7 @@ try{
                 break;
 
             case 'login':
+
                 if(isset($_POST['email']) && isset($_POST['password'])){
                     $email = $_POST['email'];
                     $password = $_POST['password'];
