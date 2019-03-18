@@ -13,5 +13,6 @@ function loggedInGoogle($googleInfo)
     require("model/frontend/GoogleUserManager.php");
     $user = new GoogleUserManager();
     $user= $user-> makeGoogle($googleInfo);
-    require("include view of button");
+    print_r($user);
+    require("view/frontend/googleLoginButton.php");
 }

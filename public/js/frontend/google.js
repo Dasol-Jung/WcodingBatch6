@@ -16,9 +16,9 @@ function onSuccess(googleUser) {
         "email": profile.getEmail()
     };
 
-    // we trigger our ajex on success
+    // we trigger our ajax on success
     var ajax = new XMLHttpRequest();
-    ajax.open("POST", './view/frontend/testReturnGoogleApi.php', true);
+    ajax.open("POST", 'index.php?action=loggedIn', true);
     ajax.setRequestHeader("Content-type", "application/json");
     ajax.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -54,6 +54,8 @@ function renderButton() {
     "onfailure": onFailure
     });
 }
+
+
 
 /**
  * function to logout the user

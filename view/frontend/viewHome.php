@@ -10,14 +10,11 @@
 <?php require_once "login.php";?>
 <?php require_once "footer.php";?>
 <div id="my-signin2"></div>
-  <script>
-    //call the function of renderbutton
-  </script>
-<script src="call your js of google"></script>
+<script src="./public/js/frontend/google.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <?php $content = ob_get_clean();?>
 <?php require "./view/template.php"; ?>
-
+<!--
 // 1 create a view only for your button to be included in view_home.(you need to wait for the of Aiden)
 // 2. change the testGoogle..php to the actual treatment  : need to create a simple view with only the display of the name and the image
 //  2a .  MVC part
@@ -32,4 +29,4 @@
       // extends Users super classe of AJ
       // create your function to : insert into if not exists the google user otherwise load the user
       // create your function to load the user from the google_uid function searchUser($uid) {}
-   // last step in your Controller function == you need to require your view to display the infor;ation of the user 
+   // last step in your Controller function == you need to require your view to display the infor;ation of the user -->
