@@ -71,7 +71,7 @@
 	}
 	.addSchedule {
 		float: right;
-		margin-right: 1rem;
+		margin-right: 1.5rem;
 		position: relative;
 		bottom: 10%;
 	}
@@ -83,7 +83,7 @@
 	grid-template-columns: repeat(7, 1fr);
 	height: 100%;
 	width: 100%;
-	padding: 0 1.5rem 1rem 1.5rem;
+	padding: 0 1.5rem 2rem 1.5rem;
 	box-sizing: border-box;
 	.dayContainer {
 		border-radius: 10px 10px 0 0;
