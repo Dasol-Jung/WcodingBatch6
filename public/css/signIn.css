@@ -104,5 +104,19 @@
 .loginForm .keepLoggedIn-container label {
   white-space: nowrap;
 }
+.loginForm .social-hr {
+  position: relative;
+  height: 0.5px;
+  background-color: #aaa;
+  margin: 2rem 0;
+}
+.loginForm .social-hr span {
+  font-size: 0.8rem;
+  position: absolute;
+  background-color: white;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 1rem;
+}
 
 /*# sourceMappingURL=signIn.css.map */
