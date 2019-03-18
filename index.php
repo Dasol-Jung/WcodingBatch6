@@ -1,6 +1,6 @@
 <?php
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);  
+error_reporting(E_ALL);
+ini_set('display_errors', 1);  
 require('./controller/frontend/frontend.php');
 try{
     if (isset($_GET['action'])) {
@@ -32,6 +32,11 @@ try{
 
         if($_GET['action'] == 'monthlySchedule'){
             viewMonthly();
+        }
+        
+        if($_GET['action'] == 'googleLogin'){
+            $googleInfo = json_decode(file_get_contents("php://input"), TRUE);
+            loggedInGoogle($googleInfo);
         }
     }
     else {

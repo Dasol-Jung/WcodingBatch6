@@ -1,4 +1,5 @@
 <?php $styles[]='<link rel="stylesheet" href="public/css/signIn.css"/>'?>
+<script src="https://apis.google.com/js/api:client.js"></script>
 <form class="loginForm" action="index.php" method="POST">
 
     <label for="email">Email</label>
@@ -16,7 +17,12 @@
         <span>Sign in with</span>
     </div>
     <div class="socialSigninContainer">
-        <button class="googleSignin"><img id="googleLogo" src="../../public/images/googleLogo.png"/><span>Google</span></button>
+    <div style="background-color : #eee; padding-left : 2.5rem; display : grid; align-items : center;" id="gSignInWrapper">
+    <div id="customBtn" class="customGPlusSignIn">
+      <img style='height : 25px; position: relative; top : 2px;' src='../../public/images/googleLogo.png'/>
+      <span style='position : relative; bottom:5px; left : 10px; font-size : 0.9rem;' class="buttonText">Google</span>
+    </div>
+  </div>
         <button class="kakaoSignin"><img id="kakaoLogo" src="../../public/images/kakaoLogo.png"/><span>Kakao</span></button>
     </div>
     
@@ -26,3 +32,6 @@
 </form>
 <script src= "../../public/js/frontend/utils.js"></script>
 <script src= "../../public/js/frontend/login.js"></script>
+<script src= "../../public/js/frontend/google.js"></script>
+<script>startApp();</script>
+
