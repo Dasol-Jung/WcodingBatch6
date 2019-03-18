@@ -16,7 +16,9 @@
     
 
     <button id="signupBtn">Sign Up</button>
-    <span class="socialSignup">Sign Up with</span>
+    <div class="social-hr">
+        <span>Sign Up with</span>
+    </div>
     <div class="socialSignupContainer">
         <button class="googleSignup"><img id="googleLogo" src="../../public/images/googleLogo.png"/><span>Google</span></button>
         <button class="kakaoSignup"><img id="kakaoLogo" src="../../public/images/kakaoLogo.png"/><span>Kakao</span></button>

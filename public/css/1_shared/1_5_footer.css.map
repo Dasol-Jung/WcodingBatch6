@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["1_1_variables.scss","1_4_header.scss"],"names":[],"mappings":"AAAA;EACC;EACA;;ACAD;EACC;EACA;;AACA;EACC;EACA;EACA;EACA;;AACA;EACC;;AAGF;EACC;;AAED;EACC;EACA;EACA;;AACA;EACC;;AAED;EACC;EACA;EACA,ODpBa;ECqBb,aDvBY;ECwBZ;;AACA;EACC","file":"1_5_footer.css"}
+{"version":3,"sourceRoot":"","sources":["1_1_variables.scss","1_5_footer.scss"],"names":[],"mappings":"AAAA;EACC;EACA;;ACAD;EACC;EACA;EACA;EACA;EACA","file":"1_5_footer.css"}

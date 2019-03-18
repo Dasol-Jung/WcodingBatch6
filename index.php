@@ -26,6 +26,13 @@ try{
         if($_GET['action'] == 'welcome'){
             viewWelcome();
         }
+        if($_GET['action'] == 'weeklySchedule'){
+            viewWeekly();
+        }
+
+        if($_GET['action'] == 'monthlySchedule'){
+            viewMonthly();
+        }
     }
     else {
         viewHome();

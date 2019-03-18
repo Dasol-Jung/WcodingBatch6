@@ -1,4 +1,9 @@
-@import './1_4_header.scss';
+@import '1_1_variables.scss';
 
-// Convert scss file to css file : run "sass --watch [FILE NAME].scss:../style.css" in terminal
-// Or, just do "sass [FILE NAME].scss ../style.css"
+footer {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	height: 30px;
+	color: white;
+}

@@ -48,3 +48,13 @@ function logout(){
     $internalUser = new InternalUser();
     $internalUser->userLogout();
 }
+
+function viewWeekly()
+{
+    require("view/frontend/viewWeekly.php");
+}
+
+function viewMonthly()
+{
+    require("view/frontend/viewMonthly.php");
+}

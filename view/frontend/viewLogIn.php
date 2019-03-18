@@ -12,6 +12,9 @@
     <span class='error' id='error_message'></span>
 
     <button id="signInBtn">Sign In</button>
+    <div class="social-hr">
+        <span>Sign in with</span>
+    </div>
     <div class="socialSigninContainer">
         <button class="googleSignin"><img id="googleLogo" src="../../public/images/googleLogo.png"/><span>Google</span></button>
         <button class="kakaoSignin"><img id="kakaoLogo" src="../../public/images/kakaoLogo.png"/><span>Kakao</span></button>
