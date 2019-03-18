@@ -1,4 +1,3 @@
-<?php $title = 'Weekly Scheduler'; ?>
 <?php ob_start(); ?>
 <?php require_once "navbar.php"?>
 <?php require_once "calendar.php"?>

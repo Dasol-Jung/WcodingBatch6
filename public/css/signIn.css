@@ -1,0 +1,108 @@
+@font-face {
+  font-family: "DIN alternate";
+  src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
+}
+.loginForm {
+  font-family: "DIN alternate";
+  padding: 1rem;
+  width: 350px;
+  margin: 2rem auto;
+  background-color: white;
+}
+.loginForm button {
+  font-size: 0.85rem;
+  height: 2.3rem;
+  cursor: pointer;
+  border: none;
+}
+.loginForm label {
+  display: block;
+}
+.loginForm label[for=password] {
+  margin-top: 1rem;
+}
+.loginForm input {
+  width: 100%;
+  display: block;
+  border: 1px solid #ccc;
+  height: 2.3rem;
+  font-size: 1rem;
+  padding-left: 0.8rem;
+  margin-top: 0.5rem;
+  box-sizing: border-box;
+}
+.loginForm input:focus {
+  outline: 2px solid #3f68b5;
+}
+.loginForm #signInBtn {
+  display: block;
+  width: 100%;
+  background-color: #35499a;
+  color: white;
+  font-weight: 300;
+}
+.loginForm .socialSigninContainer {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0.5rem;
+}
+.loginForm .socialSigninContainer .googleSignin {
+  background-color: #dbdbdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loginForm .socialSigninContainer .googleSignin img#googleLogo {
+  height: 1.3rem;
+  margin-right: 1.5rem;
+}
+.loginForm .socialSigninContainer .kakaoSignin {
+  background-color: #ffce04;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loginForm .socialSigninContainer .kakaoSignin img#kakaoLogo {
+  height: 2rem;
+  margin-right: 1.5rem;
+  position: relative;
+  top: 0.25rem;
+}
+.loginForm span.toSignup {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+}
+.loginForm span.toSignup a {
+  text-decoration: none;
+  color: #3f68b5;
+}
+.loginForm span.error {
+  display: block;
+  font-size: 0.8rem;
+  height: 1rem;
+  margin: 0.5rem 0;
+  color: #d56c6c;
+}
+.loginForm input.errorBorder {
+  border: 2px solid #d56c6c;
+}
+.loginForm .keepLoggedIn-container {
+  font-size: 0.8rem;
+  display: grid;
+  grid-gap: 5px;
+  align-items: center;
+  grid-template-columns: 15px min-content;
+}
+.loginForm .keepLoggedIn-container input#keepLoggedIn {
+  margin: 0;
+}
+.loginForm .keepLoggedIn-container input#keepLoggedIn:focus {
+  outline: none;
+}
+.loginForm .keepLoggedIn-container label {
+  white-space: nowrap;
+}
+
+/*# sourceMappingURL=signIn.css.map */
