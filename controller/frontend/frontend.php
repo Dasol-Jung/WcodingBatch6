@@ -58,3 +58,10 @@ function viewMonthly()
 {
     require("view/frontend/viewMonthly.php");
 }
+
+function loggedInGoogle($googleInfo)
+{
+    require("model/frontend/GoogleUserManager.php");
+    $googleUser = new GoogleUserManager();
+    $googleUser-> makeGoogle($googleInfo);
+}
