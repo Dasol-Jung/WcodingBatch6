@@ -12,14 +12,15 @@ class GoogleUserManager extends ManagerDB
 
     public function makeGoogle($googleInfo){
         $bdd = $this->dbConnect();
-        $googleToken = $googleInfo["google_id"];
+        $googleAccessToken = $googleInfo["access_token"];
+        $googleId = $googleInfo["google_id"];
         $googleFirstName = $googleInfo["first_name"];
         $googleLastName = $googleInfo["last_name"];
         $googleImage = $googleInfo["image_url"];
         $googleEmail = $googleInfo["email"];
         $request = "INSERT INTO weekly_scheduler.google_user
         (super_uid, google_uid, email, image, first_name, last_name, access_token, refresh_token, create_date, last_login_date, remember_me_token)
-        VALUES(NULL, '$googleToken', '$googleEmail', '$googleImage', '$googleFirstName', '$googleLastName', NULL, NULL, current_timestamp(), current_timestamp(), NULL)
+        VALUES(NULL, '$googleId', '$googleEmail', '$googleImage', '$googleFirstName', '$googleLastName', '$googleAccessToken', NULL, current_timestamp(), current_timestamp(), NULL)
         ";
 
         //$createGoogle = $bdd->prepare("INSERT INTO google_user (google_uid, email, image, first_name, last_name) VALUES ('$googleToken', '$googleEmail', '$googleImage', '$googleFirstName', '$googleLastName'");

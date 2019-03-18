@@ -9,7 +9,8 @@ function onSuccess(googleUser) {
     var profile = googleUser.getBasicProfile();
     var idToken = googleUser.getAuthResponse().id_token;
     var profileData = {
-        "google_id" : idToken,
+        "access_token" : idToken,
+        "google_id": profile.getId(),
         "first_name": profile.getGivenName(),
         "last_name": profile.getFamilyName(),
         "image_url": profile.getImageUrl(),
