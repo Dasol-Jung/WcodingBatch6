@@ -55,6 +55,10 @@ try{
                     login($email,$password, $keepLoggedIn);
                 }
 
+            case 'googleLoggedIn':
+                $googleInfo = json_decode(file_get_contents("php://input"), TRUE);
+                loggedInGoogle($googleInfo);
+
             default :
                 break;
         }

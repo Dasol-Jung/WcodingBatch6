@@ -48,3 +48,11 @@ function logout(){
     $internalUser = new InternalUser();
     $internalUser->userLogout();
 }
+
+function loggedInGoogle($googleInfo)
+{
+    require("model/frontend/GoogleUserManager.php");
+    $user = new GoogleUserManager();
+    $user= $user-> makeGoogle($googleInfo);
+    require("view/frontend/googleLoginButton.php");
+}

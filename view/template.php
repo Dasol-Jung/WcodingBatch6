@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name='google-signin-client_id' content='852784944923-o4n8r0gg2sl9k3tdgu2fue8uq13esm82.apps.googleusercontent.com'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weeky</title>
@@ -16,5 +17,6 @@
 <?php require_once "view/frontend/header.php"?>
     <?= $content ?>
 <?php require_once "view/frontend/footer.php"?>
+
 </body>
 </html>
