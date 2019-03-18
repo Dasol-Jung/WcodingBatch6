@@ -28,13 +28,14 @@
   box-sizing: border-box;
 }
 
-.utilContainer {
-  justify-self: center;
+.utilContainer .calendarCtrl {
   display: flex;
   flex-flow: row;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
-.utilContainer .showCal {
+.utilContainer .calendarCtrl .showCal {
   background-image: url("../images/cal_icon.svg");
   background-size: contain;
   background-repeat: no-repeat;
@@ -46,15 +47,15 @@
   height: 3rem;
   width: 3rem;
 }
-.utilContainer .showCal span#month {
+.utilContainer .calendarCtrl .showCal span#month {
   font-size: 0.8rem;
   margin-top: 0.2rem;
   font-weight: bold;
 }
-.utilContainer .showCal span#date {
+.utilContainer .calendarCtrl .showCal span#date {
   font-size: 0.6rem;
 }
-.utilContainer button {
+.utilContainer .calendarCtrl button {
   height: max-content;
   background-color: #2f2f2f;
   border: 1px solid white;
@@ -64,10 +65,16 @@
   font-size: 1rem;
   cursor: pointer;
 }
-.utilContainer button:hover {
+.utilContainer .calendarCtrl button:hover {
   background-color: white;
   border: 1px solid #2f2f2f;
   color: #2f2f2f;
+}
+.utilContainer .addSchedule {
+  float: right;
+  margin-right: 1rem;
+  position: relative;
+  bottom: 10%;
 }
 
 .calContainer {
@@ -76,7 +83,7 @@
   grid-template-columns: repeat(7, 1fr);
   height: 100%;
   width: 100%;
-  padding: 0 1rem 1rem 1rem;
+  padding: 0 1.5rem 1rem 1.5rem;
   box-sizing: border-box;
 }
 .calContainer .dayContainer {

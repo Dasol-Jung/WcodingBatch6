@@ -22,6 +22,7 @@ ob_start();
     </section>
     <section class="calWrapper">
         <div class="utilContainer">
+            <div class="calendarCtrl">
             <button class="prev">
                 Prev
             </button>
@@ -35,6 +36,11 @@ ob_start();
             </div>
             <button class="next">
                 Next
+            </button>
+            </div>
+            
+            <button class="addSchedule">
+                Add
             </button>
         </div>
         <div class="calContainer">

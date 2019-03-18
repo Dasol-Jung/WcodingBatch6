@@ -27,44 +27,53 @@
 }
 
 .utilContainer {
-	justify-self: center;
-	display: flex;
-	flex-flow: row;
-	align-items: center;
-	.showCal {
-		background-image: url("../images/cal_icon.svg");
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position: center;
+	.calendarCtrl {
 		display: flex;
-		flex-flow: column;
+		flex-flow: row;
 		align-items: center;
 		justify-content: center;
-		height: 3rem;
-		width: 3rem;
-		span#month {
-			font-size: 0.8rem;
-			margin-top: 0.2rem;
-			font-weight: bold;
+		width: 100%;
+		.showCal {
+			background-image: url("../images/cal_icon.svg");
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			display: flex;
+			flex-flow: column;
+			align-items: center;
+			justify-content: center;
+			height: 3rem;
+			width: 3rem;
+			span#month {
+				font-size: 0.8rem;
+				margin-top: 0.2rem;
+				font-weight: bold;
+			}
+			span#date {
+				font-size: 0.6rem;
+			}
 		}
-		span#date {
-			font-size: 0.6rem;
+		button {
+			height: max-content;
+			background-color: $primary-dark;
+			border: 1px solid $primary-light;
+			color: $primary-light;
+			border-radius: 5px;
+			margin: 0 2rem;
+			font-size: 1rem;
+			cursor: pointer;
+			&:hover {
+				background-color: $primary-light;
+				border: 1px solid $primary-dark;
+				color: $primary-dark;
+			}
 		}
 	}
-	button {
-		height: max-content;
-		background-color: $primary-dark;
-		border: 1px solid $primary-light;
-		color: $primary-light;
-		border-radius: 5px;
-		margin: 0 2rem;
-		font-size: 1rem;
-		cursor: pointer;
-		&:hover {
-			background-color: $primary-light;
-			border: 1px solid $primary-dark;
-			color: $primary-dark;
-		}
+	.addSchedule {
+		float: right;
+		margin-right: 1rem;
+		position: relative;
+		bottom: 10%;
 	}
 }
 
@@ -74,7 +83,7 @@
 	grid-template-columns: repeat(7, 1fr);
 	height: 100%;
 	width: 100%;
-	padding: 0 1rem 1rem 1rem;
+	padding: 0 1.5rem 1rem 1.5rem;
 	box-sizing: border-box;
 	.dayContainer {
 		border-radius: 10px 10px 0 0;
