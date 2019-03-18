@@ -17,6 +17,12 @@ ob_start();
 <?php $styles[]="<link rel='stylesheet' href='../../public/css/viewWeekly.css'/>"?>
 
 <div class='bodyWrapper'>
+    <!-- Add schedule form -->
+    <div class="addScheduleContainer">
+        <form action="">
+            
+        </form>
+    </div>
     <section class="listWrapper">
 
     </section>
@@ -126,8 +132,7 @@ ob_start();
         </div>
     </section>
 </div>
-
-
+<script src= "../../public/js/frontend/viewWeekly.js"></script>
 <?php
 
 //schedule ends here

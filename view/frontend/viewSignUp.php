@@ -13,7 +13,6 @@
     <label for="confirmPassword">Confirm Password</label>
     <input value="hello123!" name="confirmPassword" id="confirmPassword" type="password"/>
     <span class='error' id='error_confirmPassword'></span>
-    
 
     <button id="signupBtn">Sign Up</button>
     <div class="social-hr">
