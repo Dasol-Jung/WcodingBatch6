@@ -91,4 +91,20 @@
 	display: block;
 }
 
+.social-hr {
+	position: relative;
+	height: 1px;
+	background-color: #aaa;
+	margin: 2rem 0;
+}
+
+.social-hr span {
+	font-size: 0.8rem;
+	position: absolute;
+	background-color: white;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 0 1rem;
+}
+
 /*# sourceMappingURL=login.css.map */
