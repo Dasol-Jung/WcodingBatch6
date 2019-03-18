@@ -26,6 +26,9 @@ try{
         if($_GET['action'] == 'welcome'){
             viewWelcome();
         }
+        if($_GET['action'] == 'weeklySchedule'){
+            viewWeekly();
+        }
     }
     else {
         viewHome();
