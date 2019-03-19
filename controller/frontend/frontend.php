@@ -25,10 +25,9 @@ function viewCalendar()
  * @param Array $kakaoUser the array of all the informations of the user
  * 
  */
-function loggedUser($kakaoUserInfo){
+function loggedInKakao($kakaoUserInfo){
     $kakaoUserManager = new KakaoUser();
-    $user = $kakaoUserManager->registerKakaoUser($kakaoUserInfo);
-    require('view/frontend/testKakao.php');
+    $kakaoUserManager->registerKakaoUser($kakaoUserInfo);
 }
 
 function viewLogin(){

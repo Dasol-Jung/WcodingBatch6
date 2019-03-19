@@ -8,10 +8,9 @@ try{
             viewCalendar();
         }
 
-        if ($_GET['action'] == 'loggedUser') {
+        if ($_GET['action'] == 'kakaoLogin') {
             $kakaoInfo = json_decode(file_get_contents("php://input"), TRUE);
-            loggedUser($kakaoInfo);
-            
+            loggedInKakao($kakaoInfo);
         }
       
         if($_GET['action'] == 'login'){

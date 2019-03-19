@@ -61,10 +61,13 @@
 		}
 
 		.kakaoSignin {
+			width: 100%;
 			background-color: $kakao;
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			position: relative;
+			font-size: 0.9rem;
 			img#kakaoLogo {
 				font-family: 'Roboto';
 				height: 2rem;
@@ -125,4 +128,12 @@
 			padding: 0 1rem;
 		}
 	}
+}
+#kakao-login-btn {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	opacity: 0;
+	z-index: 1;
 }

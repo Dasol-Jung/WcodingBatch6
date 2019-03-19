@@ -20,7 +20,7 @@ Kakao.Auth.createLoginButton({
 				};
 
 				var xhr = new XMLHttpRequest();
-				xhr.open('POST', 'index.php?action=loggedUser', true);
+				xhr.open('POST', 'index.php?action=kakaoLogin', true);
 				xhr.setRequestHeader('Content-type', 'application/json');
 				xhr.addEventListener('readystatechange', function() {
 					if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {

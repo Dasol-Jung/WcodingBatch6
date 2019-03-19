@@ -24,9 +24,8 @@
                 <span style='position : relative; bottom:5px; left : 10px; font-size : 0.9rem;' class="buttonText">Google</span>
             </div>
         </div>
-        <div>
-        <a id="kakao-login-btn"></a>
-            <!-- <button class="kakaoSignin"><img id="kakaoLogo" src="../../public/images/kakaoLogo.png"/><span>Kakao</span></button> -->
+        <div>  
+            <div class="kakaoSignin"><img id="kakaoLogo" src="../../public/images/kakaoLogo.png"/><span>Kakao</span><a id="kakao-login-btn"></a></div>
         </div>
     </div>
     
