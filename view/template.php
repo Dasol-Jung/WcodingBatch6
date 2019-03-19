@@ -1,3 +1,4 @@
+<?php ob_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,5 +19,4 @@
 <?php require_once "view/frontend/header.php"?>
     <?= $content ?>
 </body>
-
 </html>
