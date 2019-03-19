@@ -1,3 +1,0 @@
-<header>
-navbar
-</header>
