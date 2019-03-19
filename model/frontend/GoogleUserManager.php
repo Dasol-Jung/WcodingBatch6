@@ -45,7 +45,8 @@ class GoogleUserManager extends User
         $googleEmail = $googleInfo["email"];
         $request = "INSERT INTO google_user
         (super_uid, google_uid, email, image, first_name, last_name, access_token, refresh_token, create_date, last_login_date, remember_me_token)
-        VALUES(NULL, '$googleId', '$googleEmail', '$googleImage', '$googleFirstName', '$googleLastName', '$googleAccessToken', NULL, current_timestamp(), current_timestamp(), NULL)";
+        VALUES(NULL, '$googleId', '$googleEmail', '$googleImage', '$googleFirstName', '$googleLastName', '$googleAccessToken', NULL, current_timestamp(), current_timestamp(), NULL)
+        ON DUPLICATE KEY UPDATE last_login_date = current_timestamp()";
         $reqCreateGoogle = $db->prepare($request);
         $googleAffectedLines = $reqCreateGoogle->execute();
         // return $this->getGoogle($googleId, $googleEmail);
