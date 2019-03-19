@@ -49,3 +49,4 @@
         <span class="dot" onclick="currentSlide(6)"></span> 
     </div>
 </section>
+<script src="public/js/frontend/carosel.js"></script>
