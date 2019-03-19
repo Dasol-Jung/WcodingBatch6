@@ -4,14 +4,10 @@ require_once('model/ManagerDB.php');
 require('model/frontend/Kakao.php');
 require_once("model/frontend/InternalUser.php");
 
-
 function viewHome()
 {
     $internalUser = new InternalUser();
     $internalUser->checkRememberMe();
-    ob_start();
-        require('view/frontend/viewSignUp.php');
-    $rightSection = ob_get_clean();
     require('view/frontend/viewHome.php');
 }
 
@@ -31,10 +27,7 @@ function loggedInKakao($kakaoUserInfo){
 }
 
 function viewLogin(){
-    ob_start();
-        require("view/frontend/viewLogin.php");
-    $rightSection = ob_get_clean();
-    require('view/frontend/viewHome.php');
+    require("view/frontend/viewLogin.php");
 }
 
 function viewWelcome(){
@@ -46,7 +39,6 @@ function signUp($email,$password,$confirmPassword,$firstName){
     $result = $internalUser->userSignUp($email,$password,$confirmPassword,$firstName);
     ob_clean();
     echo $result;
-
 }
 
 function login($email, $password, $keepLoggedIn){

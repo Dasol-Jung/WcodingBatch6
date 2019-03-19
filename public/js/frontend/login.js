@@ -9,7 +9,7 @@
 		let xhr = new XMLHttpRequest();
 		let formData = new FormData(form);
 		formData.append('action', 'login');
-		xhr.open('POST', 'index.php');
+		xhr.open('POST', 'index.php?action=login');
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
 				if (xhr.response == 'success') {

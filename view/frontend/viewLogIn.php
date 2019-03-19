@@ -1,6 +1,14 @@
+<?php $styles[] = "<link rel='stylesheet' href='public/css/1_shared/index.css'/>"?>
 <?php $styles[]='<link rel="stylesheet" href="public/css/signIn.css"/>'?>
+<?php ob_start(); ?>
 <script src="https://apis.google.com/js/api:client.js"></script>
 <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<div class="bodyWrapper">
+    <div class="left">
+        <?php require_once "carousel.php"?>
+    </div>
+    <div class="divider"></div>
+    <div class="right">
 <form class="loginForm" action="index.php" method="POST">
 
     <label for="email">Email</label>
@@ -33,9 +41,13 @@
         <span class="toSignup">You don't have an account? <a href="index.php">Sign Up</a></span>
     </div>
 </form>
+</div>
+</div>
 <script src= "../../public/js/frontend/utils.js"></script>
 <script src= "../../public/js/frontend/login.js"></script>
 <script src= "../../public/js/frontend/google.js"></script>
 <script src="../../public/js/frontend/kakaoAcct.js"></script>
 <script>startApp();</script>
-
+<?php
+$content = ob_get_clean();
+require("view/template.php");?>
