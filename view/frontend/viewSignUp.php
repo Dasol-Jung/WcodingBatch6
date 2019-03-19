@@ -1,4 +1,6 @@
-<?php $styles[]="<link rel='stylesheet' href='../../public/css/signUp.css'/>"?>
+<?php $styles[]="<link rel='stylesheet' href='public/css/signUp.css'/>"?>
+<script src="https://apis.google.com/js/api:client.js"></script>
+<script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <form class="loginForm" action="index.php" method="POST">
 
     <label for="email">Email</label>
@@ -19,8 +21,15 @@
         <span>Sign Up with</span>
     </div>
     <div class="socialSignupContainer">
-        <button class="googleSignup"><img id="googleLogo" src="../../public/images/googleLogo.png"/><span>Google</span></button>
-        <button class="kakaoSignup"><img id="kakaoLogo" src="../../public/images/kakaoLogo.png"/><span>Kakao</span></button>
+        <div style="background-color : #eee; padding-left : 2.5rem; display : grid; align-items : center;" id="gSignInWrapper">
+            <div id="customBtn" class="customGPlusSignIn">
+                <img style='height : 22px; position: relative; top : 2px;' src='../../public/images/googleLogo.png'/>
+                <span style='position : relative; bottom:5px; left : 10px; font-size : 0.9rem;' class="buttonText">Google</span>
+            </div>
+        </div>
+        <div>  
+            <div class="kakaoSignin"><img id="kakaoLogo" src="../../public/images/kakaoLogo.png"/><span>Kakao</span><a id="kakao-login-btn"></a></div>
+        </div>
     </div>
     
     <div class="toSigninContainer">
@@ -29,3 +38,6 @@
 </form>
 <script src= "../../public/js/frontend/utils.js"></script>
 <script src= "../../public/js/frontend/signUp.js"></script>
+<script src= "../../public/js/frontend/google.js"></script>
+<script src="../../public/js/frontend/kakaoAcct.js"></script>
+<script>startApp();</script>
