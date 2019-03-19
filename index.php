@@ -7,6 +7,13 @@ try{
         if ($_GET['action'] == 'viewCalendar') {
             viewCalendar();
         }
+
+        if ($_GET['action'] == 'loggedUser') {
+            $kakaoInfo = json_decode(file_get_contents("php://input"), TRUE);
+            loggedUser($kakaoInfo);
+            
+        }
+      
         if($_GET['action'] == 'login'){
             // redirect to index.php if the user is already logged in
             if($_SESSION['isLoggedIn']==true){
@@ -37,6 +44,7 @@ try{
         if($_GET['action'] == 'googleLogin'){
             $googleInfo = json_decode(file_get_contents("php://input"), TRUE);
             loggedInGoogle($googleInfo);
+
         }
     }
     else {

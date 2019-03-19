@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once('model/ManagerDB.php');
+require('model/frontend/Kakao.php');
 require_once("model/frontend/InternalUser.php");
+
 
 function viewHome()
 {
@@ -17,6 +19,16 @@ function viewCalendar()
 {
     require('view/frontend/viewCalendar.php');
 }
+
+/**
+ * loggedUser : logs users on kakao
+ * @param Array $kakaoUser the array of all the informations of the user
+ * 
+ */
+function loggedUser($kakaoUserInfo){
+    $kakaoUserManager = new KakaoUser();
+    $user = $kakaoUserManager->registerKakaoUser($kakaoUserInfo);
+    require('view/frontend/testKakao.php');
 
 function viewLogin(){
     ob_start();
@@ -64,4 +76,5 @@ function loggedInGoogle($googleInfo)
     require("model/frontend/GoogleUserManager.php");
     $googleUser = new GoogleUserManager();
     $googleUser-> makeGoogle($googleInfo);
+
 }
