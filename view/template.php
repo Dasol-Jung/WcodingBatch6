@@ -20,4 +20,5 @@
 <?php require_once "view/frontend/header.php"?>
     <?= $content ?>
 </body>
+<script src="public/js/frontend/carosel.js"></script>
 </html>

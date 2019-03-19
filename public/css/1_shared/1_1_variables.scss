@@ -24,6 +24,8 @@ $round: 13px;
 $round-top: 13px 13px 0 0;
 $box-shadow: -1px -1px 7px 0px;
 
+$carouselColor: #f2f2f2;
+
 @mixin round($round) {
 	border-radius: $round;
 }
@@ -35,3 +37,4 @@ $box-shadow: -1px -1px 7px 0px;
 @mixin boxShadow($box-shadow) {
 	box-shadow: $box-shadow;
 }
+

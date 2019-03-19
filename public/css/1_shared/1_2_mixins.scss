@@ -1,1 +1,16 @@
 @import './1_1_variables.scss';
+
+@mixin carouselArrow{
+    cursor: pointer;
+	position: absolute;
+	top: 50%;
+	width: auto;
+	padding: 16px;
+	margin-top: -22px;
+    color: $carouselColor;
+    
+    /* On hover, add a black background color with a little bit see-through */
+    &:hover{
+		background-color: rgba(0,0,0,0.5);
+	}
+}
