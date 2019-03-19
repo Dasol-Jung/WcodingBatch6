@@ -29,6 +29,7 @@ function loggedUser($kakaoUserInfo){
     $kakaoUserManager = new KakaoUser();
     $user = $kakaoUserManager->registerKakaoUser($kakaoUserInfo);
     require('view/frontend/testKakao.php');
+}
 
 function viewLogin(){
     ob_start();

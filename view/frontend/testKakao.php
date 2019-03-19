@@ -1,6 +1,6 @@
 <div id="profile">
     <span><?= $user['first_name'] ?></span><br/>
-    <img src="<?= $user['img'] ?>"/><br/>
+    <img src="<?= $user['image'] ?>"/><br/>
     <span><?= $user['email'] ?></span><br/>
 </div>
 
