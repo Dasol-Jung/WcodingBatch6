@@ -1,0 +1,78 @@
+@import '1_shared/1_1_variables.scss';
+
+.bodyWrapper {
+	font-family: $primary-font;
+	height: 100%;
+	width: 100%;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	background-color: $primary-dark;
+
+	.welcomeMsgContainer {
+		background-color: white;
+		padding: 20px;
+		border-radius: 10px;
+		border: 10px solid #3e3e3e;
+		display: grid;
+		justify-content: center;
+		align-items: center;
+		.msgBg {
+			background-color: #f2f2f2;
+			width: 450px;
+			height: 450px;
+			padding: 10px;
+			text-align: center;
+			p {
+				margin: 0.8rem 0;
+			}
+			.line1 {
+				font-size: 2rem;
+				font-weight: bold;
+			}
+			.line2 {
+				font-size: 3rem;
+				font-weight: bold;
+			}
+			.line3 {
+				font-size: 2rem;
+				font-weight: bold;
+			}
+			.line4 {
+				font-size: 3rem;
+				font-weight: bold;
+			}
+			.nameWrapper {
+				width: auto;
+				margin: 0 auto;
+				position: relative;
+				display: flex;
+				justify-content: center;
+				span {
+					flex: 50%;
+					font-size: 5rem;
+					position: relative;
+					font-weight: 900;
+				}
+				span.nameBody {
+					left: 25%;
+				}
+				span.nameShadow {
+					color: #525252;
+					right: 23.5%;
+					top: 4px;
+				}
+			}
+			button.start {
+				margin-top: 1.3rem;
+				padding: 0.3rem 1rem;
+				font-size: 2rem;
+				border: none;
+				color: white;
+				background-color: $primary-dark;
+				cursor: pointer;
+				box-shadow: $box-shadow;
+			}
+		}
+	}
+}

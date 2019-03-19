@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "DIN alternate";
+  src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
+}
+.bodyWrapper {
+  font-family: "DIN alternate";
+  height: 100%;
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background-color: #2f2f2f;
+}
+.bodyWrapper .welcomeMsgContainer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  border: 10px solid #3e3e3e;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+.bodyWrapper .welcomeMsgContainer .msgBg {
+  background-color: #f2f2f2;
+  width: 450px;
+  height: 450px;
+  padding: 10px;
+  text-align: center;
+}
+.bodyWrapper .welcomeMsgContainer .msgBg p {
+  margin: 0.8rem 0;
+}
+.bodyWrapper .welcomeMsgContainer .msgBg .line1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.bodyWrapper .welcomeMsgContainer .msgBg .line2 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+.bodyWrapper .welcomeMsgContainer .msgBg .line3 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.bodyWrapper .welcomeMsgContainer .msgBg .line4 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+.bodyWrapper .welcomeMsgContainer .msgBg .nameWrapper {
+  width: auto;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.bodyWrapper .welcomeMsgContainer .msgBg .nameWrapper span {
+  flex: 50%;
+  font-size: 5rem;
+  position: relative;
+  font-weight: 900;
+}
+.bodyWrapper .welcomeMsgContainer .msgBg .nameWrapper span.nameBody {
+  left: 25%;
+}
+.bodyWrapper .welcomeMsgContainer .msgBg .nameWrapper span.nameShadow {
+  color: #525252;
+  right: 23.5%;
+  top: 4px;
+}
+.bodyWrapper .welcomeMsgContainer .msgBg button.start {
+  margin-top: 1.3rem;
+  padding: 0.3rem 1rem;
+  font-size: 2rem;
+  border: none;
+  color: white;
+  background-color: #2f2f2f;
+  cursor: pointer;
+  box-shadow: -1px -1px 7px 0px;
+}
+
+/*# sourceMappingURL=welcome.css.map */

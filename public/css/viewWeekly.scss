@@ -1,0 +1,107 @@
+@import '1_shared/1_1_variables.scss';
+
+.bodyWrapper {
+	font-family: $primary-font;
+	height: 100%;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 7.5fr;
+	justify-content: center;
+	align-items: center;
+	background-color: $primary-dark;
+	box-sizing: border-box;
+}
+
+.listWrapper {
+	background-color: black;
+	height: 100%;
+}
+
+.calWrapper {
+	padding-top: 3rem;
+	height: 100%;
+	display: grid;
+	grid-gap: 1rem;
+	grid-template-rows: 1fr 9fr;
+	box-sizing: border-box;
+}
+
+.utilContainer {
+	.calendarCtrl {
+		display: flex;
+		flex-flow: row;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		.showCal {
+			background-image: url("../images/cal_icon.svg");
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			display: flex;
+			flex-flow: column;
+			align-items: center;
+			justify-content: center;
+			height: 3rem;
+			width: 3rem;
+			span#month {
+				font-size: 0.8rem;
+				margin-top: 0.2rem;
+				font-weight: bold;
+			}
+			span#date {
+				font-size: 0.6rem;
+			}
+		}
+		button {
+			height: max-content;
+			background-color: $primary-dark;
+			border: 1px solid $primary-light;
+			color: $primary-light;
+			border-radius: 5px;
+			margin: 0 2rem;
+			font-size: 1rem;
+			cursor: pointer;
+			&:hover {
+				background-color: $primary-light;
+				border: 1px solid $primary-dark;
+				color: $primary-dark;
+			}
+		}
+	}
+	.addSchedule {
+		float: right;
+		margin-right: 1.5rem;
+		position: relative;
+		bottom: 10%;
+	}
+}
+
+.calContainer {
+	display: grid;
+	grid-gap: 0.5rem;
+	grid-template-columns: repeat(7, 1fr);
+	height: 100%;
+	width: 100%;
+	padding: 0 1.5rem 2rem 1.5rem;
+	box-sizing: border-box;
+	.dayContainer {
+		border-radius: 10px 10px 0 0;
+		border: 1px solid $primary-light;
+		height: 100%;
+		.dayAndDate {
+			height: 5%;
+			font-weight: bold;
+			font-size: 1.1rem;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			border-radius: 6px 6px 0 0;
+			padding: 0 0.5rem;
+			background-color: $primary-light;
+		}
+		.calbody {
+			height: 95%;
+		}
+	}
+}

@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "DIN alternate";
+  src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
+}
+* {
+  box-sizing: border-box;
+}
+
+/*# sourceMappingURL=1_3_overall.css.map */

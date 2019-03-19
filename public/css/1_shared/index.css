@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "DIN alternate";
+  src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
+}
+.bodyWrapper {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 10px 2fr;
+  justify-content: center;
+  align-items: center;
+  background-color: #2f2f2f;
+}
+.bodyWrapper .divider {
+  background-color: #d56c6c;
+  height: 100%;
+}
+
+/*# sourceMappingURL=index.css.map */
