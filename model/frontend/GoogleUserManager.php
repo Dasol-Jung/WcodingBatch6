@@ -1,17 +1,38 @@
 <?php
-require_once("model/ManagerDB.php");
-class GoogleUserManager extends ManagerDB
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+require_once("User.php");
+class GoogleUserManager extends User
 {
-    public function getGoogle($googleProfileInfo){
-        $bdd = $this->dbConnect();
+    public function getGoogle($googleId,$googleEmail){
+        $db= parent::dbConnect();
 
-        $searchGoogle = $bdd->prepare("SELECT * FROM google_user");
-        $searchGoogle ->execute(array($googleProfileInfo));
-        return $searchGoogle;
+        $searchGoogle = $db->prepare("SELECT * FROM google_user WHERE google_uid=$googleId AND email='$googleEmail'");
+        $searchGoogle ->execute();
+        if($googleUser=$searchGoogle->fetch()){
+                $_SESSION['isLoggedIn']=true;
+                $_SESSION['firstName']=$googleUser['first_name'];
+                $_SESSION['google_uid']=$googleUser['google_uid'];
+                
+                    //create a token to remember the user
+                    $rememberMeToken = uniqid("",true);
+                    //save the token on database
+                    $rememberMeQuery = 'UPDATE google_user SET remember_me_token = :remember_me_token WHERE google_uid=:google_uid';
+                    $rememberMeReq = $db->prepare($rememberMeQuery);
+                    $rememberMeReq->bindParam(":remember_me_token",$rememberMeToken,PDO::PARAM_STR);
+                    $rememberMeReq->bindParam(":google_uid",$googleUser['google_uid'],PDO::PARAM_STR);
+                    $rememberMeReq->execute();
+                    setcookie('rememberMeToken', $rememberMeToken, time()+3600*24*365,'/');
+                    setcookie('firstName', $googleUser['first_name'], time()+3600*24*365,'/');
+                    setcookie('google_uid', $googleUser['google_uid'], time()+3600*24*365,'/');
+                }
+        return $googleUser;
     }
 
     public function makeGoogle($googleInfo){
-        $bdd = $this->dbConnect();
+        $db= parent::dbConnect();
         $googleAccessToken = $googleInfo["access_token"];
         $googleId = $googleInfo["google_id"];
         $googleFirstName = $googleInfo["first_name"];
@@ -21,14 +42,9 @@ class GoogleUserManager extends ManagerDB
         $request = "INSERT INTO weekly_scheduler.google_user
         (super_uid, google_uid, email, image, first_name, last_name, access_token, refresh_token, create_date, last_login_date, remember_me_token)
         VALUES(NULL, '$googleId', '$googleEmail', '$googleImage', '$googleFirstName', '$googleLastName', '$googleAccessToken', NULL, current_timestamp(), current_timestamp(), NULL)
-        ";
-
-        //$createGoogle = $bdd->prepare("INSERT INTO google_user (google_uid, email, image, first_name, last_name) VALUES ('$googleToken', '$googleEmail', '$googleImage', '$googleFirstName', '$googleLastName'");
-        //print_r($createGoogle);
-
-        $createGoogle = $bdd->prepare($request);
-        print_r($createGoogle);
-        $test = $createGoogle->execute();
-        return $test;
+        ON DUPLICATE KEY UPDATE last_login_date = current_timestamp()";
+        $reqCreateGoogle = $db->prepare($request);
+        $googleAffectedLines = $reqCreateGoogle->execute();
+        return $this->getGoogle($googleId, $googleEmail);
     }
 }
