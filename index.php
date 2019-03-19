@@ -15,16 +15,16 @@ try{
       
         if($_GET['action'] == 'login'){
             // redirect to index.php if the user is already logged in
-            if(isset($_SESSION['isLoggedIn'])){
-                if($_SESSION['isLoggedIn']==true){
-                    while(ob_get_level()){
-                        ob_end_clean();
-                    }
-                    ob_start();
-                    header("Location: index.php");
-                    ob_end_clean();
-                }
-            }
+            // if(isset($_SESSION['isLoggedIn'])){
+                // if($_SESSION['isLoggedIn']==true){
+                //     while(ob_get_level()){
+                //         ob_end_clean();
+                //     }
+                //     ob_start();
+                //     header("Location: index.php");
+                //     ob_end_clean();
+                // }
+            // }
             //if the user is not logged in, show login form
             viewLogin();
         }

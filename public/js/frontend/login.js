@@ -12,6 +12,7 @@
 		xhr.open('POST', 'index.php?action=login');
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
+				console.log(xhr.response);
 				if (xhr.response == 'success') {
 					window.location.href = 'http://localhost:8888/index.php?action=weeklySchedule';
 				}

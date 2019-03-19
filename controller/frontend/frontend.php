@@ -37,14 +37,14 @@ function viewWelcome(){
 function signUp($email,$password,$confirmPassword,$firstName){
     $internalUser = new InternalUser();
     $result = $internalUser->userSignUp($email,$password,$confirmPassword,$firstName);
-    ob_clean();
+    ob_end_clean();
     echo $result;
 }
 
 function login($email, $password, $keepLoggedIn){
     $internalUser = new InternalUser();
     $result = $internalUser->login($email,$password,$keepLoggedIn);
-    ob_clean();
+    ob_end_clean();
     echo $result;
 }
 
