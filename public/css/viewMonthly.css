@@ -1,0 +1,92 @@
+@font-face {
+  font-family: "DIN alternate";
+  src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
+}
+.bodyWrapper {
+  font-family: "DIN alternate";
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 7.5fr;
+  justify-content: center;
+  align-items: center;
+  background-color: #2f2f2f;
+  box-sizing: border-box;
+}
+
+.listWrapper {
+  background-color: black;
+  height: 100%;
+}
+
+.calWrapper {
+  height: 100%;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-rows: 1fr 9fr;
+  box-sizing: border-box;
+}
+
+.utilContainer {
+  justify-self: center;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+.utilContainer .showCal {
+  background-image: url("../images/cal_icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+}
+.utilContainer .showCal span#month {
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  font-weight: bold;
+}
+.utilContainer .showCal span#date {
+  font-size: 0.6rem;
+}
+.utilContainer button {
+  height: max-content;
+  background-color: #2f2f2f;
+  border: 1px solid white;
+  color: white;
+  border-radius: 5px;
+  margin: 0 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.utilContainer button:hover {
+  background-color: white;
+  border: 1px solid #2f2f2f;
+  color: #2f2f2f;
+}
+
+.calContainer {
+  height: 100%;
+  width: 100%;
+  padding: 0 1rem 1rem 1rem;
+  box-sizing: border-box;
+}
+.calContainer table {
+  width: 100%;
+  height: 100%;
+}
+.calContainer table th {
+  width: 14%;
+  background-color: white;
+  color: #2f2f2f;
+  height: 30px;
+}
+.calContainer table td {
+  border: 1px solid white;
+}
+
+/*# sourceMappingURL=viewMonthly.css.map */

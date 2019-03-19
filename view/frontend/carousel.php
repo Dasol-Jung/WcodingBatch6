@@ -1,3 +1,4 @@
+<link rel='stylesheet' href='public/css/2_welcome/2_1_carousel.css'/>
 <section>
     <div class="carouselContainer">
         <div class="mySlide fade">

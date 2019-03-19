@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "DIN alternate";
+  src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
+}
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: 30px;
+  color: white;
+}
+
+/*# sourceMappingURL=1_5_footer.css.map */

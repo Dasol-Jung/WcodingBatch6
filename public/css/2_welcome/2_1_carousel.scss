@@ -1,25 +1,26 @@
 @import '../1_shared/1_5_footer.scss';
+@import '../1_shared/1_2_mixins.scss';
 
 // Convert scss file to css file : run "sass --watch [FILE NAME].scss:../style.css" in terminal
 // Or, just do "sass [FILE NAME].scss ../style.css"
 
-.carouselImg{
+.carouselImg {
 	vertical-align: middle;
 	width: 100%;
 }
 
 /* Carousel Container */
-.carouselContainer{
+.carouselContainer {
 	max-width: 700px;
 	position: relative;
 	margin: auto;
 }
 
-.prevCarousel{
+.prevCarousel {
 	@include carouselArrow;
 }
 
-.nextCarousel{
+.nextCarousel {
 	@include carouselArrow;
 	right: 0;
 }
@@ -44,11 +45,11 @@
 }
 
 /* The dots/bullets/indicators */
-.dotContainer{
+.dotContainer {
 	text-align: center;
 }
 
-.dot{
+.dot {
 	cursor: pointer;
 	height: 16px;
 	width: 16px;
@@ -58,12 +59,12 @@
 	display: inline-block;
 	transition: background-color 0.3s ease;
 
-	&:hover{
+	&:hover {
 		background-color: #636363;
 	}
 }
 
-.dotActive{
+.dotActive {
 	background-color: #636363;
 }
 
@@ -75,16 +76,16 @@
 
 @keyframes fade {
 	from {
-		opacity: .4
-	} 
+		opacity: .4;
+	}
 	to {
-		opacity: 1
+		opacity: 1;
 	}
 }
 
 /* On smaller screens, decrease text size of the carousel title */
 @media only screen and (max-width: 500px) {
-	.carouselTitle{
+	.carouselTitle {
 		font-size: 17px;
 	}
 }

@@ -1,8 +1,16 @@
-<?php $title = 'Weekly Scheduler'; ?>
+<?php $styles[] = "<link rel='stylesheet' href='public/css/1_shared/index.css'"?>
 <?php ob_start(); ?>
-<?php require_once "navbar.php"?>
-<?php require_once "carousel.php"?>
-<?php require_once "kakaoAcct.php"?>
-<?php require_once "footer.php"?>
-<?php $content = ob_get_clean();?>
-<?php require "./view/template.php"; ?>
+
+<div class="bodyWrapper">
+    <div class="left">
+        <?php require_once "carousel.php"?>
+    </div>
+    <div class="divider"></div>
+    <div class="right">
+        <?=$rightSection?>
+    </div>
+</div>
+<?php
+$content = ob_get_clean();
+require("view/template.php"); ?>
+

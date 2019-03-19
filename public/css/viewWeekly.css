@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "DIN alternate";
+  src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
+}
+.bodyWrapper {
+  font-family: "DIN alternate";
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 7.5fr;
+  justify-content: center;
+  align-items: center;
+  background-color: #2f2f2f;
+  box-sizing: border-box;
+}
+
+.listWrapper {
+  background-color: black;
+  height: 100%;
+}
+
+.calWrapper {
+  padding-top: 3rem;
+  height: 100%;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-rows: 1fr 9fr;
+  box-sizing: border-box;
+}
+
+.utilContainer .calendarCtrl {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.utilContainer .calendarCtrl .showCal {
+  background-image: url("../images/cal_icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+}
+.utilContainer .calendarCtrl .showCal span#month {
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  font-weight: bold;
+}
+.utilContainer .calendarCtrl .showCal span#date {
+  font-size: 0.6rem;
+}
+.utilContainer .calendarCtrl button {
+  height: max-content;
+  background-color: #2f2f2f;
+  border: 1px solid white;
+  color: white;
+  border-radius: 5px;
+  margin: 0 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.utilContainer .calendarCtrl button:hover {
+  background-color: white;
+  border: 1px solid #2f2f2f;
+  color: #2f2f2f;
+}
+.utilContainer .addSchedule {
+  float: right;
+  margin-right: 1.5rem;
+  position: relative;
+  bottom: 10%;
+}
+
+.calContainer {
+  display: grid;
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(7, 1fr);
+  height: 100%;
+  width: 100%;
+  padding: 0 1.5rem 2rem 1.5rem;
+  box-sizing: border-box;
+}
+.calContainer .dayContainer {
+  border-radius: 10px 10px 0 0;
+  border: 1px solid white;
+  height: 100%;
+}
+.calContainer .dayContainer .dayAndDate {
+  height: 5%;
+  font-weight: bold;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 6px 6px 0 0;
+  padding: 0 0.5rem;
+  background-color: white;
+}
+.calContainer .dayContainer .calbody {
+  height: 95%;
+}
+
+/*# sourceMappingURL=viewWeekly.css.map */
