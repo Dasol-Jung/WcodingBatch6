@@ -32,7 +32,8 @@ Docs & License: https://fullcalendar.io/
 
 .fc-dayGrid-view .fc-week-number,
 .fc-dayGrid-view .fc-day-number {
-  padding: 2px; 
+  padding: 5px; 
+  color: white;
 }
 
 .fc-dayGrid-view th.fc-week-number,
@@ -68,3 +69,12 @@ Docs & License: https://fullcalendar.io/
   /* work around the way we do column resizing and ensure a minimum width */
   display: inline-block;
   min-width: 1.25em; }
+
+.fc-day-header{
+  background-color: white;
+  height: 30px;
+}
+
+/* .fc-widget-content{
+
+} */

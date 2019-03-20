@@ -100,9 +100,12 @@ hr.fc-divider {
   /* normalize cross-browser */ }
 
 .fc th {
-  text-align: center; }
+  text-align: center; 
+  border-style: solid;
+  border-width: 1px;
+  vertical-align: middle;
+}
 
-.fc th,
 .fc td {
   border-style: solid;
   border-width: 1px;
@@ -501,7 +504,8 @@ TODO: more distinction between this file and common.css
   background: #eee; }
 
 .fc-unthemed td.fc-today {
-  background: #fcf8e3; }
+  background: #999999; 
+}
 
 .fc-unthemed .fc-disabled-day {
   background: #d7d7d7;
@@ -519,7 +523,7 @@ from https://feathericons.com/ and built with IcoMoon
 .fc-icon {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'fcicons' !important;
-  speak: none;
+  /* speak: none; */
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -588,7 +592,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 .fc-button {
   display: inline-block;
   font-weight: 400;
-  color: #212529;
+  color: white;
   text-align: center;
   vertical-align: middle;
   -webkit-user-select: none;
@@ -603,52 +607,57 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
   border-radius: 0.25em; }
 
 .fc-button:hover {
-  color: #212529;
+  color: gray;
   text-decoration: none; }
 
 .fc-button:focus {
   outline: 0;
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
-  box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25); }
+  /* -webkit-box-shadow: 0 0 0 0.2rem gray;
+  box-shadow: 0 0 0 0.2rem gray;  */
+}
 
 .fc-button:disabled {
   opacity: 0.65; }
 
 /* "primary" coloring */
 .fc-button-primary {
-  color: #fff;
-  background-color: #2C3E50;
-  border-color: #2C3E50; }
+  color: black;
+  background-color: lightgray;
+  border-color: lightgray; }
 
 .fc-button-primary:hover {
-  color: #fff;
-  background-color: #1e2b37;
-  border-color: #1a252f; }
+  color: lightgray;
+  background-color: gray;
+  border-color: gray; }
 
-.fc-button-primary:focus {
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
-  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5); }
+/* .fc-button-primary:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem gray; 
+  box-shadow: 0 0 0 0.2rem gray; 
+} */
 
 .fc-button-primary:disabled {
-  color: #fff;
-  background-color: #2C3E50;
-  border-color: #2C3E50; }
+  color: lightgray;
+  background-color: gray;
+  border-color:gray; }
 
 .fc-button-primary:not(:disabled):active,
 .fc-button-primary:not(:disabled).fc-button-active {
-  color: #fff;
-  background-color: #1a252f;
-  border-color: #151e27; }
+  color: lightgray;
+  background-color:gray;
+  border-color:gray; }
 
-.fc-button-primary:not(:disabled):active:focus,
+/* .fc-button-primary:not(:disabled):active:focus,
 .fc-button-primary:not(:disabled).fc-button-active:focus {
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
-  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5); }
+  -webkit-box-shadow: 0 0 0 0.2rem gray;
+  box-shadow: 0 0 0 0.2rem gray; 
+} */
 
 /* icons within buttons */
 .fc-button .fc-icon {
   vertical-align: middle;
-  font-size: 1.5em; }
+  font-size: 1.5em; 
+  color: black;
+}
 
 /* Buttons Groups
 --------------------------------------------------------------------------------------------------*/
@@ -657,7 +666,9 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  vertical-align: middle; }
+  vertical-align: middle; 
+  margin-right: 2em;
+}
 
 .fc-button-group > .fc-button {
   position: relative;
@@ -714,12 +725,17 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 
 .fc-toolbar h2 {
   font-size: 1.75em;
-  margin: 0; }
+  margin: 0; 
+  color: white;
+  text-align: center;
+}
 
 /* View Structure
 --------------------------------------------------------------------------------------------------*/
 .fc-view-container {
-  position: relative; }
+  position: relative; 
+  padding: 0 2rem 1rem 2rem;
+}
 
 /* undo twitter bootstrap's box-sizing rules. normalizes positioning techniques */
 /* don't do this for the toolbar because we'll want bootstrap to style those buttons as some pt */
@@ -734,7 +750,8 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 .fc-view > table {
   /* so dragged elements can be above the view's main element */
   position: relative;
-  z-index: 1; }
+  z-index: 1; 
+}
 
 @media print {
   .fc {

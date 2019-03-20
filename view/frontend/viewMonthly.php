@@ -43,7 +43,7 @@ ob_start();
                 Next
             </button>
         </div>
-        <div class="calContainer">
+        <!-- <div class="calContainer">
         
             <table>
                 <tr class='days'>
@@ -110,7 +110,7 @@ ob_start();
                     <td></td>
                 </tr>
             </table>
-        </div>
+        </div> -->
         <div id="monthlyCalendar"></div>
     </section>
 </div>
