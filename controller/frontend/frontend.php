@@ -1,8 +1,10 @@
 <?php
 session_start();
 require_once('model/ManagerDB.php');
-require('model/frontend/Kakao.php');
+require_once('model/frontend/KakaoUser.php');
 require_once("model/frontend/InternalUser.php");
+require_once("model/frontend/GoogleUser.php");
+require_once("model/frontend/User.php");
 
 
 function viewHome()
@@ -20,16 +22,6 @@ function viewCalendar()
     require('view/frontend/viewCalendar.php');
 }
 
-/**
- * loggedUser : logs users on kakao
- * @param Array $kakaoUser the array of all the informations of the user
- * 
- */
-function loggedInKakao($kakaoUserInfo){
-    $kakaoUserManager = new KakaoUser();
-    $kakaoUserManager->registerKakaoUser($kakaoUserInfo);
-}
-
 function viewLogin(){
     ob_start();
         require("view/frontend/viewLogin.php");
@@ -43,7 +35,7 @@ function viewWelcome(){
 
 function signUp($email,$password,$confirmPassword,$firstName){
     $internalUser = new InternalUser();
-    $result = $internalUser->userSignUp($email,$password,$confirmPassword,$firstName);
+    $result = $internalUser->registerInternalUser($email,$password,$confirmPassword,$firstName);
     ob_end_clean();
     echo $result;
 
@@ -56,9 +48,29 @@ function login($email, $password, $keepLoggedIn){
     echo $result;
 }
 
+/**
+ * loggedUser : logs users on kakao
+ * @param Array $kakaoUser the array of all the informations of the user
+ * 
+ */
+function loginWithKakao($kakaoUserInfo){
+    $kakaoUser = new KakaoUser();
+    $kakaoLoginResult = $kakaoUser->registerKakaoUser($kakaoUserInfo);
+    ob_end_clean();
+    echo $kakaoLoginResult;
+}
+
+function loginWithGoogle($googleInfo)
+{
+    $googleUser = new GoogleUser();
+    $googleLoginResult = $googleUser-> registerGoogleUser($googleInfo);
+    ob_end_clean();
+    echo $googleLoginResult;
+}
+
 function logout(){
-    $internalUser = new InternalUser();
-    $internalUser->userLogout();
+    $user = new User();
+    $user->userLogout();
 }
 
 function viewWeekly()
@@ -69,12 +81,4 @@ function viewWeekly()
 function viewMonthly()
 {
     require("view/frontend/viewMonthly.php");
-}
-
-function loggedInGoogle($googleInfo)
-{
-    require("model/frontend/GoogleUserManager.php");
-    $googleUser = new GoogleUserManager();
-    $googleUser-> makeGoogle($googleInfo);
-
 }

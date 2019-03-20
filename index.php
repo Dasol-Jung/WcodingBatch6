@@ -1,16 +1,11 @@
 <?php
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);  
+error_reporting(E_ALL);
+ini_set('display_errors', 1);  
 require('./controller/frontend/frontend.php');
 try{
     if (isset($_GET['action'])) {
         if ($_GET['action'] == 'viewCalendar') {
             viewCalendar();
-        }
-
-        if ($_GET['action'] == 'kakaoLogin') {
-            $kakaoInfo = json_decode(file_get_contents("php://input"), TRUE);
-            loggedInKakao($kakaoInfo);
         }
       
         if($_GET['action'] == 'login'){
@@ -25,7 +20,19 @@ try{
             }
             //if the user is not logged in, show login form
             viewLogin();
+        
         }
+
+        if($_GET['action'] == 'googleLogin'){
+            $googleInfo = json_decode(file_get_contents("php://input"), TRUE);
+            loginWithGoogle($googleInfo);
+        }
+
+        if ($_GET['action'] == 'kakaoLogin') {
+            $kakaoInfo = json_decode(file_get_contents("php://input"), TRUE);
+            loginWithKakao($kakaoInfo);
+        }
+
         if($_GET['action'] == 'logout'){
             logout();
         }
@@ -40,11 +47,7 @@ try{
             viewMonthly();
         }
         
-        if($_GET['action'] == 'googleLogin'){
-            $googleInfo = json_decode(file_get_contents("php://input"), TRUE);
-            loggedInGoogle($googleInfo);
 
-        }
     }
     else {
         viewHome();

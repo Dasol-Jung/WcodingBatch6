@@ -24,7 +24,10 @@ Kakao.Auth.createLoginButton({
 				xhr.setRequestHeader('Content-type', 'application/json');
 				xhr.addEventListener('readystatechange', function() {
 					if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-						document.body.innerHTML = xhr.responseText;
+						var kakaoLoginResult = this.response;
+						kakaoLoginResult == 'success'
+							? (window.location.href = 'index.php?action=weeklySchedule')
+							: alert('Kakao Login failed');
 					}
 				});
 				xhr.send(JSON.stringify(params));

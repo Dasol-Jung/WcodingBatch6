@@ -16,10 +16,16 @@ class KakaoUser extends ManagerDB{
         $registerData -> bindParam(':email', $kakaoUserInfo['email'], PDO::PARAM_STR);
         $registerData -> bindParam(':access_token', $kakaoUserInfo['accessToken'], PDO::PARAM_STR);
         $registerData -> bindParam(':refresh_token', $kakaoUserInfo['refreshToken'], PDO::PARAM_STR);
-        print_r($registerData);
-        print_r($kakaoUserInfo);
-        $registerData->execute();
-        return $this->searchKakaoUser($uid);
+        if($registerData->execute()){
+            $_SESSION['isLoggedIn']=true;
+            $_SESSION['firstName']=$kakaoUserInfo['first_name'];
+            $_SESSION['uid']=$uid;
+            $_SESSION['userType']='kakao';
+            return 'success';
+        }
+        else{
+            throw new Exception("Kakao Login Failed");
+        }
     }
 
     public function searchKakaoUser($uid){

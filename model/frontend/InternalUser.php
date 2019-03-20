@@ -8,7 +8,7 @@
     
     class InternalUser extends User{
 
-        public function userSignUp($email,$password,$confirmPassword,$firstName){
+        public function registerInternalUser($email,$password,$confirmPassword,$firstName){
             $db= parent::dbConnect();
             $inputs = array("email"=>"$email", "password"=> $password, "confirmPassword"=>$confirmPassword, "firstName"=>$firstName);
             $utils = new Utils();
@@ -60,7 +60,8 @@
                 if(password_verify($password,$user['password'])){
                     $_SESSION['isLoggedIn']=true;
                     $_SESSION['firstName']=$user['first_name'];
-                    $_SESSION['internalUid']=$user['internal_uid'];
+                    $_SESSION['uid']=$user['internal_uid'];
+                    $_SESSION['userType']='internal';
                     
                     if($keepLoggedIn){
                         //create a token to remember the user
@@ -75,7 +76,8 @@
 
                         setcookie('rememberMeToken', $rememberMeToken, time()+3600*24*365,'/');
                         setcookie('firstName', $user['first_name'], time()+3600*24*365,'/');
-                        setcookie('internalUid', $user['internal_uid'], time()+3600*24*365,'/');
+                        setcookie('uid', $user['internal_uid'], time()+3600*24*365,'/');
+                        setcookie('userType', 'internal', time()+3600*24*365,'/');
                     }
                     
                     return "success";
@@ -102,18 +104,10 @@
                 if($isRememberMeCookieValid==true){
                     $_SESSION['isLoggedIn']=true;
                     $_SESSION['firstName']=user['first_name'];
-                    $_SESSION['internalUid']=$user['internal_uid'];
+                    $_SESSION['uid']=$user['internal_uid'];
+                    $_SESSION['userType']='internal';
                 }
             }
-        }
-
-        public function userLogout(){
-
-            setcookie('rememberMeToken');
-            setcookie('firstName');
-            setcookie('internalUid');
-            session_destroy();
-            header("Location: index.php");
         }
     }
 ?>

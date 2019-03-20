@@ -13,6 +13,16 @@ class User extends ManagerDB{
         $internalUid = $findUserId->fetchAll();
         return $internalUid[0];
     }
+
+    public function userLogout(){
+
+        setcookie('rememberMeToken');
+        setcookie('firstName');
+        setcookie('uid');
+        setcookie('userType');
+        session_destroy();
+        header("Location: index.php");
+    }
 }
 
 ?>

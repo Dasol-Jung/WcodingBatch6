@@ -10,7 +10,7 @@ if(!isset($_SESSION))
     session_start(); 
 } 
 require_once("User.php");
-class GoogleUserManager extends User
+class GoogleUser extends User
 {
     public function getGoogle($googleId,$googleEmail){
         $db= parent::dbConnect();
@@ -35,7 +35,7 @@ class GoogleUserManager extends User
                 }
         return $googleUser;
     }
-    public function makeGoogle($googleInfo){
+    public function registerGoogleUser($googleInfo){
         $db= parent::dbConnect();
         $googleAccessToken = $googleInfo["access_token"];
         $googleId = $googleInfo["google_id"];
@@ -48,8 +48,14 @@ class GoogleUserManager extends User
         VALUES(NULL, '$googleId', '$googleEmail', '$googleImage', '$googleFirstName', '$googleLastName', '$googleAccessToken', NULL, current_timestamp(), current_timestamp(), NULL)
         ON DUPLICATE KEY UPDATE last_login_date = current_timestamp()";
         $reqCreateGoogle = $db->prepare($request);
-        $googleAffectedLines = $reqCreateGoogle->execute();
-        // return $this->getGoogle($googleId, $googleEmail);
-        return $googleAffectedLines;
+        if($reqCreateGoogle->execute()){
+            $_SESSION['isLoggedIn']=true;
+            $_SESSION['firstName']=$googleFirstName;
+            $_SESSION['uid']=$googleId;
+            $_SESSION['userType']='google';
+            return 'success';
+        }else{
+            throw new Exception("Google Login Failed");
+        }
     }
 }

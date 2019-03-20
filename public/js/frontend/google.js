@@ -54,12 +54,13 @@ function onSuccess(googleUser) {
 	ajax.setRequestHeader('Content-type', 'application/json');
 	ajax.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			var results = this.responseText;
-			console.log(results);
+			var googleLoginResult = this.response;
+			googleLoginResult == 'success'
+				? (window.location.href = 'index.php?action=weeklySchedule')
+				: alert('Google Login failed');
 		}
 	};
 	var params = JSON.stringify(profileData);
-	console.log(params);
 	ajax.send(params);
 }
 
