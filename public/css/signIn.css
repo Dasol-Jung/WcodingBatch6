@@ -110,7 +110,7 @@
 }
 .loginForm .social-hr {
   position: relative;
-  height: 0.5px;
+  height: 1px;
   background-color: #aaa;
   margin: 2rem 0;
 }
