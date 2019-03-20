@@ -82,3 +82,8 @@ function viewMonthly()
 {
     require("view/frontend/viewMonthly.php");
 }
+
+function viewProfile()
+{
+    require("view/frontend/viewProfile.php");
+}

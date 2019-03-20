@@ -18,7 +18,7 @@
                     <img id='avatar' src="<?=$_SESSION['avatar']?>" alt="public/images/defaultUserImage.svg">
                 </li>
                 <ul class="avatarPopup hidden">
-                    <li class="profile"><a href="" class="menuLink profileLink">MY ACCOUNT</a></li>
+                    <li class="profile"><a href="index.php?action=profile" class="menuLink profileLink">MY ACCOUNT</a></li>
                     <li class="menuItem"><a class='menuLink logout' href="index.php?action=logout">LOGOUT</a></li>
                 </ul>
             <?php else :?>

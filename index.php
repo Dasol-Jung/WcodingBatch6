@@ -46,8 +46,10 @@ try{
         if($_GET['action'] == 'monthlySchedule'){
             viewMonthly();
         }
-        
 
+        if($_GET['action'] == 'profile'){
+            viewProfile();
+        }
     }
     else {
         viewHome();
