@@ -15,6 +15,12 @@ if($_SESSION['isLoggedIn']!=true){
 ob_start();
 ?>
 <?php $styles[]="<link rel='stylesheet' href='../../public/css/viewMonthly.css'/>"?>
+<link href='../../public/fullcalendar/core/main.css' rel='stylesheet' />
+<link href='../../public/fullcalendar/daygrid/main.css' rel='stylesheet' />
+
+<script src='../../public/fullcalendar/core/main.js'></script>
+<script src='../../public/fullcalendar/daygrid/main.js'></script>
+
 
 <div class='bodyWrapper'>
     <section class="listWrapper">
@@ -22,6 +28,9 @@ ob_start();
     </section>
     <section class="calWrapper">
         <div class="utilContainer">
+            <button class="monthlyWeekly">
+                weekly/monthly
+            </button>
             <button class="prev">
                 Prev
             </button>
@@ -102,9 +111,10 @@ ob_start();
                 </tr>
             </table>
         </div>
+        <div id="monthlyCalendar"></div>
     </section>
 </div>
-
+<script src= "../../public/js/frontend/viewMonthly.js"></script>
 
 <?php
 

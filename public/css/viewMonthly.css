@@ -22,9 +22,11 @@
 .calWrapper {
   height: 100%;
   display: grid;
+  margin-top: 100px;
   grid-gap: 1rem;
   grid-template-rows: 1fr 9fr;
   box-sizing: border-box;
+  background-color: #2f2f2f;
 }
 
 .utilContainer {
@@ -87,6 +89,11 @@
 }
 .calContainer table td {
   border: 1px solid white;
+}
+
+#monthlyCalendar {
+  max-width: 900px;
+  margin: 40px auto;
 }
 
 /*# sourceMappingURL=viewMonthly.css.map */
