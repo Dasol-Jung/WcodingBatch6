@@ -21,6 +21,7 @@ class KakaoUser extends ManagerDB{
             $_SESSION['firstName']=$kakaoUserInfo['first_name'];
             $_SESSION['uid']=$uid;
             $_SESSION['userType']='kakao';
+            $_SESSION['avatar']=$kakaoUserInfo['img'];
             return 'success';
         }
         else{

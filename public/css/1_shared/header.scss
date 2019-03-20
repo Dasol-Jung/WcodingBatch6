@@ -1,0 +1,51 @@
+@font-face {
+	font-family: "DIN alternate";
+	src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
+}
+header {
+	position: absolute;
+	width: 100%;
+}
+header .logoContainer {
+	float: left;
+	width: 30px;
+	height: 30px;
+	margin: 10px 0 0 10px;
+}
+header .logoContainer #logo {
+	height: 100%;
+}
+header nav {
+	float: right;
+}
+header ul {
+	display: flex;
+	justify-content: flex-end;
+	list-style: none;
+}
+header ul .menuItem {
+	margin: 0 1rem;
+}
+header ul .menuLink {
+	padding: 0 1rem;
+	text-decoration: none;
+	color: white;
+	font-family: "DIN alternate";
+	font-weight: bold;
+}
+header ul .menuLink :hover {
+	text-decoration: underline;
+}
+
+.menuWrapper {
+	margin-right: 1.5rem;
+}
+
+#avatar {
+	border-radius: 50%;
+	max-height: 25px;
+	position: relative;
+	bottom: 3px;
+}
+
+/*# sourceMappingURL=header.css.map */

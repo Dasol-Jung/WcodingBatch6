@@ -5,11 +5,14 @@ while(ob_get_level()){
 ob_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);  
+
 if(!isset($_SESSION)) 
 { 
     session_start(); 
 } 
+
 require_once("User.php");
+
 class GoogleUser extends User
 {
     public function getGoogle($googleId,$googleEmail){
@@ -53,6 +56,7 @@ class GoogleUser extends User
             $_SESSION['firstName']=$googleFirstName;
             $_SESSION['uid']=$googleId;
             $_SESSION['userType']='google';
+            $_SESSION['avatar']=$googleImage;
             return 'success';
         }else{
             throw new Exception("Google Login Failed");
