@@ -122,8 +122,24 @@ const clientUtils = (() => {
 		});
 	}
 
+	/**
+ * ----------------------------------------------------------------------------------
+ * public
+ * showPopup : show hidden popup menu
+ * @param
+ * -(HTMLelement) : a button to toggle popup menu
+ * -(HTMLelement) : an html element to show
+ * ----------------------------------------------------------------------------------
+ */
+	function togglePopup(button, menu) {
+		button.addEventListener('click', () => {
+			menu.classList.toggle('hidden');
+		});
+	}
+
 	return {
 		validator,
-		renderErrorMsg
+		renderErrorMsg,
+		togglePopup
 	};
 })();

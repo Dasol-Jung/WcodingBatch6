@@ -1,3 +1,5 @@
+@import '1_1_variables.scss';
+
 @font-face {
 	font-family: "DIN alternate";
 	src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
@@ -37,15 +39,47 @@ header ul .menuLink :hover {
 	text-decoration: underline;
 }
 
-.menuWrapper {
-	margin-right: 1.5rem;
+li.avatar.menuItem {
+	display: flex;
+	flex-flow: column;
+	margin-right: 2rem;
+	position: relative;
 }
 
 #avatar {
 	border-radius: 50%;
 	max-height: 25px;
+	max-width: 25px;
 	position: relative;
 	bottom: 3px;
+	align-self: flex-end;
+}
+
+.avatarPopup {
+	position: absolute;
+	top: 40px;
+	right: 1.5rem;
+	transition: all 0.1s ease-in;
+	font-size: 0.8rem;
+	margin-top: 0.5rem;
+	border: 3px solid #aaa;
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-start;
+	background-color: white;
+	height: 300px;
+	padding: 1rem 0;
+	li {
+		margin-bottom: 1rem;
+		a {
+			color: black;
+		}
+	}
+}
+.hidden {
+	transform: translateY(-150%);
+	opacity: 0;
+	transition: all 0.1s ease-in;
 }
 
 /*# sourceMappingURL=header.css.map */
