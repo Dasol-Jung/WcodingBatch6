@@ -85,5 +85,11 @@ function viewMonthly()
 
 function viewProfile()
 {
-    require("view/frontend/viewProfile.php");
+    if($_SESSION['isLoggedIn']!= true){
+        header("Location: index.php");
+    }else{
+        $user = new User();
+        $userInfo = $user->getUserInfo($_SESSION['uid'],$_SESSION['userType']);
+        require("view/frontend/viewProfile.php");
+    }
 }

@@ -9,35 +9,39 @@ ob_start();
 
 <div class="bodyWrapper">
 
-<form class="profileForm" action="index.php" method="POST">
+<div class="profileForm" action="index.php" method="POST">
 
     <label for="email">Email</label>
-    <input value="" name="email" id="email" type="email"/>
-    <span class='error' id='error_email'></span>
+    <input readonly value="<?=$userInfo['email']?>" name="email" id="email" type="email"/>
 
     <label for="changePassword">Password</label>
     <button id="changePassword">Change Password</button>
 
-    <fieldset>
-    <legend>Personal Info</legend>
-    <label for="firstName">First Name</label>
-    <input value='' name="firstName" id="firstName" type="text"/>
-    <span class='error' id='error_firstName'></span>
-
-    <label for="avatarBtn">Avatar</label>
-    <img id='avatar' src="<?=$_SESSION['avatar']?>" alt="public/images/defaultUserImage.svg">
-    <label for="changeAvatar"><button class='changeAvatar'>Change Avatar</button></label>
-    <input name="avatar" id="changeAvatar" type="file"/>
-    <span class='error' id='error_firstName'></span>
-    <button class="savePersonalInfo">Save</button>
-    </fieldset>
+    <div class="modalTarget">
+        <label for="currentPW">Current password</label>
+        <input type="password" placeholder='Enter current password'>
+        <button class="checkCurrentPW">Confirm</button>
+    </div>
     
+    <div class="firstNameAvatarContainer">
+        <div class="firstNameContainer">
+            <label for="firstName">First Name</label>
+            <input value='<?=$userInfo['first_name']?>' name="firstName" id="firstName" type="text"/>
+        </div>
+    
+        <div class="avatarContainer">
+            <label for="avatarBtn">Avatar</label>
+            <img id='profileAvatar' src="<?=$_SESSION['avatar']?>" alt="public/images/defaultUserImage.svg">
+            <label for="changeAvatar">Edit</label>
+            <input name="avatar" id="changeAvatar" type="file"/>  
+        </div>
+        <button class="savePersonalInfo">Save</button>
+    </div>
     <button id="signOut">Sign out</button>
-
-   
-</form>
+</div>
    
 </div>
+<script src='public/js/frontend/profile.js'></script>
 <?php
 $content = ob_get_clean();
 require('view/template.php');

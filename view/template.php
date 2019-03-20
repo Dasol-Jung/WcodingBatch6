@@ -15,10 +15,14 @@
         <?php endforeach?>
     <?php endif?>
 </head>
-<script src= "public/js/frontend/utils.js"></script>
-<script src= "public/js/frontend/header.js"></script>
+
 <body>
 <?php require_once "view/frontend/header.php"?>
     <?= $content ?>
+    <script src= "public/js/frontend/utils.js"></script>
+    <script src= "public/js/frontend/header.js"></script>
+    <script>
+        clientUtils.initialize()
+    </script>
 </body>
 </html>

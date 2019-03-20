@@ -5,6 +5,8 @@
 	window.onload = () => {
 		let avatar = document.querySelector('#avatar');
 		let popupMenu = document.querySelector('.avatarPopup');
-		clientUtils.togglePopup(avatar, popupMenu);
+		if (avatar && popupMenu) {
+			clientUtils.togglePopup(avatar, popupMenu);
+		}
 	};
 })();

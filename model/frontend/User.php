@@ -15,13 +15,36 @@ class User extends ManagerDB{
     }
 
     public function userLogout(){
-
         setcookie('rememberMeToken');
         setcookie('firstName');
         setcookie('uid');
         setcookie('userType');
         session_destroy();
         header("Location: index.php");
+    }
+
+    public function getUserInfo($uid, $userType){
+        $db = parent::dbConnect();
+        switch($userType){
+            case 'internal':
+                $findUser = $db->query("SELECT email, first_name FROM internal_user");
+                return $findUser->fetchAll()[0];
+                break;
+
+            case 'google':
+                $findUser = $db->query("SELECT email, first_name FROM google_user");
+                return $findUser->fetchAll()[0];
+                break;
+
+            case 'kakao':
+                $findUser = $db->query("SELECT email, first_name FROM kakao_user");
+                return $findUser->fetchAll()[0];
+                break;
+
+            default:
+                return null;
+                break;
+        }
     }
 }
 

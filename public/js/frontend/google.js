@@ -92,7 +92,7 @@ function onFailure(error) {
  * function to logout the user
  * NO USE for now we'll see later if we need
  */
-function signOut() {
+function googleLogOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
 	if (googleIdSession) {
 		auth2.signOut().then(function() {

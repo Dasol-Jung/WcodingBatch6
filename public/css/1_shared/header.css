@@ -62,6 +62,7 @@ li.avatar.menuItem {
   position: relative;
   bottom: 3px;
   align-self: flex-end;
+  cursor: pointer;
 }
 
 .avatarPopup {

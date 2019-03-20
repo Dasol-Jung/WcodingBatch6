@@ -36,7 +36,6 @@
         <span class="toSignin">Already have an account? <a href="http://localhost:8888/index.php?action=login">Sign in</a></span>
     </div>
 </form>
-<script src= "../../public/js/frontend/utils.js"></script>
 <script src= "../../public/js/frontend/signUp.js"></script>
 <script src= "../../public/js/frontend/google.js"></script>
 <script src="../../public/js/frontend/kakaoAcct.js"></script>

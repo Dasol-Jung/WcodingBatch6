@@ -8,8 +8,6 @@ Kakao.Auth.createLoginButton({
 		Kakao.API.request({
 			url: '/v2/user/me',
 			success: function(res) {
-				// alert(JSON.stringify(res));
-				// alert(JSON.stringify(authObj));
 				var params = {
 					uid: res.id,
 					first_name: res.properties.nickname,

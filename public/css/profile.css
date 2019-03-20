@@ -16,6 +16,7 @@
 }
 
 button {
+  margin-top: 1rem;
   width: 130px;
   font-size: 0.85rem;
   height: 2.3rem;
@@ -25,7 +26,12 @@ button {
 }
 
 label {
+  margin-top: 1rem;
   display: block;
+}
+
+fieldset {
+  margin-top: 1rem;
 }
 
 input {
@@ -72,6 +78,31 @@ button.savePersonalInfo {
 button#signOut {
   background-color: darkorange;
   color: black;
+}
+
+input:read-only:focus {
+  outline: none;
+}
+
+.avatarContainer {
+  position: relative;
+  align-self: center;
+}
+.avatarContainer label[for=changeAvatar] {
+  position: absolute;
+  background-color: #2f2f2f;
+  color: white;
+  padding: 0.1rem 0.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0;
+  left: 0;
+  bottom: 0;
+}
+
+#profileAvatar {
+  height: 100px;
+  border-radius: 50%;
 }
 
 /*# sourceMappingURL=login.css.map */

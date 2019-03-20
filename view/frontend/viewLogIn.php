@@ -33,7 +33,6 @@
         <span class="toSignup">You don't have an account? <a href="index.php">Sign Up</a></span>
     </div>
 </form>
-<script src= "../../public/js/frontend/utils.js"></script>
 <script src= "../../public/js/frontend/login.js"></script>
 <script src= "../../public/js/frontend/google.js"></script>
 <script src="../../public/js/frontend/kakaoAcct.js"></script>

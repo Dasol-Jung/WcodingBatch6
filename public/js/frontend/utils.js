@@ -132,14 +132,120 @@ const clientUtils = (() => {
  * ----------------------------------------------------------------------------------
  */
 	function togglePopup(button, menu) {
-		button.addEventListener('click', () => {
+		button.addEventListener('click', e => {
 			menu.classList.toggle('hidden');
+		});
+	}
+
+	/**
+ * ----------------------------------------------------------------------------------
+ * public
+ * createModal: create Moda
+ * @param
+ * -(HTMLelement) : content to put in the modal
+ * -(array) optional : [width, height]
+ * @return
+ * -(HTMLelement) : modal element to append to body
+ * ----------------------------------------------------------------------------------
+ */
+
+	function createModal(element, sizeArr) {
+		element.style.display = 'block';
+		let modalContainer = document.createElement('div');
+		let modalBackground = document.createElement('div');
+		let closeButton = document.createElement('div');
+
+		closeButton.innerHTML = '<i class="fa fa-window-close">';
+
+		let body = document.body,
+			html = document.documentElement;
+
+		// get the height of full html document
+		let maxHeight = Math.max(
+			body.scrollHeight,
+			body.offsetHeight,
+			html.clientHeight,
+			html.scrollHeight,
+			html.offsetHeight
+		);
+
+		//modal close button style
+
+		closeButton.style.position = 'absolute';
+		closeButton.style.top = '8px';
+		closeButton.style.right = '8px';
+		closeButton.style.fontSize = '2rem';
+		closeButton.style.display = 'flex';
+		closeButton.style.alignItems = 'flex-start';
+		closeButton.style.cursor = 'pointer';
+
+		//modal background style
+		modalBackground.style.position = 'absolute';
+		modalBackground.style.display = 'flex';
+		modalBackground.style.justifyContent = 'center';
+		modalBackground.style.alignItems = 'flex-start';
+		modalBackground.style.height = maxHeight + 'px';
+		modalBackground.style.width = '100%';
+		modalBackground.style.top = '0';
+		modalBackground.style.left = '0';
+		modalBackground.style.backgroundColor = 'rgba(0,0,0,0.5)';
+
+		//modal container style
+		modalContainer.style.backgroundColor = 'white';
+		modalContainer.style.padding = '40px';
+		modalContainer.style.borderRadius = '8px';
+		modalContainer.style.width = sizeArr ? sizeArr[0] + 'px' : '100%';
+		modalContainer.style.height = sizeArr ? sizeArr[1] + 'px' : '100%';
+		modalContainer.style.margin = 'auto';
+		modalContainer.style.zIndex = '1';
+
+		// close modal
+
+		modalBackground.addEventListener(
+			'click',
+			e => {
+				if (e.target === e.currentTarget) {
+					e.currentTarget.style.display = 'none';
+					element.style.display = 'none';
+				}
+			},
+			true
+		);
+
+		closeButton.addEventListener('click', e => {
+			modalBackground.style.display = 'none';
+			element.style.display = 'none';
+		});
+
+		//append modal content, close button, and container to modal background
+		modalContainer.appendChild(closeButton);
+		modalContainer.appendChild(element);
+		modalBackground.appendChild(modalContainer);
+
+		return modalBackground;
+	}
+
+	/**
+ * ----------------------------------------------------------------------------------
+ * public
+ * initialize : initialize anything you need
+ * ----------------------------------------------------------------------------------
+ */
+
+	function initialize() {
+		//hide modal contents
+
+		let modalTargets = document.querySelectorAll('.modalTarget');
+		modalTargets.forEach(target => {
+			target.style.display = 'none';
 		});
 	}
 
 	return {
 		validator,
 		renderErrorMsg,
-		togglePopup
+		togglePopup,
+		createModal,
+		initialize
 	};
 })();
