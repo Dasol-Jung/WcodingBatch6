@@ -95,6 +95,11 @@ try{
                 if(isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_SESSION['isCurrentPasswordCorrect'])){
                     changePassword($_POST['password'], $_POST['password']);
                 }
+
+            case 'changePersonalInfo':
+
+                changePersonalInfo($_POST['firstName'],$_FILES['avatar']);
+                break;
                 
             default :
                 break;

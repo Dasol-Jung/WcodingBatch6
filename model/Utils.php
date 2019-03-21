@@ -35,10 +35,35 @@ class Utils{
                         return false;
                     }
                     break;
+
+                case "avatar":
+                    if($value['size']>0){
+                        $isSizeValid = ($value['size']/1000)<500 ? true : false;
+                        $allowedExt = ['jpg','jpeg','png'];
+                        $ext = strtolower(pathinfo(basename($value['name']),PATHINFO_EXTENSION));
+                        $isExtValid = in_array($ext,$allowedExt);
+                        if(!$isSizeValid || !$isExtValid){
+                            return false;
+                        }
+                        break;
+                    }
+                   
                 default:
                     break;
             }
         }
         return true;
     }
+
+    public function fileUpload($file){
+        $fileExtension = strtolower(substr(strrchr($file['name'],'.'),1));
+        $fileUniqName = md5(uniqid(rand(),null));
+        mkdir("public/avatar",0777,true);
+        $filePath = "public/avatar/" . $fileUniqName . "." . $fileExtension .  ".file";
+        $fileResult = move_uploaded_file($file['tmp_name'], $filePath);
+
+        return ['isSuccess'=>$fileResult, "filePath"=>$filePath];
+
+    }
+
 }

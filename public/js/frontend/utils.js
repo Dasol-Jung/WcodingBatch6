@@ -52,7 +52,7 @@ const clientUtils = (() => {
 			passwordSpecialReg = /^(?=.*[!@#\$%\^&\*])/,
 			passwordLetterReg = /^(?=.*[a-z])(?=.*[0-9])/,
 			emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-			firstNameReg = /^(?=.{1,})/;
+			firstNameReg = /^[a-z ,.'-]+$/i;
 		inputs.forEach(input => {
 			switch (input.name) {
 				case 'email':
@@ -83,9 +83,24 @@ const clientUtils = (() => {
 
 				case 'firstName':
 					if (!firstNameReg.test(String(input.value))) {
-						errorMsg['firstName'] = "First Name can't be empty";
+						errorMsg['firstName'] = 'Invalid First Name';
 					}
 					break;
+
+				case 'avatar':
+					if (input.files.length == 1) {
+						let file = input.files[0];
+						let ext = file.name.slice(file.name.lastIndexOf('.') + 1);
+						let allowedExt = [ 'jpg', 'jpeg', 'png' ];
+						let isValidExt = allowedExt.includes(ext);
+						if (file.size / 1000 > 500) {
+							errorMsg['avatar'] = 'File size should be smaller than 500KB';
+							break;
+						} else if (!isValidExt) {
+							errorMsg['avatar'] = 'Only jpg, jpeg, png files are allowed';
+							break;
+						}
+					}
 
 				default:
 					break;

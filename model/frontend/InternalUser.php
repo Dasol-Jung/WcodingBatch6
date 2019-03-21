@@ -134,12 +134,13 @@
         }
 
         public function changePassword($password, $confirmPassword){
-            $db = parent::dbConnect();
+
             $inputs = array("password"=> $password, "confirmPassword"=>$confirmPassword);
             $utils = new Utils();
             if($utils->validator($inputs)!=true){
                 return "invalid";
             }else{
+                $db = parent::dbConnect();
                 $passwordHashed = password_hash($password,PASSWORD_DEFAULT);
                 $changeReq = $db->prepare("UPDATE internal_user SET password=:password WHERE internal_uid=:internal_uid");
                 $changeReq->bindParam(":internal_uid", $_SESSION['uid'], PDO::PARAM_STR);

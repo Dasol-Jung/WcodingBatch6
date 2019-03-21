@@ -15,8 +15,8 @@ ob_start();
     <input readonly value="<?=$userInfo['email']?>" name="email" id="email" type="email"/>
 
     <?php if($_SESSION['userType']=='internal'):?>
-    <label for="changePassword">Password</label>
-    <button id="changePassword">Change Password</button>
+        <label for="changePassword">Password</label>
+        <button id="changePassword">Change Password</button>
     <?php endif?>
 
     <form class="checkCurrentPW modalTarget">
@@ -24,21 +24,28 @@ ob_start();
         <input name='currentPW' type="password" placeholder='Enter current password'>
         <button>Confirm</button>
     </form>
-    
-    <div class="firstNameAvatarContainer">
+
+    <form class="personalInfo">
         <div class="firstNameContainer">
             <label for="firstName">First Name</label>
-            <input value='<?=$userInfo['first_name']?>' name="firstName" id="firstName" type="text"/>
+            <input <?php echo $_SESSION['userType']=='internal' ?  null : 'readonly'?> value='<?=$userInfo['first_name']?>' name="firstName" id="firstName" type="text"/>
+            <span class='error' id='error_firstName'></span>
         </div>
     
         <div class="avatarContainer">
             <label for="avatarBtn">Avatar</label>
             <img id='profileAvatar' src="<?=$_SESSION['avatar']?>" alt="public/images/defaultUserImage.svg">
-            <label for="changeAvatar">Edit</label>
-            <input name="avatar" id="changeAvatar" type="file"/>  
+            <?php if($_SESSION['userType']=='internal'):?>
+              <label for="changeAvatar">Edit</label>
+              <input name="avatar" id="changeAvatar" type="file"/>
+              <span class='error' id='error_avatar'></span>
+            <?php endif?>
+            
         </div>
-        <button class="savePersonalInfo">Save</button>
-    </div>
+        <?php if($_SESSION['userType']=='internal'):?>
+            <button class="savePersonalInfo">Save</button>
+        <?php endif?>
+    </form>
     <button id="signOut">Sign out</button>
 </div>
    

@@ -110,3 +110,10 @@ function changePassword($password, $confirmPassword){
     ob_end_clean();
     echo $result;
 }
+
+function changePersonalInfo($firstName, $avatar){
+    $user = new User();
+    $result = $user->changePersonalInfo($firstName, $avatar);
+    ob_end_clean();
+    echo $result;
+}

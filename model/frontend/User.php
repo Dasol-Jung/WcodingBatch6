@@ -46,6 +46,108 @@ class User extends ManagerDB{
                 break;
         }
     }
+
+    public function changePersonalInfo($firstName, $avatar){
+        $inputs = array("firstName"=>$firstName, "avatar"=>$avatar);
+        $utils = new Utils();
+        if($utils->validator($inputs)!=true){
+            return "invalid";
+            exit();
+        }else{
+            $db = parent::dbConnect();
+            
+            // save file to server
+            if($avatar['size']>0){
+                $fileUploadResult = $utils->fileUpload($avatar);
+                if($fileUploadResult['isSuccess']){
+
+                    //update DB
+
+                    switch($_SESSION['userType']){
+                        case 'internal':
+                            $filePath = $fileUploadResult['filePath'];
+                            $updatePersonalInfo = "UPDATE internal_user SET first_name=:firstName, image=:image WHERE internal_uid=:uid";
+                            $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
+                            $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
+                            $updatePersonalInfoReq->bindValue(":image",$filePath, PDO::PARAM_STR);
+                            $updatePersonalInfoReq->bindValue(":uid",$_SESSION['uid'], PDO::PARAM_STR);
+                            break;
+
+                        case "google":
+                            $filePath = $fileUploadResult['filePath'];
+                            $updatePersonalInfo = "UPDATE google_user SET first_name=:firstName, image=:image WHERE google_uid=:uid";
+                            $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
+                            $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
+                            $updatePersonalInfoReq->bindValue(":image",$filePath, PDO::PARAM_STR);
+                            $updatePersonalInfoReq->bindValue(":uid",$_SESSION['uid'], PDO::PARAM_STR);
+                            break;
+
+                        case "kakao":
+                            $filePath = $fileUploadResult['filePath'];
+                            $updatePersonalInfo = "UPDATE kakao_user SET first_name=:firstName, image=:image WHERE kakao_uid=:uid";
+                            $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
+                            $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
+                            $updatePersonalInfoReq->bindValue(":image",$filePath, PDO::PARAM_STR);
+                            $updatePersonalInfoReq->bindValue(":uid",$_SESSION['uid'], PDO::PARAM_STR);
+                            break;
+
+                        default;
+                            break;
+                    }
+
+                    if($updatePersonalInfoReq->execute()){
+                        //delete existing file
+                        if($_SESSION['avatar']!='public/images/defaultUserImage.svg'){
+                            unlink($_SESSION['avatar']);
+                        }
+                        //update session
+                        $_SESSION['avatar']=$filePath;
+                        return 'success';
+                    }else{
+                        return 'failure';
+                    }
+                    
+                }else{
+                    return 'failure';
+                }
+            }else{
+                switch($_SESSION['userType']){
+                    case 'internal':
+                        
+                        $updatePersonalInfo = "UPDATE internal_user SET first_name=:firstName WHERE internal_uid=:uid";
+                        $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
+                        $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
+                        $updatePersonalInfoReq->bindValue(":uid",$_SESSION['uid'], PDO::PARAM_STR);
+                        break;
+
+                    case "google":
+                        
+                        $updatePersonalInfo = "UPDATE google_user SET first_name=:firstName WHERE google_uid=:uid";
+                        $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
+                        $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
+                        $updatePersonalInfoReq->bindValue(":uid",$_SESSION['uid'], PDO::PARAM_STR);
+                        break;
+
+                    case "kakao":
+                        
+                        $updatePersonalInfo = "UPDATE kakao_user SET first_name=:firstName WHERE kakao_uid=:uid";
+                        $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
+                        $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
+                        $updatePersonalInfoReq->bindValue(":uid",$_SESSION['uid'], PDO::PARAM_STR);
+                        break;
+
+                    default;
+                        break;
+                }
+                if($updatePersonalInfoReq->execute()){
+                    
+                    return 'success';
+                }else{
+                    return 'failure';
+                }
+            }
+        }
+    }
 }
 
 ?>
