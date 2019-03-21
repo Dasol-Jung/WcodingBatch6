@@ -27,90 +27,11 @@ ob_start();
 
     </section>
     <section class="calWrapper">
-        <div class="utilContainer">
-            <button class="monthlyWeekly">
-                weekly/monthly
-            </button>
-            <button class="prev">
-                Prev
-            </button>
-            <div class="showCal">
-                <span id='month'>
-                Mar
-                </span>
-            </div>
-            <button class="next">
-                Next
+        <div id="switchDiv">
+            <button id="monthlyWeeklyBtn">
+                switch to weekly
             </button>
         </div>
-        <!-- <div class="calContainer">
-        
-            <table>
-                <tr class='days'>
-                    <th>Sun</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Frid</th>
-                    <th>Sat</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </div> -->
         <div id="monthlyCalendar"></div>
     </section>
 </div>
