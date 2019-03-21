@@ -103,6 +103,7 @@ input:read-only:focus {
 #profileAvatar {
   height: 100px;
   width: 100px;
+  object-fit: cover;
   border-radius: 50%;
 }
 
