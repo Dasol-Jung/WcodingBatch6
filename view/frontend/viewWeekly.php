@@ -15,126 +15,17 @@ if(!isset($_SESSION))
 ob_start();
 ?>
 <?php $styles[]="<link rel='stylesheet' href='../../public/css/viewWeekly.css'/>"?>
-
+<link href='../../public/fullcalendar/core/main.css' rel='stylesheet' />
+<link href='../../public/fullcalendar/daygrid/main.css' rel='stylesheet' />
 <div class='bodyWrapper'>
-    <!-- Add schedule form -->
-    <div class="addScheduleContainer">
-        <form action="">
-            
-        </form>
-    </div>
     <section class="listWrapper">
-
     </section>
     <section class="calWrapper">
-        <div class="utilContainer">
-            <button class="weeklyMonthly">
-                weekly/monthly
-            </button>
-            <div class="calendarCtrl">
-            <button class="prev">
-                Prev
-            </button>
-            <div class="showCal">
-                <span id='month'>
-                Mar
-                </span>
-                <span id='date'>
-                12th
-                </span>
-            </div>
-            <button class="next">
-                Next
-            </button>
-            </div>
-            
-            <button class="addSchedule">
-                Add
-            </button>
-        </div>
-        <div class="calContainer">
-        
-            <div class="dayContainer">
-                <div class="dayAndDate">
-                    <span class="month">
-                        Month
-                    </span>
-                    <span class="date">
-                        Date
-                    </span>
-                </div>
-                <div class="calbody"></div>
-            </div>
-            <div class="dayContainer">
-                <div class="dayAndDate">
-                    <span class="month">
-                        Month
-                    </span>
-                    <span class="date">
-                        Date
-                    </span>
-                </div>
-                <div class="calbody"></div>
-            </div>
-            <div class="dayContainer">
-                <div class="dayAndDate">
-                    <span class="month">
-                        Month
-                    </span>
-                    <span class="date">
-                        Date
-                    </span>
-                </div>
-                <div class="calbody"></div>
-            </div>
-            <div class="dayContainer">
-                <div class="dayAndDate">
-                    <span class="month">
-                        Month
-                    </span>
-                    <span class="date">
-                        Date
-                    </span>
-                </div>
-                <div class="calbody"></div>
-            </div>
-            <div class="dayContainer">
-                <div class="dayAndDate">
-                    <span class="month">
-                        Month
-                    </span>
-                    <span class="date">
-                        Date
-                    </span>
-                </div>
-                <div class="calbody"></div>
-            </div>
-            <div class="dayContainer">
-                <div class="dayAndDate">
-                    <span class="month">
-                        Month
-                    </span>
-                    <span class="date">
-                        Date
-                    </span>
-                </div>
-                <div class="calbody"></div>
-            </div>
-            <div class="dayContainer">
-                <div class="dayAndDate">
-                    <span class="month">
-                        Month
-                    </span>
-                    <span class="date">
-                        Date
-                    </span>
-                </div>
-                <div class="calbody"></div>
-            </div>
-            
-        </div>
+        <div id='weeklyCalendar'></div>
     </section>
 </div>
+<script src='../../public/fullcalendar/core/main.js'></script>
+<script src='../../public/fullcalendar/daygrid/main.js'></script>
 <script src= "../../public/js/frontend/viewWeekly.js"></script>
 <?php
 
