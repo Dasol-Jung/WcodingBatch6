@@ -79,8 +79,7 @@
                         setcookie('firstName', $user['first_name'], time()+3600*24*365,'/');
                         setcookie('uid', $user['internal_uid'], time()+3600*24*365,'/');
                         setcookie('userType', 'internal', time()+3600*24*365,'/');
-                    }
-                    
+                    }  
                     return "success";
 
                 }else{
@@ -109,6 +108,47 @@
                     $_SESSION['uid']=$user['internal_uid'];
                     $_SESSION['userType']='internal';
                     $_SESSION['avatar']=$user['image'];
+                }
+            }
+        }
+
+        public function checkCurrentPassword($uid, $currentPassword){
+            $db = parent::dbConnect();
+            $findUserQuery = 'SELECT password FROM internal_user WHERE internal_uid=:internal_uid';
+            $findUser = $db->prepare($findUserQuery);
+            $findUser->bindParam(":internal_uid",$uid,PDO::PARAM_STR);
+            if($findUser->execute()){
+                if($user=$findUser->fetch()){
+                    if(password_verify($currentPassword,$user['password'])){
+                        $_SESSION['isCurrentPasswordCorrect'] = true;
+                        return "success";
+    
+                    }else{
+                        return "incorrect";
+                    }
+                }else{
+                    return "failure";
+                }
+            }
+            
+        }
+
+        public function changePassword($password, $confirmPassword){
+            $db = parent::dbConnect();
+            $inputs = array("password"=> $password, "confirmPassword"=>$confirmPassword);
+            $utils = new Utils();
+            if($utils->validator($inputs)!=true){
+                return "invalid";
+            }else{
+                $passwordHashed = password_hash($password,PASSWORD_DEFAULT);
+                $changeReq = $db->prepare("UPDATE internal_user SET password=:password WHERE internal_uid=:internal_uid");
+                $changeReq->bindParam(":internal_uid", $_SESSION['uid'], PDO::PARAM_STR);
+                $changeReq->bindParam(":password", $passwordHashed, PDO::PARAM_STR);
+                if($changeReq->execute()){
+                    unset($_SESSION['isCurrentPasswordCorrect']);
+                    return 'success';
+                }else{
+                    return 'failure';
                 }
             }
         }

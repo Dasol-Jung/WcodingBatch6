@@ -155,7 +155,7 @@ const clientUtils = (() => {
 		let modalBackground = document.createElement('div');
 		let closeButton = document.createElement('div');
 
-		closeButton.innerHTML = '<i class="fa fa-window-close">';
+		closeButton.innerHTML = '<span>X</span>';
 
 		let body = document.body,
 			html = document.documentElement;
@@ -192,6 +192,7 @@ const clientUtils = (() => {
 
 		//modal container style
 		modalContainer.style.backgroundColor = 'white';
+		modalContainer.style.position = 'relative';
 		modalContainer.style.padding = '40px';
 		modalContainer.style.borderRadius = '8px';
 		modalContainer.style.width = sizeArr ? sizeArr[0] + 'px' : '100%';

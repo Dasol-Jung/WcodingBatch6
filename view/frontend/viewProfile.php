@@ -14,14 +14,16 @@ ob_start();
     <label for="email">Email</label>
     <input readonly value="<?=$userInfo['email']?>" name="email" id="email" type="email"/>
 
+    <?php if($_SESSION['userType']=='internal'):?>
     <label for="changePassword">Password</label>
     <button id="changePassword">Change Password</button>
+    <?php endif?>
 
-    <div class="modalTarget">
+    <form class="checkCurrentPW modalTarget">
         <label for="currentPW">Current password</label>
-        <input type="password" placeholder='Enter current password'>
-        <button class="checkCurrentPW">Confirm</button>
-    </div>
+        <input name='currentPW' type="password" placeholder='Enter current password'>
+        <button>Confirm</button>
+    </form>
     
     <div class="firstNameAvatarContainer">
         <div class="firstNameContainer">

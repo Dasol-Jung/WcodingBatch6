@@ -1,4 +1,8 @@
 <?php
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+}
 error_reporting(E_ALL);
 ini_set('display_errors', 1);  
 require('./controller/frontend/frontend.php');
@@ -10,7 +14,7 @@ try{
       
         if($_GET['action'] == 'login'){
             // redirect to index.php if the user is already logged in
-            if($_SESSION['isLoggedIn']==true){
+            if(isset($_SESSION['isLoggedIn'])&&$_SESSION['isLoggedIn']==true){
                 while(ob_get_level()){
                     ob_end_clean();
                 }
@@ -79,6 +83,19 @@ try{
                     login($email,$password, $keepLoggedIn);
                 }
 
+            case 'checkCurrentPW':
+
+                if(isset($_POST['currentPW']) && isset($_SESSION['uid'])){
+                    checkCurrentPW($_SESSION['uid'], $_POST['currentPW']);
+                }
+                break;
+            
+            case 'changePassword':
+
+                if(isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_SESSION['isCurrentPasswordCorrect'])){
+                    changePassword($_POST['password'], $_POST['password']);
+                }
+                
             default :
                 break;
         }

@@ -1,5 +1,8 @@
 <?php
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+}
 require_once('model/ManagerDB.php');
 require_once('model/frontend/KakaoUser.php');
 require_once("model/frontend/InternalUser.php");
@@ -92,4 +95,18 @@ function viewProfile()
         $userInfo = $user->getUserInfo($_SESSION['uid'],$_SESSION['userType']);
         require("view/frontend/viewProfile.php");
     }
+}
+
+function checkCurrentPW($uid, $currentPW){
+    $internalUser = new InternalUser();
+    $result = $internalUser->checkCurrentPassword($uid,$currentPW);
+    ob_end_clean();
+    echo $result;
+}
+
+function changePassword($password, $confirmPassword){
+    $internalUser = new InternalUser();
+    $result = $internalUser->changePassword($password,$confirmPassword);
+    ob_end_clean();
+    echo $result;
 }
