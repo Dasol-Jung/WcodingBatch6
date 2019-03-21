@@ -27,6 +27,9 @@ try{
             //if the user is not logged in, show login form
             viewLogin();
         }
+        if($_GET['action'] == 'weeklySchedule' && $_GET['add']== 'add'){
+            addButton();
+        }
         if($_GET['action'] == 'logout'){
             logout();
         }

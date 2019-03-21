@@ -77,5 +77,8 @@ function loggedInGoogle($googleInfo)
     require("model/frontend/GoogleUserManager.php");
     $googleUser = new GoogleUserManager();
     $googleUser-> makeGoogle($googleInfo);
+}
 
+function addButton(){
+    require("view/frontend/addButtonCalendar.php");
 }
