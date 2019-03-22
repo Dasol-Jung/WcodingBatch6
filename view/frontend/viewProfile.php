@@ -9,7 +9,7 @@ ob_start();
 
 <div class="bodyWrapper">
 <script src="https://apis.google.com/js/api:client.js"></script>
-<!-- <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script> -->
+<script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <div class="profileForm" action="index.php" method="POST">
 
     <label for="email">Email</label>
@@ -46,16 +46,36 @@ ob_start();
             <button class="savePersonalInfo">Save</button>
         <?php endif?>
     </form>
-    <div class="connectAcct">
-        <label for="connectAcct">Connect Account</label>
-        <div style="background-color : #eee; padding-left : 2.5rem; display : grid; align-items : center;" id="gSignInWrapper">
-            <div id="connectGoogle" class="customGPlusSignIn">
-                <img style='height : 22px; position: relative; top : 2px;' src='../../public/images/googleLogo.png'/>
-                <span style='position : relative; bottom:5px; left : 10px; font-size : 0.9rem;' class="buttonText">Google</span>
-            </div>
+    <div class="connectedAcct">
+        <label for="connectAcct">Connected Acccounts</label>
+        <div class="internalAcct">
+            <?php foreach($avatars['internal'] as $internalAvatar):?>
+                <img src="<?=$internalAvatar?>" alt="">
+            <?php endforeach?>
         </div>
-        <div>  
-            <!-- <div class="kakaoSignin"><img id="kakaoLogo" src="../../public/images/kakaoLogo.png"/><span>Kakao</span><a id="kakao-login-btn"></a></div> -->
+        <div class="googleAcct">
+            <?php foreach($avatars['google'] as $googleAvatar):?>
+                <img src="<?=$googleAvatar?>" alt="">
+            <?php endforeach?>
+        </div>
+        <div class="kakaoAcct">
+            <?php foreach($avatars['kakao'] as $kakaoAvatar):?>
+                <img src="<?=$kakaoAvatar?>" alt="">
+            <?php endforeach?>
+        </div>
+    </div>
+    <div class="connectNewAcct">
+        <label for="connectAcct">Connect new account</label>
+        <div class="connectButtons">
+            <div style="background-color : #eee; width: 100%; text-align : center;  display : grid; align-items : center;" id="gSignInWrapper">
+                <div id="connectGoogle" class="customGPlusSignIn">
+                    <img style='height : 22px; position: relative; top : 2px;' src='../../public/images/googleLogo.png'/>
+                    <span style='position : relative; bottom:5px; left : 10px; font-size : 0.9rem;' class="buttonText">Google</span>
+                </div>
+            </div>
+            <div>  
+                <div class="kakaoSignin"><img id="kakaoLogo" src="../../public/images/kakaoLogo.png"/><span>Kakao</span><a id="connectKakao"></a></div>
+            </div>
         </div>
     </div>
     <button id="signOut">Sign out</button>
@@ -64,7 +84,7 @@ ob_start();
 </div>
 <script src='public/js/frontend/profile.js'></script>
 <script src="../../public/js/frontend/google.js"></script>
-<!-- <script src="../../public/js/frontend/kakaoAcct.js"></script> -->
+<script src="../../public/js/frontend/kakaoAcct.js"></script>
 <script>startApp();</script>
 <?php
 $content = ob_get_clean();

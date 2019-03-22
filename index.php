@@ -48,7 +48,16 @@ try{
             
             case 'kakaoLogin':
                 $kakaoInfo = json_decode(file_get_contents("php://input"), TRUE);
-                loginWithKakao($kakaoInfo);
+                switch($_GET['type']){
+                    case 'login':
+                        loginWithKakao($kakaoInfo);
+                        break;
+                    case 'connect':
+                        connectKakao($kakaoInfo);
+                        break;
+                    default:
+                        break;
+                }
                 break;
 
             case 'logout':

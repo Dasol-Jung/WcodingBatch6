@@ -7,7 +7,7 @@ class User extends ManagerDB{
 
     protected function findByEmail($email){
         $db = parent::dbConnect();
-        $findUserId = $db->prepare("SELECT internal_uid, first_name FROM internal_user WHERE email = :email");
+        $findUserId = $db->prepare("SELECT internal_uid, first_name, super_uid FROM internal_user WHERE email = :email");
         $findUserId->bindValue(":email",$email,PDO::PARAM_STR);
         $findUserId->execute();
         $internalUid = $findUserId->fetchAll();
@@ -27,17 +27,17 @@ class User extends ManagerDB{
         $db = parent::dbConnect();
         switch($userType){
             case 'internal':
-                $findUser = $db->query("SELECT email, first_name FROM internal_user");
+                $findUser = $db->query("SELECT email, first_name FROM internal_user WHERE internal_uid='$uid'");
                 return $findUser->fetchAll()[0];
                 break;
 
             case 'google':
-                $findUser = $db->query("SELECT email, first_name FROM google_user");
+                $findUser = $db->query("SELECT email, first_name FROM google_user WHERE google_uid='$uid'");
                 return $findUser->fetchAll()[0];
                 break;
 
             case 'kakao':
-                $findUser = $db->query("SELECT email, first_name FROM kakao_user");
+                $findUser = $db->query("SELECT email, first_name FROM kakao_user WHERE kakao_uid='$uid'");
                 return $findUser->fetchAll()[0];
                 break;
 
@@ -147,6 +147,42 @@ class User extends ManagerDB{
                 }
             }
         }
+    }
+
+    public function getAvatars($superUid){
+
+        // connect to db
+        $db = parent::dbConnect();
+
+        //find uids connected to a super uid
+
+        $getUids = $db->query("SELECT * FROM super_user WHERE super_uid='$superUid'");
+        $accounts = $getUids->fetchAll();
+        $avatars = ["internal"=>[],"google"=>[],"kakao"=>[]];
+
+        foreach($accounts AS $account){
+            switch($account['type']){
+                case 'internal':
+                    $internalAvatarReq = $db->query("SELECT * FROM internal_user WHERE super_uid='$superUid'");
+                    while($internalAvatar = $internalAvatarReq->fetch()){
+                        $avatars['internal'][] = $internalAvatar['image'];
+                    }
+                    break;
+                case 'google':
+                    $googleAvatarReq = $db->query("SELECT * FROM google_user WHERE super_uid='$superUid'");
+                    while($googleAvatar = $googleAvatarReq->fetch()){
+                        $avatars['google'][] = $googleAvatar['image'];
+                    }
+                    break;
+                case 'kakao':
+                    $kakaoAvatarReq = $db->query("SELECT * FROM kakao_user WHERE super_uid='$superUid'");
+                    while($kakaoAvatar = $kakaoAvatarReq->fetch()){
+                        $avatars['kakao'][] = $kakaoAvatar['image'];
+                    }
+                    break;
+            }
+        }
+        return $avatars;
     }
 }
 

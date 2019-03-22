@@ -93,6 +93,7 @@ function viewProfile()
     }else{
         $user = new User();
         $userInfo = $user->getUserInfo($_SESSION['uid'],$_SESSION['userType']);
+        $avatars = $user->getAvatars($_SESSION['superUid']);
         require("view/frontend/viewProfile.php");
     }
 }
@@ -121,6 +122,13 @@ function changePersonalInfo($firstName, $avatar){
 function connectGoogle($googleUserInfo){
     $googleUser = new GoogleUser();
     $result = $googleUser->connectGoogle($googleUserInfo);
+    ob_end_clean();
+    print_r($result);
+}
+
+function connectKakao($kakaoUserInfo){
+    $kakaoUser = new KakaoUser();
+    $result = $kakaoUser->connectKakao($kakaoUserInfo);
     ob_end_clean();
     echo $result;
 }

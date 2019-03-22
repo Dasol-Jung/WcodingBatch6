@@ -52,8 +52,12 @@ class GoogleUser extends User
         $googleImage = $googleInfo["image_url"];
         $googleEmail = $googleInfo["email"];
 
+        //find super uid
+
+        $superUidFromDb = $this->findByUid($googleId)['super_uid'];
+
         //create super uid
-        $superUid = uniqid("",true);
+        $superUid = $superUidFromDb ? $superUidFromDb : uniqid("",true);
 
         //update google_user table
         $request = "INSERT INTO google_user
@@ -70,14 +74,14 @@ class GoogleUser extends User
         $superUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
         $superUserReq->bindParam(":type", $userType, PDO::PARAM_STR);
         $superUserReq->bindParam(":uid", $googleId, PDO::PARAM_STR);
- 
+
         if($reqCreateGoogle->execute() && $superUserReq->execute()){
             $_SESSION['isLoggedIn']=true;
             $_SESSION['firstName']=$googleFirstName;
             $_SESSION['uid']=$googleId;
             $_SESSION['userType']='google';
             $_SESSION['avatar']=$googleImage;
-            $_SESSION['superUid']=$superUid;
+            $_SESSION['superUid']= $superUidFromDb;
             return 'success';
         }else{
             throw new Exception("Google Login Failed");
@@ -99,10 +103,33 @@ class GoogleUser extends User
        //create super uid
        $superUid = $_SESSION['superUid'];
 
+       //get existing super uid
+
+       $getCurrentSuperUid = $db->query("SELECT super_uid, uid FROM super_user WHERE uid='$googleId'");
+       
+       if($currentSuperUid=$getCurrentSuperUid->fetch()['super_uid']){
+           
+            $updateConnectedAcct = $db->prepare("UPDATE super_user SET super_uid=:super_uid WHERE super_uid=:currentSuperUid");
+            $updateConnectedAcct->bindParam(":super_uid",$superUid,PDO::PARAM_STR);
+            $updateConnectedAcct->bindParam(":currentSuperUid",$currentSuperUid,PDO::PARAM_STR);
+            $updateConnectedAcct->execute();
+
+            $updateKakaoTable = $db->prepare("UPDATE kakao_user SET super_uid=:super_uid WHERE super_uid=:currentSuperUid");
+            $updateKakaoTable->bindParam(":super_uid",$superUid,PDO::PARAM_STR);
+            $updateKakaoTable->bindParam(":currentSuperUid",$currentSuperUid,PDO::PARAM_STR);
+            $updateKakaoTable->execute();
+
+            $updateInternalTable = $db->prepare("UPDATE internal_user SET super_uid=:super_uid WHERE super_uid=:currentSuperUid");
+            $updateInternalTable->bindParam(":super_uid",$superUid,PDO::PARAM_STR);
+            $updateInternalTable->bindParam(":currentSuperUid",$currentSuperUid,PDO::PARAM_STR);
+            $updateInternalTable->execute();
+
+       }
+       
         //insert into super_user table
         $userType = 'google';
         $superUserReq = $db->prepare("INSERT INTO super_user (super_uid, type, uid) VALUES (:super_uid, :type, :uid)
-        ON DUPLICATE KEY UPDATE super_uid = super_uid
+        ON DUPLICATE KEY UPDATE super_uid = '$superUid'
         ");
         $superUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
         $superUserReq->bindParam(":type", $userType, PDO::PARAM_STR);
@@ -121,5 +148,13 @@ class GoogleUser extends User
        }else{
            throw new Exception("Google Login Failed");
        }
+    }
+
+    public function findByUid($googleUid){
+
+        $db= parent::dbConnect();
+        $findByUidReq = $db->query("SELECT google_uid, email, image, first_name, super_uid FROM google_user WHERE google_uid='$googleUid'");
+        return $findByUidReq->fetch();
+        
     }
 }

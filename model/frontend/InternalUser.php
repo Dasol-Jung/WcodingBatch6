@@ -66,7 +66,7 @@
             //find user id by email and set session;
             $_SESSION['isLoggedIn']=true;
             $_SESSION['superUid']= $superUid;
-            $_SESSION['internalUid'] = $internalUid;
+            $_SESSION['uid'] = $internalUid;
             $_SESSION['firstName'] = $firstNameCleaned;
             $_SESSION['userType'] = 'internal';
             $_SESSION['avatar'] = "public/images/defaultUserImage.svg";

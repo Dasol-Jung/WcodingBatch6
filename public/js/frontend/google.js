@@ -68,7 +68,13 @@ function onSuccess(googleUser, type) {
 					? (window.location.href = 'index.php?action=weeklySchedule')
 					: alert('Google Login failed');
 			} else if (type == 'connect') {
-				googleLoginResult == 'success' ? location.reload() : alert('Google connection failed');
+				if (googleLoginResult == 'success') {
+					alert('Your Google account has been successfully connected');
+					location.reload();
+				} else {
+					console.log(ajax.response);
+					alert('Google connection failed');
+				}
 			}
 		}
 	};

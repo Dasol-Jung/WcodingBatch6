@@ -107,6 +107,49 @@ input:read-only:focus {
   border-radius: 50%;
 }
 
+#connectKakao {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.kakaoSignin {
+  width: 100%;
+  background-color: #ffce04;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.kakaoSignin img#kakaoLogo {
+  font-family: "Roboto";
+  height: 2rem;
+  margin-right: 0.5rem;
+  position: relative;
+  top: 0.2rem;
+}
+
+.connectButtons {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0.5rem;
+}
+.connectButtons .googleSignin {
+  background-color: #dbdbdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.connectButtons .googleSignin img#googleLogo {
+  height: 1.3rem;
+  margin-right: 1.5rem;
+}
+
 /*# sourceMappingURL=login.css.map */
 
 /*# sourceMappingURL=profile.css.map */
