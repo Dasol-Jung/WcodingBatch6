@@ -130,5 +130,5 @@ function connectKakao($kakaoUserInfo){
     $kakaoUser = new KakaoUser();
     $result = $kakaoUser->connectKakao($kakaoUserInfo);
     ob_end_clean();
-    echo $result;
+    print_r($result);
 }

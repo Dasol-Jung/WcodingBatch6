@@ -57,7 +57,7 @@ class GoogleUser extends User
         $superUidFromDb = $this->findByUid($googleId)['super_uid'];
 
         //create super uid
-        $superUid = $superUidFromDb ? $superUidFromDb : uniqid("",true);
+        $superUid = $superUidFromDb!='' ? $superUidFromDb : uniqid("",true);
 
         //update google_user table
         $request = "INSERT INTO google_user
@@ -81,7 +81,7 @@ class GoogleUser extends User
             $_SESSION['uid']=$googleId;
             $_SESSION['userType']='google';
             $_SESSION['avatar']=$googleImage;
-            $_SESSION['superUid']= $superUidFromDb;
+            $_SESSION['superUid']= $superUid;
             return 'success';
         }else{
             throw new Exception("Google Login Failed");
@@ -99,10 +99,8 @@ class GoogleUser extends User
        $googleLastName = $googleInfo["last_name"];
        $googleImage = $googleInfo["image_url"];
        $googleEmail = $googleInfo["email"];
-
        //create super uid
        $superUid = $_SESSION['superUid'];
-
        //get existing super uid
 
        $getCurrentSuperUid = $db->query("SELECT super_uid, uid FROM super_user WHERE uid='$googleId'");

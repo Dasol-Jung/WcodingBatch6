@@ -13,9 +13,9 @@ class KakaoUser extends ManagerDB{
         //find super uid
 
         $superUidFromDb = $this->findByUid($uid)['super_uid'];
-
+        
         //create super uid
-        $superUid = $superUidFromDb ? $superUidFromDb : uniqid("",true);
+        $superUid = $superUidFromDb!='' ? $superUidFromDb : uniqid("",true);
 
         //update kakao_user table
         $registerData -> bindParam(':kakao_uid', $uid, PDO::PARAM_INT);
@@ -40,7 +40,7 @@ class KakaoUser extends ManagerDB{
             $_SESSION['isLoggedIn']=true;
             $_SESSION['firstName']=$kakaoUserInfo['first_name'];
             $_SESSION['uid']=$uid;
-            $_SESSION['superUid']=$superUidFromDb;
+            $_SESSION['superUid']=$superUid;
             $_SESSION['userType']='kakao';
             $_SESSION['avatar']=$kakaoUserInfo['img'];
             return 'success';
@@ -70,7 +70,6 @@ class KakaoUser extends ManagerDB{
 
         //create super uid
         $superUid = $_SESSION['superUid'];
-
         //get existing super uid
 
         $getCurrentSuperUid = $db->query("SELECT super_uid, uid FROM super_user WHERE uid='$uid'");
