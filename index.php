@@ -6,59 +6,77 @@ if(!isset($_SESSION))
 error_reporting(E_ALL);
 ini_set('display_errors', 1);  
 require('./controller/frontend/frontend.php');
+
 try{
     if (isset($_GET['action'])) {
-        if ($_GET['action'] == 'viewCalendar') {
-            viewCalendar();
-        }
-      
-        if($_GET['action'] == 'login'){
-            // redirect to index.php if the user is already logged in
-            if(isset($_SESSION['isLoggedIn'])&&$_SESSION['isLoggedIn']==true){
-                while(ob_get_level()){
+
+        switch($_GET['action']){
+            case 'viewCalendar': 
+                viewCalendar();
+                break;
+
+            case 'login':
+                // redirect to index.php if the user is already logged in
+                if(isset($_SESSION['isLoggedIn'])&&$_SESSION['isLoggedIn']==true){
+                    while(ob_get_level()){
+                        ob_end_clean();
+                    }
+                    ob_start();
+                    header("Location: index.php");
                     ob_end_clean();
                 }
-                ob_start();
-                header("Location: index.php");
-                ob_end_clean();
-            }
-            //if the user is not logged in, show login form
-            viewLogin();
-        
-        }
+                //if the user is not logged in, show login form
+                viewLogin();
+                break;
 
-        if($_GET['action'] == 'googleLogin'){
-            $googleInfo = json_decode(file_get_contents("php://input"), TRUE);
-            loginWithGoogle($googleInfo);
-        }
+            case 'googleLogin':
+                $googleInfo = json_decode(file_get_contents("php://input"), TRUE);
+                switch($_GET['type']){
 
-        if ($_GET['action'] == 'kakaoLogin') {
-            $kakaoInfo = json_decode(file_get_contents("php://input"), TRUE);
-            loginWithKakao($kakaoInfo);
-        }
+                    case 'login':
+                        loginWithGoogle($googleInfo);
+                        break;
 
-        if($_GET['action'] == 'logout'){
-            logout();
-        }
-        if($_GET['action'] == 'welcome'){
-            viewWelcome();
-        }
-        if($_GET['action'] == 'weeklySchedule'){
-            viewWeekly();
-        }
+                    case 'connect':
+                        connectGoogle($googleInfo);
+                        break;
 
-        if($_GET['action'] == 'monthlySchedule'){
-            viewMonthly();
-        }
+                    default:
+                        break;
+                }
+                break;
+            
+            case 'kakaoLogin':
+                $kakaoInfo = json_decode(file_get_contents("php://input"), TRUE);
+                loginWithKakao($kakaoInfo);
+                break;
 
-        if($_GET['action'] == 'profile'){
-            viewProfile();
+            case 'logout':
+                logout();
+                break;
+
+            case 'welcome':
+                viewWelcome();
+                break;
+
+            case 'weeklySchedule':
+                viewWeekly();
+                break;
+
+            case 'monthlySchedule':
+                viewMonthly();
+                break;
+
+            case 'profile':
+                viewProfile();
+                break;
+            
+            default:
+                break;
         }
-    }
-    else {
+    }else{
         viewHome();
     }
-
     if (isset($_POST['action'])) {
 
         switch($_POST['action']){

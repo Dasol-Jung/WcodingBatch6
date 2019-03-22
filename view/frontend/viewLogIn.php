@@ -19,7 +19,7 @@
     </div>
     <div class="socialSigninContainer">
         <div style="background-color : #eee; padding-left : 2.5rem; display : grid; align-items : center;" id="gSignInWrapper">
-            <div id="customBtn" class="customGPlusSignIn">
+            <div id="googleLogin" class="customGPlusSignIn">
                 <img style='height : 22px; position: relative; top : 2px;' src='../../public/images/googleLogo.png'/>
                 <span style='position : relative; bottom:5px; left : 10px; font-size : 0.9rem;' class="buttonText">Google</span>
             </div>

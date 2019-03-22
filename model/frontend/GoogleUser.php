@@ -38,6 +38,7 @@ class GoogleUser extends User
                 }
         return $googleUser;
     }
+
     public function registerGoogleUser($googleInfo){
 
         // connect db
@@ -58,7 +59,7 @@ class GoogleUser extends User
         $request = "INSERT INTO google_user
         (super_uid, google_uid, email, image, first_name, last_name, access_token, refresh_token, create_date, last_login_date, remember_me_token)
         VALUES('$superUid', '$googleId', '$googleEmail', '$googleImage', '$googleFirstName', '$googleLastName', '$googleAccessToken', NULL, current_timestamp(), current_timestamp(), NULL)
-        ON DUPLICATE KEY UPDATE last_login_date = current_timestamp()";
+        ON DUPLICATE KEY UPDATE last_login_date = current_timestamp(), super_uid=super_uid";
         $reqCreateGoogle = $db->prepare($request);
 
         //update super_user table
@@ -81,5 +82,44 @@ class GoogleUser extends User
         }else{
             throw new Exception("Google Login Failed");
         }
+    }
+
+    public function connectGoogle($googleInfo){
+       // connect db
+       $db= parent::dbConnect();
+
+       //set variables
+       $googleAccessToken = $googleInfo["access_token"];
+       $googleId = $googleInfo["google_id"];
+       $googleFirstName = $googleInfo["first_name"];
+       $googleLastName = $googleInfo["last_name"];
+       $googleImage = $googleInfo["image_url"];
+       $googleEmail = $googleInfo["email"];
+
+       //create super uid
+       $superUid = $_SESSION['superUid'];
+
+        //insert into super_user table
+        $userType = 'google';
+        $superUserReq = $db->prepare("INSERT INTO super_user (super_uid, type, uid) VALUES (:super_uid, :type, :uid)
+        ON DUPLICATE KEY UPDATE super_uid = super_uid
+        ");
+        $superUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
+        $superUserReq->bindParam(":type", $userType, PDO::PARAM_STR);
+        $superUserReq->bindParam(":uid", $googleId, PDO::PARAM_STR);
+
+       //update google_user table
+       $request = "INSERT INTO google_user
+       (super_uid, google_uid, email, image, first_name, last_name, access_token, refresh_token, create_date, last_login_date, remember_me_token)
+       VALUES('$superUid', '$googleId', '$googleEmail', '$googleImage', '$googleFirstName', '$googleLastName', '$googleAccessToken', NULL, current_timestamp(), current_timestamp(), NULL)
+       ON DUPLICATE KEY UPDATE last_login_date = current_timestamp(), super_uid='$superUid'";
+       $reqCreateGoogle = $db->prepare($request);
+
+       if($reqCreateGoogle->execute()&&$superUserReq->execute()){
+         
+           return 'success';
+       }else{
+           throw new Exception("Google Login Failed");
+       }
     }
 }

@@ -117,3 +117,10 @@ function changePersonalInfo($firstName, $avatar){
     ob_end_clean();
     echo $result;
 }
+
+function connectGoogle($googleUserInfo){
+    $googleUser = new GoogleUser();
+    $result = $googleUser->connectGoogle($googleUserInfo);
+    ob_end_clean();
+    echo $result;
+}

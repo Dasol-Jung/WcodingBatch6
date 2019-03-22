@@ -3,6 +3,7 @@
  * initializing google api
  */
 var googleUser = {};
+
 var startApp = function() {
 	gapi.load('auth2', function() {
 		// Retrieve the singleton for the GoogleAuth library and set up the client.
@@ -13,16 +14,23 @@ var startApp = function() {
 			// Request scopes in addition to 'profile' and 'email'
 			//scope: 'additional_scope'
 		});
-		attachSignin(document.getElementById('customBtn'));
+		let loginBtn = document.getElementById('googleLogin');
+		if (loginBtn) {
+			attachSignin(loginBtn, 'login');
+		}
+		let connectBtn = document.getElementById('connectGoogle');
+		if (connectBtn) {
+			attachSignin(connectBtn, 'connect');
+		}
 	});
 };
 
-function attachSignin(element) {
+function attachSignin(element, type) {
 	auth2.attachClickHandler(
 		element,
 		{},
 		function() {
-			onSuccess(auth2.currentUser.get());
+			onSuccess(auth2.currentUser.get(), type);
 		},
 		function(error) {
 			onFailure(error);
@@ -35,7 +43,7 @@ function attachSignin(element) {
 ** @param googleUser Object The googleUser
 **
 */
-function onSuccess(googleUser) {
+function onSuccess(googleUser, type) {
 	// Google treatment for the user
 	var profile = googleUser.getBasicProfile();
 	var idToken = googleUser.getAuthResponse().id_token;
@@ -50,14 +58,18 @@ function onSuccess(googleUser) {
 
 	// we trigger our ajax on success
 	var ajax = new XMLHttpRequest();
-	ajax.open('POST', 'index.php?action=googleLogin', true);
+	ajax.open('POST', `index.php?action=googleLogin&type=${type}`, true);
 	ajax.setRequestHeader('Content-type', 'application/json');
 	ajax.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var googleLoginResult = this.response;
-			googleLoginResult == 'success'
-				? (window.location.href = 'index.php?action=weeklySchedule')
-				: alert('Google Login failed');
+			if (type == 'login') {
+				googleLoginResult == 'success'
+					? (window.location.href = 'index.php?action=weeklySchedule')
+					: alert('Google Login failed');
+			} else if (type == 'connect') {
+				googleLoginResult == 'success' ? location.reload() : alert('Google connection failed');
+			}
 		}
 	};
 	var params = JSON.stringify(profileData);
@@ -72,21 +84,6 @@ function onFailure(error) {
 	// change to throw new exception later .....
 	console.log(error);
 }
-
-// /**
-//  * Main function of google to trigger the sign/log in button
-//  */
-// function renderButton() {
-// 	gapi.signin2.render('googleLogin', {
-// 		scope: 'profile email',
-// 		width: 240,
-// 		height: 50,
-// 		longtitle: false,
-// 		theme: 'dark',
-// 		onsuccess: onSuccess,
-// 		onfailure: onFailure
-// 	});
-// }
 
 /**
  * function to logout the user

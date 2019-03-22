@@ -78,7 +78,7 @@
 
             $db = parent::dbConnect();
             $emailCleaned = addslashes(htmlspecialchars(htmlentities(trim($email))));
-            $findUserQuery = 'SELECT email, password, first_name, internal_uid, image FROM internal_user WHERE email=:email';
+            $findUserQuery = 'SELECT email, password, first_name, internal_uid, image, super_uid FROM internal_user WHERE email=:email';
             $findUser = $db->prepare($findUserQuery);
             $findUser->bindParam(":email",$emailCleaned,PDO::PARAM_STR);
             $findUser->execute();
@@ -90,6 +90,7 @@
                     $_SESSION['uid']=$user['internal_uid'];
                     $_SESSION['userType']='internal';
                     $_SESSION['avatar']=$user['image'];
+                    $_SESSION['superUid']= $user['super_uid'];
                     
                     if($keepLoggedIn){
                         //create a token to remember the user
@@ -106,6 +107,7 @@
                         setcookie('firstName', $user['first_name'], time()+3600*24*365,'/');
                         setcookie('uid', $user['internal_uid'], time()+3600*24*365,'/');
                         setcookie('userType', 'internal', time()+3600*24*365,'/');
+                        setcookie('superUid', $user['super_uid'], time()+3600*24*365,'/');
                     }  
                     return "success";
 
@@ -121,7 +123,7 @@
             
             if(isset($_COOKIE['internal_uid']) && isset($_COOKIE['rememberMeToken'])){
                 $db = parent::dbConnect();
-                $checkRememberQuery = "SELECT internal_uid, first_name, image FROM internal_user WHERE internal_uid=:internal_uid AND remember_me_token =:remember_me_token";
+                $checkRememberQuery = "SELECT internal_uid, first_name, image, super_uid FROM internal_user WHERE internal_uid=:internal_uid AND remember_me_token =:remember_me_token";
                 $checkRememberReq = $db->prepare($checkRememberQuery);
                 $checkRememberReq->bindParam(":internal_uid",$_COOKIE['internal_uid'],PDO::PARAM_STR);
                 $checkRememberReq->bindParam(":remember_me_token",$_COOKIE['rememberMeToken'],PDO::PARAM_STR);
@@ -135,6 +137,7 @@
                     $_SESSION['uid']=$user['internal_uid'];
                     $_SESSION['userType']='internal';
                     $_SESSION['avatar']=$user['image'];
+                    $_SESSION['superUid']= $user['super_uid'];
                 }
             }
         }
