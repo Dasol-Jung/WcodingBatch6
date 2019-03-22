@@ -30,20 +30,47 @@
             }
             //hash password
             $passwordHashed = password_hash($password,PASSWORD_DEFAULT);
-            $userId = uniqid("",true);
+
+            //create user id
+            $internalUid = uniqid("",true);
+            $superUid = uniqid("",true);
+            
+            //clean first name
             $firstNameCleaned = htmlspecialchars($firstName);
 
-            $signUpReq = $db->prepare("INSERT INTO internal_user (internal_uid, email, password, first_name) VALUES (:userId, :email, :password, :first_name)");
-            $signUpReq->bindParam(":userId", $userId, PDO::PARAM_STR);
+            //update internal_user db
+            $signUpReq = $db->prepare("INSERT INTO internal_user (internal_uid, email, password, first_name, super_uid) VALUES (:userId, :email, :password, :first_name, :super_uid)");
+            $signUpReq->bindParam(":userId", $internalUid, PDO::PARAM_STR);
             $signUpReq->bindParam(":email", $emailCleaned, PDO::PARAM_STR);
             $signUpReq->bindParam(":password", $passwordHashed, PDO::PARAM_STR);
             $signUpReq->bindParam(":first_name", $firstNameCleaned, PDO::PARAM_STR);
-            $signUpReq->execute();
+            $signUpReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
+            if(!$signUpReq->execute()){
+                return "Something went wrong";
+                exit();
+            }
 
+            //update super user db
+
+            $userType = 'internal';
+            $superUserReq = $db->prepare("INSERT INTO super_user (super_uid, type, uid) VALUES (:super_uid, :type, :uid)
+            ON DUPLICATE KEY UPDATE super_uid = super_uid");
+            $superUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
+            $superUserReq->bindParam(":type", $userType, PDO::PARAM_STR);
+            $superUserReq->bindParam(":uid", $internalUid, PDO::PARAM_STR);
+            if(!$superUserReq->execute()){
+                return "Something went wrong";
+                exit();
+            };
+            
             //find user id by email and set session;
             $_SESSION['isLoggedIn']=true;
-            $_SESSION['internalUid'] = parent::findByEmail($emailCleaned)['internal_uid'];
-            $_SESSION['firstName'] = parent::findByEmail($emailCleaned)['first_name'];
+            $_SESSION['superUid']= $superUid;
+            $_SESSION['internalUid'] = $internalUid;
+            $_SESSION['firstName'] = $firstNameCleaned;
+            $_SESSION['userType'] = 'internal';
+            $_SESSION['avatar'] = "public/images/defaultUserImage.svg";
+
             return "success";
         }
 

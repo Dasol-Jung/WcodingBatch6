@@ -39,24 +39,44 @@ class GoogleUser extends User
         return $googleUser;
     }
     public function registerGoogleUser($googleInfo){
+
+        // connect db
         $db= parent::dbConnect();
+
+        //set variables
         $googleAccessToken = $googleInfo["access_token"];
         $googleId = $googleInfo["google_id"];
         $googleFirstName = $googleInfo["first_name"];
         $googleLastName = $googleInfo["last_name"];
         $googleImage = $googleInfo["image_url"];
         $googleEmail = $googleInfo["email"];
+
+        //create super uid
+        $superUid = uniqid("",true);
+
+        //update google_user table
         $request = "INSERT INTO google_user
         (super_uid, google_uid, email, image, first_name, last_name, access_token, refresh_token, create_date, last_login_date, remember_me_token)
-        VALUES(NULL, '$googleId', '$googleEmail', '$googleImage', '$googleFirstName', '$googleLastName', '$googleAccessToken', NULL, current_timestamp(), current_timestamp(), NULL)
+        VALUES('$superUid', '$googleId', '$googleEmail', '$googleImage', '$googleFirstName', '$googleLastName', '$googleAccessToken', NULL, current_timestamp(), current_timestamp(), NULL)
         ON DUPLICATE KEY UPDATE last_login_date = current_timestamp()";
         $reqCreateGoogle = $db->prepare($request);
-        if($reqCreateGoogle->execute()){
+
+        //update super_user table
+        $userType = 'google';
+        $superUserReq = $db->prepare("INSERT INTO super_user (super_uid, type, uid) VALUES (:super_uid, :type, :uid)
+        ON DUPLICATE KEY UPDATE super_uid = super_uid
+        ");
+        $superUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
+        $superUserReq->bindParam(":type", $userType, PDO::PARAM_STR);
+        $superUserReq->bindParam(":uid", $googleId, PDO::PARAM_STR);
+ 
+        if($reqCreateGoogle->execute() && $superUserReq->execute()){
             $_SESSION['isLoggedIn']=true;
             $_SESSION['firstName']=$googleFirstName;
             $_SESSION['uid']=$googleId;
             $_SESSION['userType']='google';
             $_SESSION['avatar']=$googleImage;
+            $_SESSION['superUid']=$superUid;
             return 'success';
         }else{
             throw new Exception("Google Login Failed");
