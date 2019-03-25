@@ -7,7 +7,7 @@
 
 .bodyWrapper {
 	height: min-content;
-	padding: 3rem 0;
+	padding-bottom: 3rem;
 	width: 100%;
 	background-color: #2f2f2f;
 }
@@ -30,7 +30,7 @@ label {
 
 .modalTarget {
 	font-family: "DIN alternate";
-	height: auto;
+	height: max-content;
 	label {
 		margin-top: 0;
 	}
@@ -39,7 +39,6 @@ label {
 		width: 100%;
 	}
 	.confirmPWBtn {
-		background-color: grey;
 		margin: 1rem 0 0 0;
 		float: right;
 	}
@@ -189,12 +188,18 @@ input:read-only {
 		grid-gap: 1rem;
 		text-align: center;
 		div {
-			width: 20%;
+			width: 30%;
 			background-color: #eee;
-			padding: 1rem 0;
+			padding: 1rem;
 			display: flex;
 			align-items: center;
 			justify-content: space-around;
+			span {
+				width: 100px;
+			}
+			button {
+				margin-left: 2rem;
+			}
 		}
 	}
 	img {

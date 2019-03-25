@@ -142,7 +142,7 @@
 	if (signOutBtn) {
 		signOutBtn.addEventListener('click', e => {
 			let modalTarget = document.querySelector('.modalTarget.checkSignOut');
-			document.body.appendChild(clientUtils.createModal(modalTarget, [ 400, 200 ]));
+			document.body.appendChild(clientUtils.createModal(modalTarget));
 		});
 	}
 })();

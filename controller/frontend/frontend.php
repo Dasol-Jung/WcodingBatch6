@@ -14,6 +14,9 @@ function viewHome()
 {
     $internalUser = new InternalUser();
     $internalUser->checkRememberMe();
+    $user = new User();
+        $userInfo = $user->getUserInfo($_SESSION['uid'],$_SESSION['userType']);
+        $avatars = $user->getAvatars($_SESSION['superUid']);
     ob_start();
         require('view/frontend/viewSignUp.php');
     $rightSection = ob_get_clean();
@@ -78,11 +81,17 @@ function logout(){
 
 function viewWeekly()
 {
+    $user = new User();
+        $userInfo = $user->getUserInfo($_SESSION['uid'],$_SESSION['userType']);
+        $avatars = $user->getAvatars($_SESSION['superUid']);
     require("view/frontend/viewWeekly.php");
 }
 
 function viewMonthly()
 {
+    $user = new User();
+        $userInfo = $user->getUserInfo($_SESSION['uid'],$_SESSION['userType']);
+        $avatars = $user->getAvatars($_SESSION['superUid']);
     require("view/frontend/viewMonthly.php");
 }
 
@@ -138,4 +147,11 @@ function signOut($uid, $userType){
     $result = $user->signOut($uid,$userType);
     ob_end_clean();
     print_r($result);
+}
+
+function switchAccount($superUid, $type){
+    $user = new User();
+    $result=$user->switchAccount($superUid, $type);
+    ob_end_clean();
+    echo $result;
 }

@@ -5,6 +5,7 @@
 	src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
 }
 header {
+	font-family: "DIN alternate";
 	height: 60px;
 	background-color: $primary-dark;
 	width: 100%;
@@ -60,7 +61,8 @@ li.avatar.menuItem {
 
 .avatarPopup {
 	position: absolute;
-	top: 40px;
+	z-index: 100;
+	top: 50px;
 	right: 1.5rem;
 	transition: all 0.1s ease-in;
 	font-size: 0.8rem;
@@ -70,12 +72,28 @@ li.avatar.menuItem {
 	flex-flow: column;
 	justify-content: flex-start;
 	background-color: white;
-	height: 300px;
-	padding: 1rem 0;
+	height: max-content;
+	padding: 0;
 	li {
-		margin-bottom: 1rem;
+		&:hover {
+			background-color: #eee;
+		}
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		a {
+			font-size: 1rem;
+			font-weight: bold;
 			color: black;
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			padding: 1rem;
+		}
+		img {
+			margin-left: 1rem;
+			width: 1rem;
+			height: 1rem;
 		}
 	}
 }

@@ -59,26 +59,29 @@ ob_start();
             <div class="internalAcct">
                 <?php if(isset($avatars['internal'])):?>
                     <span>Weeky </span>
-                <?php endif?>
                 <?php foreach($avatars['internal'] as $internalAvatar):?>
                     <img src="<?=$internalAvatar?>" alt="">
                 <?php endforeach?>
+                    <button id="discntInternal">Disconnect</button>
+                <?php endif?>
             </div>
             <div class="googleAcct">
                 <?php if(isset($avatars['google'])):?>
                     <span>Google </span>
-                <?php endif?>
                 <?php foreach($avatars['google'] as $googleAvatar):?>
                     <img src="<?=$googleAvatar?>" alt="">
                 <?php endforeach?>
+                <button id="discntGoogle">Disconnect</button>
+                <?php endif?>
             </div>
             <div class="kakaoAcct">
                 <?php if(isset($avatars['kakao'])):?>
                     <span>Kakao </span>
-                <?php endif?>
                 <?php foreach($avatars['kakao'] as $kakaoAvatar):?>
                     <img src="<?=$kakaoAvatar?>" alt="">
                 <?php endforeach?>
+                <button id="discntKakao">Disconnect</button>
+                <?php endif?>
             </div>
         </div>
     </div>

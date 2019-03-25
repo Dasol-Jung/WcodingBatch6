@@ -216,6 +216,7 @@ class User extends ManagerDB{
                     return 'failure';
                 }
                 break;
+
             case 'kakao':
                 $kakaoSignOutReq = $db->prepare("DELETE FROM kakao_user WHERE kakao_uid=:uid");
                 $kakaoSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
@@ -227,10 +228,70 @@ class User extends ManagerDB{
                     return 'failure';
                 }
                 break;
+
             default:
                 return "failure";
                 break;
         }
+    }
+
+    public function switchAccount($superUid, $type){
+
+            $db = parent::dbConnect();
+
+            switch($type){
+                case 'internal':
+                    $internalUserReq = $db->prepare("SELECT internal_uid, first_name, image FROM internal_user WHERE super_uid=:super_uid");
+                    $internalUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
+                    if($internalUserReq->execute()){
+                        $internalUser = $internalUserReq->fetch();
+                        $_SESSION['isLoggedIn']=true;
+                        $_SESSION['uid'] = $internalUser['internal_uid'];
+                        $_SESSION['firstName'] = $internalUser['first_name'];
+                        $_SESSION['userType'] = 'internal';
+                        $_SESSION['avatar'] = $internalUser['image'];
+                        return 'success';
+                        
+                    }else{
+                        return 'failure';
+                    }
+                    break;
+                case 'google':
+                    $googleUserReq = $db->prepare("SELECT google_uid, first_name, image FROM google_user WHERE super_uid=:super_uid");
+                    $googleUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);                    
+                    if($googleUserReq->execute()){
+                        $googleUser = $googleUserReq->fetch();
+                        $_SESSION['isLoggedIn']=true;
+                        $_SESSION['uid'] = $googleUser['google_uid'];
+                        $_SESSION['firstName'] = $googleUser['first_name'];
+                        $_SESSION['userType'] = 'google';
+                        $_SESSION['avatar'] = $googleUser['image'];
+                        return 'success';
+                    }else{
+                        return 'failure';
+                    }
+                    break;
+    
+                case 'kakao':
+                    $kakaoUserReq = $db->prepare("SELECT kakao_uid, first_name, image FROM kakao_user WHERE super_uid=:super_uid");
+                    $kakaoUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);                    
+                    if($kakaoUserReq->execute()){
+                        $kakaoUser = $kakaoUserReq->fetch();
+                        $_SESSION['isLoggedIn']=true;
+                        $_SESSION['uid'] = $kakaoUser['kakao_uid'];
+                        $_SESSION['firstName'] = $kakaoUser['first_name'];
+                        $_SESSION['userType'] = 'kakao';
+                        $_SESSION['avatar'] = $kakaoUser['image'];
+                        return 'success';
+                    }else{
+                        return 'failure';
+                    }
+                    break;
+        
+                default:
+                    return "failure";
+                    break;
+            }
     }
 }
 

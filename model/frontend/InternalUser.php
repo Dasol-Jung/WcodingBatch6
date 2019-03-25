@@ -85,6 +85,8 @@
             if($user=$findUser->fetch()){
                 
                 if(password_verify($password,$user['password'])){
+
+           
                     $_SESSION['isLoggedIn']=true;
                     $_SESSION['firstName']=$user['first_name'];
                     $_SESSION['uid']=$user['internal_uid'];

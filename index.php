@@ -80,6 +80,10 @@ try{
                 viewProfile();
                 break;
             
+            case 'switch':
+                switchAccount($_SESSION['superUid'],$_GET['type']);
+                break;
+            
             default:
                 break;
         }
