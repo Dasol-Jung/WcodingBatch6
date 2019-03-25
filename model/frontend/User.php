@@ -184,6 +184,54 @@ class User extends ManagerDB{
         }
         return $avatars;
     }
+
+    public function signOut($uid,$userType){
+
+        // connect to db
+        $db = parent::dbConnect();
+
+        switch($userType){
+            case 'internal':
+                $internalSignOutReq = $db->prepare("DELETE FROM internal_user WHERE internal_uid=:uid");
+                $internalSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
+                $superSignOutReq = $db->prepare("DELETE FROM super_user WHERE uid=:uid");
+                $superSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
+                if($internalSignOutReq->execute()&&$superSignOutReq->execute()){
+                    if($_SESSION['avatar']!='public/images/defaultUserImage.svg'){
+                        unlink($_SESSION['avatar']);
+                    }
+                    return 'success';
+                }else{
+                    return 'failure';
+                }
+                break;
+            case 'google':
+                $googleSignOutReq = $db->prepare("DELETE FROM google_user WHERE google_uid=:uid");
+                $googleSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
+                $superSignOutReq = $db->prepare("DELETE FROM super_user WHERE uid=:uid");
+                $superSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
+                if($googleSignOutReq->execute()&&$superSignOutReq->execute()){
+                    return 'success';
+                }else{
+                    return 'failure';
+                }
+                break;
+            case 'kakao':
+                $kakaoSignOutReq = $db->prepare("DELETE FROM kakao_user WHERE kakao_uid=:uid");
+                $kakaoSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
+                $superSignOutReq = $db->prepare("DELETE FROM super_user WHERE uid=:uid");
+                $superSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
+                if($kakaoSignOutReq->execute()&&$superSignOutReq->execute()){
+                    return 'success';
+                }else{
+                    return 'failure';
+                }
+                break;
+            default:
+                return "failure";
+                break;
+        }
+    }
 }
 
 ?>

@@ -5,17 +5,19 @@
 	src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
 }
 header {
-	position: absolute;
+	height: 60px;
+	background-color: $primary-dark;
 	width: 100%;
 }
 header .logoContainer {
 	float: left;
 	width: 30px;
-	height: 30px;
-	margin: 10px 0 0 10px;
+	height: 100%;
 }
 header .logoContainer #logo {
-	height: 100%;
+	height: 70%;
+	box-sizing: border-box;
+	padding: 10px 0 0 10px;
 }
 header nav {
 	float: right;
@@ -27,6 +29,8 @@ header ul {
 }
 header ul .menuItem {
 	margin: 0 1rem;
+	display: flex;
+	align-items: center;
 }
 header ul .menuLink {
 	padding: 0 1rem;
@@ -43,7 +47,6 @@ li.avatar.menuItem {
 	display: flex;
 	flex-flow: column;
 	margin-right: 2rem;
-	position: relative;
 }
 
 #avatar {
@@ -51,8 +54,6 @@ li.avatar.menuItem {
 	object-fit: cover;
 	height: 25px;
 	width: 25px;
-	position: relative;
-	bottom: 3px;
 	align-self: flex-end;
 	cursor: pointer;
 }

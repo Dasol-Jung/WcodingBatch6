@@ -170,7 +170,7 @@ const clientUtils = (() => {
 		let modalBackground = document.createElement('div');
 		let closeButton = document.createElement('div');
 
-		closeButton.innerHTML = '<span>X</span>';
+		closeButton.innerHTML = '<i class="fas fa-times"></i>';
 
 		let body = document.body,
 			html = document.documentElement;
@@ -187,9 +187,9 @@ const clientUtils = (() => {
 		//modal close button style
 
 		closeButton.style.position = 'absolute';
-		closeButton.style.top = '8px';
-		closeButton.style.right = '8px';
-		closeButton.style.fontSize = '2rem';
+		closeButton.style.top = '10px';
+		closeButton.style.right = '10px';
+		closeButton.style.fontSize = '1rem';
 		closeButton.style.display = 'flex';
 		closeButton.style.alignItems = 'flex-start';
 		closeButton.style.cursor = 'pointer';
@@ -209,9 +209,8 @@ const clientUtils = (() => {
 		modalContainer.style.backgroundColor = 'white';
 		modalContainer.style.position = 'relative';
 		modalContainer.style.padding = '40px';
-		modalContainer.style.borderRadius = '8px';
-		modalContainer.style.width = sizeArr ? sizeArr[0] + 'px' : '100%';
-		modalContainer.style.height = sizeArr ? sizeArr[1] + 'px' : '100%';
+		modalContainer.style.width = sizeArr ? sizeArr[0] + 'px' : 'max-content';
+		modalContainer.style.height = sizeArr ? sizeArr[1] + 'px' : 'max-content';
 		modalContainer.style.margin = 'auto';
 		modalContainer.style.zIndex = '1';
 

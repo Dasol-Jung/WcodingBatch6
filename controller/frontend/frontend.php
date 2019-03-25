@@ -132,3 +132,10 @@ function connectKakao($kakaoUserInfo){
     ob_end_clean();
     print_r($result);
 }
+
+function signOut($uid, $userType){
+    $user = new User();
+    $result = $user->signOut($uid,$userType);
+    ob_end_clean();
+    print_r($result);
+}

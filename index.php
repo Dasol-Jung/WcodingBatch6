@@ -127,6 +127,11 @@ try{
 
                 changePersonalInfo($_POST['firstName'],$_FILES['avatar']);
                 break;
+
+            case 'signOut':
+                
+                signOut($_SESSION['uid'], $_SESSION['userType']);
+                break;
                 
             default :
                 break;

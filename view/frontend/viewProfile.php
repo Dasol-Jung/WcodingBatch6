@@ -23,49 +23,67 @@ ob_start();
     <form class="checkCurrentPW modalTarget">
         <label for="currentPW">Current password</label>
         <input name='currentPW' type="password" placeholder='Enter current password'>
-        <button>Confirm</button>
+        <button class='confirmPWBtn'>Confirm</button>
     </form>
 
     <form class="personalInfo">
+        <fieldset>
+            <legend>Personal Info</legend>
+        
         <div class="firstNameContainer">
             <label for="firstName">First Name</label>
             <input <?php echo $_SESSION['userType']=='internal' ?  null : 'readonly'?> value='<?=$userInfo['first_name']?>' name="firstName" id="firstName" type="text"/>
             <span class='error' id='error_firstName'></span>
         </div>
-    
-        <div class="avatarContainer">
-            <label for="avatarBtn">Avatar</label>
-            <img id='profileAvatar' src="<?=$_SESSION['avatar']?>" alt="public/images/defaultUserImage.svg">
+        <div class="gridContainer">
+            <div class="avatarContainer">
+                <label for="avatarBtn">Avatar</label>
+                <div class="avatarBox">
+                <img id='profileAvatar' src="<?=$_SESSION['avatar']?>" alt="public/images/defaultUserImage.svg">
+                <?php if($_SESSION['userType']=='internal'):?>
+                <label for="changeAvatar">Edit</label>
+                <input name="avatar" id="changeAvatar" type="file"/>
+                <span class='error' id='error_avatar'></span>
+                <?php endif?>
+                </div>
+            </div>
             <?php if($_SESSION['userType']=='internal'):?>
-              <label for="changeAvatar">Edit</label>
-              <input name="avatar" id="changeAvatar" type="file"/>
-              <span class='error' id='error_avatar'></span>
+                <button class="savePersonalInfo">Save</button>
             <?php endif?>
         </div>
-        <?php if($_SESSION['userType']=='internal'):?>
-            <button class="savePersonalInfo">Save</button>
-        <?php endif?>
+        </fieldset> 
     </form>
     <div class="connectedAcct">
         <label for="connectAcct">Connected Acccounts</label>
-        <div class="internalAcct">
-            <?php foreach($avatars['internal'] as $internalAvatar):?>
-                <img src="<?=$internalAvatar?>" alt="">
-            <?php endforeach?>
-        </div>
-        <div class="googleAcct">
-            <?php foreach($avatars['google'] as $googleAvatar):?>
-                <img src="<?=$googleAvatar?>" alt="">
-            <?php endforeach?>
-        </div>
-        <div class="kakaoAcct">
-            <?php foreach($avatars['kakao'] as $kakaoAvatar):?>
-                <img src="<?=$kakaoAvatar?>" alt="">
-            <?php endforeach?>
+        <div class="connectedAcctContainer">
+            <div class="internalAcct">
+                <?php if(isset($avatars['internal'])):?>
+                    <span>Weeky </span>
+                <?php endif?>
+                <?php foreach($avatars['internal'] as $internalAvatar):?>
+                    <img src="<?=$internalAvatar?>" alt="">
+                <?php endforeach?>
+            </div>
+            <div class="googleAcct">
+                <?php if(isset($avatars['google'])):?>
+                    <span>Google </span>
+                <?php endif?>
+                <?php foreach($avatars['google'] as $googleAvatar):?>
+                    <img src="<?=$googleAvatar?>" alt="">
+                <?php endforeach?>
+            </div>
+            <div class="kakaoAcct">
+                <?php if(isset($avatars['kakao'])):?>
+                    <span>Kakao </span>
+                <?php endif?>
+                <?php foreach($avatars['kakao'] as $kakaoAvatar):?>
+                    <img src="<?=$kakaoAvatar?>" alt="">
+                <?php endforeach?>
+            </div>
         </div>
     </div>
-    <div class="connectNewAcct">
-        <label for="connectAcct">Connect new account</label>
+<div class="connectNewAcct">
+    <label for="connectAcct">Connect new account</label>
         <div class="connectButtons">
             <div style="background-color : #eee; width: 100%; text-align : center;  display : grid; align-items : center;" id="gSignInWrapper">
                 <div id="connectGoogle" class="customGPlusSignIn">
@@ -78,7 +96,13 @@ ob_start();
             </div>
         </div>
     </div>
+    <label for="connectAcct">Sign out</label>
     <button id="signOut">Sign out</button>
+    <form class="checkSignOut modalTarget">
+        <label for="currentPW">Current password</label>
+        <input name='currentPW' type="password" placeholder='Enter current password'>
+        <button class='confirmPWBtn'>Confirm</button>
+    </form>
 </div>
    
 </div>

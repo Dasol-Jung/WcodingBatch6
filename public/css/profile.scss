@@ -6,27 +6,43 @@
 }
 
 .bodyWrapper {
-	height: 100%;
+	height: min-content;
+	padding: 3rem 0;
 	width: 100%;
-	display: grid;
-	justify-content: center;
-	align-items: center;
 	background-color: #2f2f2f;
 }
 
 button {
-	margin-top: 1rem;
+	color: white;
+	background-color: lightslategrey;
+	margin-left: 0.8rem;
 	width: 130px;
 	font-size: 0.85rem;
 	height: 2.3rem;
 	border: none;
 	cursor: pointer;
-	border-radius: 8px;
 }
 
 label {
-	margin-top: 1rem;
+	margin: 1rem 0;
 	display: block;
+}
+
+.modalTarget {
+	font-family: "DIN alternate";
+	height: auto;
+	label {
+		margin-top: 0;
+	}
+	input[name='currentPW'] {
+		display: inline-block;
+		width: 100%;
+	}
+	.confirmPWBtn {
+		background-color: grey;
+		margin: 1rem 0 0 0;
+		float: right;
+	}
 }
 
 fieldset {
@@ -34,13 +50,12 @@ fieldset {
 }
 
 input {
-	width: 100%;
+	width: 200px;
 	display: block;
 	border: 1px solid #ccc;
 	height: 2.3rem;
 	font-size: 1rem;
 	padding-left: 0.8rem;
-	margin-top: 0.5rem;
 	box-sizing: border-box;
 	&:focus {
 		outline: 2px solid #3f68b5;
@@ -49,15 +64,29 @@ input {
 
 .profileForm {
 	font-family: $primary-font;
-	padding: 1rem;
-	width: 350px;
-	margin: 2rem auto;
+	padding: 1rem 2rem;
+	margin: auto;
+	width: 80%;
 	background-color: white;
 }
 
+input#email {
+	border: none;
+}
+
 button#changePassword {
-	background-color: $primary-red;
 	color: white;
+}
+
+.gridContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+
+	button.savePersonalInfo {
+		color: white;
+		align-self: flex-end;
+		justify-self: flex-end;
+	}
 }
 
 input[type='file'] {
@@ -66,17 +95,6 @@ input[type='file'] {
 
 button.changeAvatar {
 	background-color: #888;
-	color: white;
-}
-
-button.savePersonalInfo {
-	background-color: lightblue;
-	color: white;
-}
-
-button#signOut {
-	background-color: darkorange;
-	color: black;
 }
 
 input:read-only {
@@ -88,23 +106,34 @@ input:read-only {
 .avatarContainer {
 	position: relative;
 	align-self: center;
-	label[for='changeAvatar'] {
-		position: absolute;
-		background-color: $primary-dark;
-		color: white;
-		padding: 0.1rem 0.2rem;
-		border-radius: 5px;
-		cursor: pointer;
-		margin: 0;
-		left: 0;
-		bottom: 0;
+
+	.avatarBox {
+		margin-bottom: 1rem;
+		display: grid;
+		align-items: flex-end;
+		position: relative;
+		width: min-content;
+		height: min-content;
+		margin-left: 0.8rem;
+		label[for='changeAvatar'] {
+			margin: 0;
+			padding: 0 0.5rem;
+			position: absolute;
+			background-color: $primary-dark;
+			color: white;
+			border-radius: 5px;
+			cursor: pointer;
+			left: 0;
+			bottom: 0;
+		}
 	}
-}
-#profileAvatar {
-	height: 100px;
-	width: 100px;
-	object-fit: cover;
-	border-radius: 50%;
+	#profileAvatar {
+		margin-top: auto;
+		height: 100px;
+		width: 100px;
+		object-fit: cover;
+		border-radius: 50%;
+	}
 }
 
 #connectKakao {
@@ -135,8 +164,9 @@ input:read-only {
 
 .connectButtons {
 	margin-top: 1rem;
+	margin-left: 0.8rem;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 25% 25%;
 	grid-gap: 0.5rem;
 
 	.googleSignin {
@@ -150,4 +180,26 @@ input:read-only {
 		}
 	}
 }
+
+.connectedAcct {
+	margin-left: 0.8rem;
+	.connectedAcctContainer {
+		display: grid;
+		grid-template-rows: repeat(3, 1fr);
+		grid-gap: 1rem;
+		text-align: center;
+		div {
+			width: 20%;
+			background-color: #eee;
+			padding: 1rem 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+		}
+	}
+	img {
+		width: 35px;
+	}
+}
+
 /*# sourceMappingURL=login.css.map */
