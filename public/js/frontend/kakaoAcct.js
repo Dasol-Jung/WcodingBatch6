@@ -17,7 +17,6 @@ if (document.querySelector('#kakaoLogin')) {
 						accessToken: authObj.access_token,
 						refreshToken: authObj.refresh_token
 					};
-
 					var xhr = new XMLHttpRequest();
 					xhr.open('POST', 'index.php?action=kakaoLogin&type=login', true);
 					xhr.setRequestHeader('Content-type', 'application/json');
