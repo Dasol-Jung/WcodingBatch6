@@ -37,6 +37,9 @@ function viewLogin(){
     $rightSection = ob_get_clean();
     require('view/frontend/viewHome.php');
 }
+function addButton(){
+    require("view/frontend/addButtonCalendar.php");
+}
 
 function viewWelcome(){
     require("view/frontend/viewWelcome.php");
@@ -79,6 +82,3 @@ function loggedInGoogle($googleInfo)
     $googleUser-> makeGoogle($googleInfo);
 }
 
-function addButton(){
-    require("view/frontend/addButtonCalendar.php");
-}
