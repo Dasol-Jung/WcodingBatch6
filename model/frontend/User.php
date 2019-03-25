@@ -158,7 +158,7 @@ class User extends ManagerDB{
 
         $getUids = $db->query("SELECT * FROM super_user WHERE super_uid='$superUid'");
         $accounts = $getUids->fetchAll();
-        $avatars = ["internal"=>[],"google"=>[],"kakao"=>[]];
+        $avatars = [];
 
         foreach($accounts AS $account){
             switch($account['type']){

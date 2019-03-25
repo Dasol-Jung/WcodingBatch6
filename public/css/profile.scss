@@ -5,17 +5,23 @@
 	src: url("./fonts/DIN Alternate Regular.otf");
 }
 
+body,
+html {
+	height: 100vh;
+}
+
 .bodyWrapper {
-	height: min-content;
-	padding-bottom: 3rem;
+	height: 92vh;
+	padding: 0;
 	width: 100%;
 	background-color: #2f2f2f;
+	display: grid;
+	align-items: center;
 }
 
 button {
 	color: white;
 	background-color: lightslategrey;
-	margin-left: 0.8rem;
 	width: 130px;
 	font-size: 0.85rem;
 	height: 2.3rem;
@@ -45,7 +51,7 @@ label {
 }
 
 fieldset {
-	margin-top: 1rem;
+	margin: 1rem 0;
 }
 
 input {
@@ -62,11 +68,20 @@ input {
 }
 
 .profileForm {
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: repeat(3, auto);
+	grid-gap: 2rem;
 	font-family: $primary-font;
 	padding: 1rem 2rem;
-	margin: auto;
 	width: 80%;
 	background-color: white;
+}
+
+.emailpasswordWrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 }
 
 input#email {
@@ -75,17 +90,6 @@ input#email {
 
 button#changePassword {
 	color: white;
-}
-
-.gridContainer {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-
-	button.savePersonalInfo {
-		color: white;
-		align-self: flex-end;
-		justify-self: flex-end;
-	}
 }
 
 input[type='file'] {
@@ -102,12 +106,20 @@ input:read-only {
 	}
 }
 
+.avatarAndSave {
+	display: grid;
+	grid-template-columns: auto auto;
+	align-items: end;
+	button.savePersonalInfo {
+		justify-self: end;
+	}
+}
+
 .avatarContainer {
 	position: relative;
 	align-self: center;
 
 	.avatarBox {
-		margin-bottom: 1rem;
 		display: grid;
 		align-items: flex-end;
 		position: relative;
@@ -145,6 +157,7 @@ input:read-only {
 }
 
 .kakaoSignin {
+	height: 2.3rem;
 	width: 100%;
 	background-color: $kakao;
 	display: flex;
@@ -163,9 +176,8 @@ input:read-only {
 
 .connectButtons {
 	margin-top: 1rem;
-	margin-left: 0.8rem;
 	display: grid;
-	grid-template-columns: 20% 20%;
+	grid-template-columns: auto auto;
 	grid-gap: 0.5rem;
 
 	.googleSignin {
@@ -181,16 +193,16 @@ input:read-only {
 }
 
 .connectedAcct {
-	margin-left: 0.8rem;
 	.connectedAcctContainer {
 		display: grid;
-		grid-template-rows: repeat(3, 1fr);
+		grid-template-rows: repeat(auto, 1fr);
 		grid-gap: 1rem;
 		text-align: center;
 		div {
-			width: 30%;
+			width: 100%;
+			box-sizing: border-box;
 			background-color: #eee;
-			padding: 1rem;
+			padding: 1rem 1rem 1rem 0;
 			display: flex;
 			align-items: center;
 			justify-content: space-around;
@@ -198,7 +210,7 @@ input:read-only {
 				width: 100px;
 			}
 			button {
-				margin-left: 2rem;
+				margin-left: 1rem;
 			}
 		}
 	}

@@ -15,8 +15,10 @@ function viewHome()
     $internalUser = new InternalUser();
     $internalUser->checkRememberMe();
     $user = new User();
+    if(isset($_SESSION['uid'])&&isset($_SESSION['userType'])){
         $userInfo = $user->getUserInfo($_SESSION['uid'],$_SESSION['userType']);
         $avatars = $user->getAvatars($_SESSION['superUid']);
+    }
     ob_start();
         require('view/frontend/viewSignUp.php');
     $rightSection = ob_get_clean();

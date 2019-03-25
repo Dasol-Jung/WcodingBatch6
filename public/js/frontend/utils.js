@@ -199,7 +199,7 @@ const clientUtils = (() => {
 		modalBackground.style.display = 'flex';
 		modalBackground.style.justifyContent = 'center';
 		modalBackground.style.alignItems = 'flex-start';
-		modalBackground.style.height = maxHeight + 'px';
+		modalBackground.style.height = '100%';
 		modalBackground.style.width = '100%';
 		modalBackground.style.top = '0';
 		modalBackground.style.left = '0';
