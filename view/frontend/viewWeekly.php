@@ -27,6 +27,7 @@ ob_start();
 <script src='../../public/fullcalendar/core/main.js'></script>
 <script src='../../public/fullcalendar/daygrid/main.js'></script>
 <script src= "../../public/js/frontend/viewWeekly.js"></script>
+<script src= "../../public/js/frontend/modifyButton.js"></script>
 <?php
 
 //schedule ends here

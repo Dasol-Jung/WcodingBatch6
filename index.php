@@ -28,7 +28,7 @@ try{
             viewLogin();
         }
         if($_GET['action'] == 'weeklySchedule' && $_GET['add']== 'add'){
-            addButton();
+            addMain();
         }
         if($_GET['action'] == 'logout'){
             logout();

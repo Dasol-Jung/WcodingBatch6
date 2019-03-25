@@ -104,7 +104,9 @@ ob_start();
         </div>
     </section>
 </div>
-
+<script src='../../public/fullcalendar/core/main.js'></script>
+<script src='../../public/fullcalendar/daygrid/main.js'></script>
+<script src= "../../public/js/frontend/viewmonthly.js"></script>
 
 <?php
 

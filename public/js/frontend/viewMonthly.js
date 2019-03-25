@@ -1,9 +1,3 @@
-/** add events */
-
-function createAddButtonEvent() {
-	document.querySelector('button.addSchedule').addEventListener('click', () => {});
-}
-
 function changeWeeklyMonthly(){
 	document.querySelector('button.weeklyMonthly');addEventListener("click",() => {
 			if(document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule'){
@@ -21,10 +15,10 @@ function generateCalendar (calendarEl) {
 				changeWeeklyMonthly: {
 					text: 'Weekly/Monthly',
 					click: function() {
-						if(document.body.contains(document.getElementById("weeklyCalendar"))){
-							location.href = 'http://localhost:8888/index.php?action=monthlySchedule'	
+						if(document.body.contains(document.getElementById("monthlyCalendar"))){
+							document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule'
 						} else {
-							location.href = 'http://localhost:8888/index.php?action=weeklySchedule'
+							document.location.href = 'http://localhost:8888/index.php?action=monlylySchedule'
 						}
 					}
 				},
@@ -33,8 +27,8 @@ function generateCalendar (calendarEl) {
 					click: function(){
 						document.location.href = "http://localhost:8888/index.php?action=weeklySchedule&add=add"
 					}
-				}
-			},
+                }
+            },
 			header: {
 				left: 'changeWeeklyMonthly addButton',
 				center: 'title',
@@ -45,19 +39,4 @@ function generateCalendar (calendarEl) {
 		});
 		calendar.render();
 	});
-}
-function openForm() {
-    document.getElementById("myForm").style.display = "block";
-}
-
-function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-}
-/**
- * EXECUTION OF THE SCRIPT 
- */
-
-{
-	var calendarEl = document.getElementById('weeklyCalendar');
-	generateCalendar(calendarEl);
 }

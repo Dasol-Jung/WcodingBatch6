@@ -37,9 +37,6 @@ function viewLogin(){
     $rightSection = ob_get_clean();
     require('view/frontend/viewHome.php');
 }
-function addButton(){
-    require("view/frontend/addButtonCalendar.php");
-}
 
 function viewWelcome(){
     require("view/frontend/viewWelcome.php");
@@ -80,5 +77,21 @@ function loggedInGoogle($googleInfo)
     require("model/frontend/GoogleUserManager.php");
     $googleUser = new GoogleUserManager();
     $googleUser-> makeGoogle($googleInfo);
+}
+
+function addMain(){
+    require("view/frontend/iFrame.php");
+}
+
+function addButton($addWeekly){
+    require("model/frontend/AddModifyDB.php");
+    $addAffLines = new AddModifyDB();
+    $addAffLines-> addInfo($addWeekly);
+}
+
+function modifyButton($modWeekly){
+    require("model/frontend/AddModifyDB.php");
+    $modAffLines = new AddModifyDB();
+    $modAffLines-> modInfo($modWeekly);
 }
 

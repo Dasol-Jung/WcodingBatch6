@@ -22,9 +22,9 @@ function generateCalendar (calendarEl) {
 					text: 'Weekly/Monthly',
 					click: function() {
 						if(document.body.contains(document.getElementById("weeklyCalendar"))){
-							location.href = 'http://localhost:8888/index.php?action=monthlySchedule'	
+							document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule'	
 						} else {
-							location.href = 'http://localhost:8888/index.php?action=weeklySchedule'
+							document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule'
 						}
 					}
 				},
@@ -46,13 +46,7 @@ function generateCalendar (calendarEl) {
 		calendar.render();
 	});
 }
-function openForm() {
-    document.getElementById("myForm").style.display = "block";
-}
 
-function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-}
 /**
  * EXECUTION OF THE SCRIPT 
  */
