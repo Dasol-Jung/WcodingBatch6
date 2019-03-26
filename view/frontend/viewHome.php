@@ -1,4 +1,4 @@
-<?php $styles[] = "<link rel='stylesheet' href='public/css/1_shared/index.css'"?>
+<?php $styles[] = "<link rel='stylesheet' href='public/css/1_shared/index.css'/>"?>
 <?php ob_start(); ?>
 
 <div class="bodyWrapper">
