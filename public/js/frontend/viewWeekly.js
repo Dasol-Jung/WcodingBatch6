@@ -31,7 +31,7 @@ function generateCalendar (calendarEl) {
 				addButton: {
 					text: 'Add',
 					click: function(){
-						document.location.href = "http://localhost:8888/index.php?action=weeklySchedule&add=add"
+						location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add'
 					}
 				}
 			},
@@ -50,9 +50,17 @@ function openForm() {
     document.getElementById("myForm").style.display = "block";
 }
 
-function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-}
+// var closeForm = document.getElementById('closeForm');closeForm.onclick = function(){
+// 	var formDiv = document.getElementById('myForm');
+// 	formDiv.style.display = 'none';
+// }
+// function closeForm() {
+// 	var closeForm = document.getElementById('closeForm');
+// 	closeForm.onclick = function(){
+// 	var formDiv = document.getElementById('myForm');
+// 		formDiv.parentnode.remove();
+// 	}
+// }
 /**
  * EXECUTION OF THE SCRIPT 
  */
@@ -61,3 +69,7 @@ function closeForm() {
 	var calendarEl = document.getElementById('weeklyCalendar');
 	generateCalendar(calendarEl);
 }
+
+/**
+ * Disiplay errors on the check of the form
+ */ 

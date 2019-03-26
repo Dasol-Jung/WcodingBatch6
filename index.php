@@ -28,7 +28,7 @@ try{
             viewLogin();
         }
         if($_GET['action'] == 'weeklySchedule' && $_GET['add']== 'add'){
-            addMain();
+            displayMain();
         }
         if($_GET['action'] == 'logout'){
             logout();
@@ -49,6 +49,12 @@ try{
             loggedInGoogle($googleInfo);
 
         }
+        if($_GET['action'] == 'addEditAppointment'){
+            addButton('$_POST');
+            closeForm();
+            // viewWeekly();
+        }
+        
     }
     else {
         viewHome();
