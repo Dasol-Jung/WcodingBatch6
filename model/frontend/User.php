@@ -27,17 +27,17 @@ class User extends ManagerDB{
         $db = parent::dbConnect();
         switch($userType){
             case 'internal':
-                $findUser = $db->query("SELECT email, first_name FROM internal_user WHERE internal_uid='$uid'");
+                $findUser = $db->query("SELECT email, first_name, setting_schedule_view FROM internal_user WHERE internal_uid='$uid'");
                 return $findUser->fetchAll()[0];
                 break;
 
             case 'google':
-                $findUser = $db->query("SELECT email, first_name FROM google_user WHERE google_uid='$uid'");
+                $findUser = $db->query("SELECT email, first_name, setting_schedule_view FROM google_user WHERE google_uid='$uid'");
                 return $findUser->fetchAll()[0];
                 break;
 
             case 'kakao':
-                $findUser = $db->query("SELECT email, first_name FROM kakao_user WHERE kakao_uid='$uid'");
+                $findUser = $db->query("SELECT email, first_name, setting_schedule_view FROM kakao_user WHERE kakao_uid='$uid'");
                 return $findUser->fetchAll()[0];
                 break;
 
@@ -293,6 +293,56 @@ class User extends ManagerDB{
                     break;
             }
     }
+
+    public function changeUserSetting($value, $type, $userType, $superUid){
+
+        // issue : setting column name dynamically isn't possible for now.
+        // for now I set column name directly as setting_schedule_view
+
+        $db = parent::dbConnect();
+        $settingType = "setting_" . $type;
+
+        switch($userType){
+            case 'internal':
+                $internalUserReq = $db->prepare("UPDATE internal_user SET setting_schedule_view=:settingValue WHERE super_uid=:super_uid");
+                $internalUserReq->bindParam(":settingValue", $value, PDO::PARAM_STR);
+                $internalUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
+                if($internalUserReq->execute()){
+                    return 'success';
+                    
+                }else{
+                    return 'failure';
+                }
+                break;
+            case 'google':
+                $googleUserReq = $db->prepare("UPDATE google_user SET setting_schedule_view=:settingValue WHERE super_uid=:super_uid");
+                $googleUserReq->bindParam(":settingValue", $value, PDO::PARAM_STR);
+                $googleUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
+                if($googleUserReq->execute()){
+                    return 'success';
+                    
+                }else{
+                    return 'failure';
+                }
+                break;
+
+            case 'kakao':
+                $kakaoUserReq = $db->prepare("UPDATE kakao_user SET setting_schedule_view=:settingValue WHERE super_uid=:super_uid");
+                $kakaoUserReq->bindParam(":settingValue", $value, PDO::PARAM_STR);
+                $kakaoUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
+                if($kakaoUserReq->execute()){
+                    return 'success';
+                    
+                }else{
+                    return 'failure';
+                }
+                break;
+        
+            default:
+                return "failure";
+                break;
+        }
+}
 }
 
 ?>

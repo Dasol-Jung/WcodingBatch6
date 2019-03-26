@@ -190,6 +190,25 @@
 	}
 })();
 
+/**
+ * adding an event to user setting-default view button
+ */
+
+(function() {
+	let settings = document.querySelectorAll('.toggleContainer');
+	if (settings) {
+		settings.forEach(setting => {
+			let settingType = setting.id;
+			let settingBtn = setting.querySelector('.toggleButton');
+
+			settingBtn.addEventListener('click', () => {
+				let status = Array.prototype.indexOf.call(settingBtn.classList, 'on') == -1 ? 'm' : 'w';
+				changeUserSetting(status, settingType);
+			});
+		});
+	}
+})();
+
 // FUNCTIONS //
 
 /**
@@ -273,6 +292,44 @@ function requestSignOut(form) {
 						window.location.href = 'index.php';
 					}
 					logoutReq.send();
+					break;
+				case 'failure':
+					alert('Something went wrong');
+					break;
+				default:
+					alert('Soemthing went wrong');
+					break;
+			}
+			return;
+		}
+		if (xhr.status >= 400) {
+			//php error page
+			return null;
+		}
+	};
+	xhr.send(formData);
+}
+
+/**
+ * changeUserSetting : send a request to the server in order to change user setting
+ * @param
+ * -value : value of the setting 'on' or 'off'
+ * -type : type of the setting. ex) defaultView
+ */
+
+function changeUserSetting(value, type) {
+	// create a form to enter new password
+
+	let xhr = new XMLHttpRequest();
+	let formData = new FormData();
+	formData.append('action', 'changeSetting');
+	formData.append('type', type);
+	formData.append('value', value);
+	xhr.open('POST', 'index.php');
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
+			switch (xhr.response) {
+				case 'success':
 					break;
 				case 'failure':
 					alert('Something went wrong');

@@ -157,3 +157,10 @@ function switchAccount($superUid, $type){
     ob_end_clean();
     echo $result;
 }
+
+function changeUserSetting($value, $type, $userType, $superUid){
+    $user = new User();
+    $result=$user->changeUserSetting($value, $type, $userType, $superUid);
+    ob_end_clean();
+    echo $result;
+}

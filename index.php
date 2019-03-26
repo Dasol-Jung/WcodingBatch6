@@ -136,6 +136,13 @@ try{
                 
                 signOut($_SESSION['uid'], $_SESSION['userType']);
                 break;
+
+            case 'changeSetting':
+
+                if(isset($_POST['value']) && isset($_POST['type']) && $_SESSION['userType'] && $_SESSION['superUid'] ){
+                    changeUserSetting($_POST['value'],$_POST['type'], $_SESSION['userType'],$_SESSION['superUid']);
+                }
+                break;            
                 
             default :
                 break;

@@ -82,6 +82,7 @@ class GoogleUser extends User
             $_SESSION['userType']='google';
             $_SESSION['avatar']=$googleImage;
             $_SESSION['superUid']= $superUid;
+            
             return 'success';
         }else{
             throw new Exception("Google Login Failed");

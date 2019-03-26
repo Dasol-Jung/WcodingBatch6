@@ -255,13 +255,14 @@ const clientUtils = (() => {
 			target.style.display = 'none';
 		});
 
-		//kakao login
-		let kakaoBtn = document.querySelector('#kakao-login-btn');
-		let kakaoBtnWrapper = kakaoBtn.parentElement;
-		kakaoBtnWrapper.style.width = '100%';
-		kakaoBtnWrapper.style.height = '100%';
-		kakaoBtn.style.width = '100%';
-		kakaoBtn.style.height = '100%';
+		//toggle buttons
+
+		let toggleButtons = document.querySelectorAll('.toggleButton');
+		toggleButtons.forEach(toggleBtn => {
+			toggleBtn.addEventListener('click', () => {
+				toggleBtn.classList.toggle('on');
+			});
+		});
 	}
 
 	return {

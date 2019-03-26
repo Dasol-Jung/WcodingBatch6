@@ -18,7 +18,7 @@
         <span>Sign in with</span>
     </div>
     <div class="socialSigninContainer">
-        <div style="background-color : #eee; width: 100%; text-align : center;  display : grid; align-items : center;" id="gSignInWrapper">
+        <div style="background-color : #eee; width: 100%; text-align : center; display : grid; align-items : center;" id="gSignInWrapper">
             <div id="googleLogin" class="customGPlusSignIn">
                 <img style='height : 22px; position: relative; top : 2px;' src='../../public/images/googleLogo.png'/>
                 <span style='position : relative; bottom:5px; left : 10px; font-size : 0.9rem;' class="buttonText">Google</span>

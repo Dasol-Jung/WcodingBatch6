@@ -73,7 +73,7 @@ input:focus {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(3, auto);
-  grid-gap: 2rem;
+  grid-column-gap: 4rem;
   font-family: "DIN alternate";
   padding: 1rem 2rem;
   width: 80%;
