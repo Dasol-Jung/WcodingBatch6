@@ -212,7 +212,7 @@ const clientUtils = (() => {
 		modalContainer.style.width = sizeArr ? sizeArr[0] + 'px' : 'max-content';
 		modalContainer.style.height = sizeArr ? sizeArr[1] + 'px' : 'max-content';
 		modalContainer.style.margin = 'auto';
-		modalContainer.style.zIndex = '1';
+		modalContainer.style.zIndex = '999';
 
 		// close modal
 

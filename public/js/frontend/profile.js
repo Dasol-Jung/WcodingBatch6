@@ -148,11 +148,11 @@
 })();
 
 /**
- * checks if the user entered the right password before proceeding to signing out
+ * checks if the internal user entered the right password before proceeding to signing out
  */
 
 (function() {
-	let changePWConfirmBtn = document.querySelector('form.checkSignOut');
+	let changePWConfirmBtn = document.querySelector('form.checkSignOutInternal');
 	if (changePWConfirmBtn) {
 		changePWConfirmBtn.addEventListener('submit', e => {
 			e.preventDefault();
@@ -179,6 +179,46 @@
 						default:
 							break;
 					}
+				}
+				if (xhr.status >= 400) {
+					//php error page
+					return;
+				}
+			};
+			xhr.send(formData);
+		});
+	}
+})();
+
+/**
+ * confirm if the user really wants to sign out send a request
+ */
+
+(function() {
+	let confirmSignOutBtn = document.querySelector('button.confirmSignOut');
+	if (confirmSignOutBtn) {
+		confirmSignOutBtn.addEventListener('click', e => {
+			e.preventDefault();
+			let formData = new FormData();
+			// send ajax
+			let xhr = new XMLHttpRequest();
+			formData.append('action', 'signOut');
+			xhr.open('POST', 'index.php');
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
+					switch (xhr.response) {
+						case 'success':
+							alert('Your account has been successfully deleted. Thank you for using Weeky');
+							window.location.href = 'index.php';
+							break;
+						case 'failure':
+							alert('Something Went Wrong');
+							break;
+
+						default:
+							break;
+					}
+					return;
 				}
 				if (xhr.status >= 400) {
 					//php error page

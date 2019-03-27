@@ -117,12 +117,20 @@ ob_start();
     </div>
     </div>   
 </div>
+    <?php if($_SESSION['userType']=='internal'):?>
+        <form class="checkSignOutInternal modalTarget">
+            <label for="currentPW">Current password</label>
+            <input name='currentPW' type="password" placeholder='Enter current password'>
+            <button class='confirmPWBtn'>Confirm</button>
+        </form>
+    <?php else:?>
+        <form class="checkSignOut modalTarget">
+            <label for="confirmSignOut">Do you really want to sign out?</label>
+            <button class='confirmSignOut'>Sign Out</button>
+        </form>
+    <?php endif?>
 
-    <form class="checkSignOut modalTarget">
-        <label for="currentPW">Current password</label>
-        <input name='currentPW' type="password" placeholder='Enter current password'>
-        <button class='confirmPWBtn'>Confirm</button>
-    </form>
+
     <form class="checkCurrentPW modalTarget">
         <label for="currentPW">Current password</label>
         <input name='currentPW' type="password" placeholder='Enter current password'>

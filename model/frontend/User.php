@@ -200,6 +200,11 @@ class User extends ManagerDB{
                     if($_SESSION['avatar']!='public/images/defaultUserImage.svg'){
                         unlink($_SESSION['avatar']);
                     }
+                    setcookie('rememberMeToken');
+                    setcookie('firstName');
+                    setcookie('uid');
+                    setcookie('userType');
+                    session_destroy();
                     return 'success';
                 }else{
                     return 'failure';
@@ -211,6 +216,11 @@ class User extends ManagerDB{
                 $superSignOutReq = $db->prepare("DELETE FROM super_user WHERE uid=:uid");
                 $superSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
                 if($googleSignOutReq->execute()&&$superSignOutReq->execute()){
+                    setcookie('rememberMeToken');
+                    setcookie('firstName');
+                    setcookie('uid');
+                    setcookie('userType');
+                    session_destroy();
                     return 'success';
                 }else{
                     return 'failure';
@@ -223,6 +233,11 @@ class User extends ManagerDB{
                 $superSignOutReq = $db->prepare("DELETE FROM super_user WHERE uid=:uid");
                 $superSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
                 if($kakaoSignOutReq->execute()&&$superSignOutReq->execute()){
+                    setcookie('rememberMeToken');
+                    setcookie('firstName');
+                    setcookie('uid');
+                    setcookie('userType');
+                    session_destroy();
                     return 'success';
                 }else{
                     return 'failure';
