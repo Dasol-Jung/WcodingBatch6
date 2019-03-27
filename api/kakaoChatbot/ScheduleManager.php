@@ -71,6 +71,48 @@ class ScheduleManager{
 
     }
 
-}
-    
+    //read one day schedule from db
+
+    public function createSchedule($userId, $title, $date){
+
+        $db= $this->dbConnect();
+
+        $addSchedule = $db->prepare("INSERT INTO schedule (title, event_date, user_id) VALUES(:title, :event_date, :user_id)");
+        $addSchedule->bindParam(":user_id", $userId, PDO::PARAM_STR);
+        $addSchedule->bindParam(":event_date", $date, PDO::PARAM_STR);
+        $addSchedule->bindParam(":title", $title, PDO::PARAM_STR);
+        if($addSchedule->execute()){
+          
+            $chatResponse = '
+            {
+                "version": "2.0",
+                "template": {
+                    "outputs": [
+                        {
+                            "simpleText": {
+                                "text": "일정이 추가되었습니다"
+                            }
+                        }
+                    ]
+                }
+            }';
+            }
+            else{
+                $chatResponse = '
+                {
+                    "version": "2.0",
+                    "template": {
+                        "outputs": [
+                            {
+                                "simpleText": {
+                                    "text": "일정이 추가되지 않았습니다"
+                                }
+                            }
+                        ]
+                    }
+                }';  
+            }
+            return $chatResponse;  
+        }
+    }
 ?>
