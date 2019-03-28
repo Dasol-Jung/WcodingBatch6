@@ -156,20 +156,6 @@
 })();
 
 /**
- * adding an event to show modal when an user clicks signout button
- */
-
-(function() {
-	let signOutBtn = document.querySelector('button#signOut');
-	if (signOutBtn) {
-		signOutBtn.addEventListener('click', e => {
-			let modalTarget = document.querySelector('.modalTarget.checkSignOutInternal');
-			document.body.appendChild(clientUtils.createModal(modalTarget));
-		});
-	}
-})();
-
-/**
  * checks if the internal user entered the right password before proceeding to signing out
  */
 
