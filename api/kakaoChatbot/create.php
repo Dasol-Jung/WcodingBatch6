@@ -1,6 +1,5 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+header('Content-Type: application/json; charset=utf-8');
 ob_start();
 require_once("./ScheduleManager.php");
 
@@ -11,11 +10,12 @@ $dataInArr = json_decode($data, true);
 //extract kakao id, schedule date and title from the associative array above.
 $userId = $dataInArr['userRequest']['user']['properties']['appUserId'];
 $scheduleDate = json_decode(str_replace("\\","",$dataInArr['action']['params']['sys_date']),true)['date'];
-$scheduleTitle = trim(json_encode($dataInArr['action']['params']['title']),'"');
+$scheduleTitle = trim(json_encode($dataInArr['action']['params']['title'],JSON_UNESCAPED_UNICODE),'"');
 
 $scheduleManager = new ScheduleManager();
 $response = $scheduleManager->createSchedule($userId, $scheduleTitle, $scheduleDate);
 
+ob_get_clean();
 echo $response;
 
 ?>

@@ -47,7 +47,7 @@ class ScheduleManager{
                 }
               }',true);
               $chatResponse["template"]["outputs"][0]["listCard"]["items"]=$scheduleItems;
-              return json_encode($chatResponse);
+              return json_encode($chatResponse,JSON_UNESCAPED_UNICODE);
             }
             else{
                 $chatResponse = '
