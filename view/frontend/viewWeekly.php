@@ -15,8 +15,10 @@ if(!isset($_SESSION))
 ob_start();
 ?>
 <?php $styles[]="<link rel='stylesheet' href='../../public/css/viewWeekly.css'/>"?>
+<link href='../../public/css/addButton.css' rel='stylesheet' />
 <link href='../../public/fullcalendar/core/main.css' rel='stylesheet' />
 <link href='../../public/fullcalendar/daygrid/main.css' rel='stylesheet' />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <div class='bodyWrapper'>
     <section class="listWrapper">
     </section>

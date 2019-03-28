@@ -81,26 +81,24 @@ function loggedInGoogle($googleInfo)
 }
 
 function displayMain(){
-    require("view/frontend/iFrame.php");
+    require("view/frontend/addButtonCalendar.php");
 }
 
 function addButton($addWeekly){
-    require("model/frontend/AddModifyDB.php");
     $addAffLines = new AddModifyDB();
     $addAffLines-> addInfo($addWeekly);
 }
 
 function modifyButton($modWeekly){
-    require("model/frontend/AddModifyDB.php");
     $modAffLines = new AddModifyDB();
     $modAffLines-> modInfo($modWeekly);
 }
 
-function displayPost(){
-    require("model/frontend/AddModifyDB.php");
-    require("view/frontend/postData.php")
+function loadAllToDoList($user){
+    $loadAffLines = new AddModifyDB();
+    $loadAffLines-> loadToDoList($user);
 }
 
-function closeForm() {
-    require("model/frontend/AddModifyDB.php");
-}
+// function closeForm() {
+//     require_once("model/frontend/AddModifyDB.php");
+// }
