@@ -21,54 +21,55 @@ class ScheduleManager{
     public function readOneSchedule($userId, $date){
 
         $db= $this->dbConnect();
-
-        $getSchedule = $db->prepare("SELECT title, description FROM schedule WHERE user_id=:user_id AND event_date = :event_date");
-        $getSchedule->bindParam(":user_id", $userId, PDO::PARAM_STR);
-        $getSchedule->bindParam(":event_date", $date, PDO::PARAM_STR);
-        if($getSchedule->execute()){
-            $scheduleItems = [];
-            while($scheduleInfo=$getSchedule->fetch(PDO::FETCH_ASSOC)){
-                $scheduleItems[]=["title"=>$scheduleInfo['title'], "description"=>$scheduleInfo['description']];
-            }
-            if(!empty($scheduleItems)){
-            $chatResponse = json_decode('{
-                "version": "2.0",
-                "template": {
-                  "outputs": [
-                    {
-                      "listCard": {
-                        "header": {
-                          "title": "스케줄입니다"
-                        },
-                        "items": []
-                      }
-                    }
-                  ]
+        $isAuthenticated = $this->authenticate($db,$userId);
+        if($isAuthenticated===true){
+            $getSchedule = $db->prepare("SELECT title, description FROM schedule WHERE user_id=:user_id AND event_date = :event_date");
+            $getSchedule->bindParam(":user_id", $userId, PDO::PARAM_STR);
+            $getSchedule->bindParam(":event_date", $date, PDO::PARAM_STR);
+            if($getSchedule->execute()){
+                $scheduleItems = [];
+                while($scheduleInfo=$getSchedule->fetch(PDO::FETCH_ASSOC)){
+                    $scheduleItems[]=["title"=>$scheduleInfo['title'], "description"=>$scheduleInfo['description']];
                 }
-              }',true);
-              $chatResponse["template"]["outputs"][0]["listCard"]["items"]=$scheduleItems;
-              return json_encode($chatResponse,JSON_UNESCAPED_UNICODE);
-            }
-            else{
-                $chatResponse = '
-                {
+                if(!empty($scheduleItems)){
+                $chatResponse = json_decode('{
                     "version": "2.0",
                     "template": {
-                        "outputs": [
-                            {
-                                "simpleText": {
-                                    "text": "일정이 없습니다"
-                                }
-                            }
-                        ]
+                      "outputs": [
+                        {
+                          "listCard": {
+                            "header": {
+                              "title": "스케줄입니다"
+                            },
+                            "items": []
+                          }
+                        }
+                      ]
                     }
-                }';
-                return $chatResponse;
+                  }',true);
+                  $chatResponse["template"]["outputs"][0]["listCard"]["items"]=$scheduleItems;
+                  return json_encode($chatResponse,JSON_UNESCAPED_UNICODE);
+                }
+                else{
+                    $chatResponse = '
+                    {
+                        "version": "2.0",
+                        "template": {
+                            "outputs": [
+                                {
+                                    "simpleText": {
+                                        "text": "일정이 없습니다"
+                                    }
+                                }
+                            ]
+                        }
+                    }';
+                    return $chatResponse;
+                }
             }
-            
-            
+        }else{
+            return $isAuthenticated;
         }
-
     }
 
     //read one day schedule from db
@@ -76,28 +77,14 @@ class ScheduleManager{
     public function createSchedule($userId, $title, $date){
 
         $db= $this->dbConnect();
-
-        $addSchedule = $db->prepare("INSERT INTO schedule (title, event_date, user_id) VALUES(:title, :event_date, :user_id)");
-        $addSchedule->bindParam(":user_id", $userId, PDO::PARAM_STR);
-        $addSchedule->bindParam(":event_date", $date, PDO::PARAM_STR);
-        $addSchedule->bindParam(":title", $title, PDO::PARAM_STR);
-        if($addSchedule->execute()){
-          
-            $chatResponse = '
-            {
-                "version": "2.0",
-                "template": {
-                    "outputs": [
-                        {
-                            "simpleText": {
-                                "text": "일정이 추가되었습니다"
-                            }
-                        }
-                    ]
-                }
-            }';
-            }
-            else{
+        $isAuthenticated = $this->authenticate($db,$userId);
+        if($isAuthenticated===true){
+            $addSchedule = $db->prepare("INSERT INTO schedule (title, event_date, user_id) VALUES(:title, :event_date, :user_id)");
+            $addSchedule->bindParam(":user_id", $userId, PDO::PARAM_STR);
+            $addSchedule->bindParam(":event_date", $date, PDO::PARAM_STR);
+            $addSchedule->bindParam(":title", $title, PDO::PARAM_STR);
+            if($addSchedule->execute()){
+            
                 $chatResponse = '
                 {
                     "version": "2.0",
@@ -105,14 +92,71 @@ class ScheduleManager{
                         "outputs": [
                             {
                                 "simpleText": {
-                                    "text": "일정이 추가되지 않았습니다"
+                                    "text": "일정이 추가되었습니다"
                                 }
                             }
                         ]
                     }
-                }';  
+                }';
+                }
+                else{
+                    $chatResponse = '
+                    {
+                        "version": "2.0",
+                        "template": {
+                            "outputs": [
+                                {
+                                    "simpleText": {
+                                        "text": "일정이 추가되지 않았습니다"
+                                    }
+                                }
+                            ]
+                        }
+                    }';  
+                }
+                return $chatResponse;
             }
-            return $chatResponse;  
+            else{
+                return $isAuthenticated;
+            }  
+        }
+
+        private function authenticate($db, $userId){
+
+            $checkUser = $db->prepare("SELECT kakao_uid FROM kakao_user WHERE kakao_uid=:kakao_uid");
+            $checkUser->bindParam(":kakao_uid",$userId, PDO::PARAM_STR);
+            $checkUser->execute();
+            if($checkUser->rowCount()){
+                return true;
+            }else{
+                $signUpMsg = '
+                {
+                    "version": "2.0",
+                    "template": {
+                      "outputs": [
+                        {
+                          "basicCard": {
+                            "title": "Weeky",
+                            "description": "Weeky 가입하기",
+                            "profile": {
+                              "nickname": "가입하기"
+                            },
+                            "buttons": [
+                              {
+                                "action":  "webLink",
+                                "label": "가입하기",
+                                "webLinkUrl": "http://localhost:8888/index.php"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }';
+                return $signUpMsg;
+            }
         }
     }
+
+
 ?>

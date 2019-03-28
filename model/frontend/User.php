@@ -25,26 +25,10 @@ class User extends ManagerDB{
 
     public function getUserInfo($uid, $userType){
         $db = parent::dbConnect();
-        switch($userType){
-            case 'internal':
-                $findUser = $db->query("SELECT email, first_name, setting_schedule_view FROM internal_user WHERE internal_uid='$uid'");
-                return $findUser->fetchAll()[0];
-                break;
-
-            case 'google':
-                $findUser = $db->query("SELECT email, first_name, setting_schedule_view FROM google_user WHERE google_uid='$uid'");
-                return $findUser->fetchAll()[0];
-                break;
-
-            case 'kakao':
-                $findUser = $db->query("SELECT email, first_name, setting_schedule_view FROM kakao_user WHERE kakao_uid='$uid'");
-                return $findUser->fetchAll()[0];
-                break;
-
-            default:
-                return null;
-                break;
-        }
+        $userType= htmlspecialchars($userType);
+        $findUser = $db->query("SELECT email, first_name, setting_schedule_view FROM {$userType}_user WHERE {$userType}_uid='$uid'");
+        return $findUser->fetchAll()[0];
+               
     }
 
     public function changePersonalInfo($firstName, $avatar){
@@ -55,46 +39,23 @@ class User extends ManagerDB{
             exit();
         }else{
             $db = parent::dbConnect();
-            
+            $userType = htmlspecialchars($_SESSION['userType']);
+            $uid = htmlspecialchars($_SESSION['uid']);
+
             // save file to server
             if($avatar['size']>0){
                 $fileUploadResult = $utils->fileUpload($avatar);
                 if($fileUploadResult['isSuccess']){
-
+                    
                     //update DB
-
-                    switch($_SESSION['userType']){
-                        case 'internal':
-                            $filePath = $fileUploadResult['filePath'];
-                            $updatePersonalInfo = "UPDATE internal_user SET first_name=:firstName, image=:image WHERE internal_uid=:uid";
-                            $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
-                            $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
-                            $updatePersonalInfoReq->bindValue(":image",$filePath, PDO::PARAM_STR);
-                            $updatePersonalInfoReq->bindValue(":uid",$_SESSION['uid'], PDO::PARAM_STR);
-                            break;
-
-                        case "google":
-                            $filePath = $fileUploadResult['filePath'];
-                            $updatePersonalInfo = "UPDATE google_user SET first_name=:firstName, image=:image WHERE google_uid=:uid";
-                            $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
-                            $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
-                            $updatePersonalInfoReq->bindValue(":image",$filePath, PDO::PARAM_STR);
-                            $updatePersonalInfoReq->bindValue(":uid",$_SESSION['uid'], PDO::PARAM_STR);
-                            break;
-
-                        case "kakao":
-                            $filePath = $fileUploadResult['filePath'];
-                            $updatePersonalInfo = "UPDATE kakao_user SET first_name=:firstName, image=:image WHERE kakao_uid=:uid";
-                            $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
-                            $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
-                            $updatePersonalInfoReq->bindValue(":image",$filePath, PDO::PARAM_STR);
-                            $updatePersonalInfoReq->bindValue(":uid",$_SESSION['uid'], PDO::PARAM_STR);
-                            break;
-
-                        default;
-                            break;
-                    }
-
+                   
+                    $filePath = $fileUploadResult['filePath'];
+                    $updatePersonalInfo = "UPDATE {$userType}_user SET first_name=:firstName, image=:image WHERE {$userType}_uid=:uid";
+                    $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
+                    $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
+                    $updatePersonalInfoReq->bindValue(":image",$filePath, PDO::PARAM_STR);
+                    $updatePersonalInfoReq->bindValue(":uid",$uid, PDO::PARAM_STR);
+                     
                     if($updatePersonalInfoReq->execute()){
                         //delete existing file
                         if($_SESSION['avatar']!='public/images/defaultUserImage.svg'){
@@ -106,41 +67,17 @@ class User extends ManagerDB{
                     }else{
                         return 'failure';
                     }
-                    
                 }else{
                     return 'failure';
                 }
             }else{
-                switch($_SESSION['userType']){
-                    case 'internal':
-                        
-                        $updatePersonalInfo = "UPDATE internal_user SET first_name=:firstName WHERE internal_uid=:uid";
-                        $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
-                        $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
-                        $updatePersonalInfoReq->bindValue(":uid",$_SESSION['uid'], PDO::PARAM_STR);
-                        break;
 
-                    case "google":
-                        
-                        $updatePersonalInfo = "UPDATE google_user SET first_name=:firstName WHERE google_uid=:uid";
-                        $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
-                        $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
-                        $updatePersonalInfoReq->bindValue(":uid",$_SESSION['uid'], PDO::PARAM_STR);
-                        break;
-
-                    case "kakao":
-                        
-                        $updatePersonalInfo = "UPDATE kakao_user SET first_name=:firstName WHERE kakao_uid=:uid";
-                        $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
-                        $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
-                        $updatePersonalInfoReq->bindValue(":uid",$_SESSION['uid'], PDO::PARAM_STR);
-                        break;
-
-                    default;
-                        break;
-                }
+                $updatePersonalInfo = "UPDATE {$userType}_user SET first_name=:firstName WHERE {$userType}_uid=:uid";
+                $updatePersonalInfoReq = $db->prepare($updatePersonalInfo);
+                $updatePersonalInfoReq->bindValue(":firstName",$firstName, PDO::PARAM_STR);
+                $updatePersonalInfoReq->bindValue(":uid",$uid, PDO::PARAM_STR);
+                       
                 if($updatePersonalInfoReq->execute()){
-                    
                     return 'success';
                 }else{
                     return 'failure';
@@ -161,26 +98,12 @@ class User extends ManagerDB{
         $avatars = [];
 
         foreach($accounts AS $account){
-            switch($account['type']){
-                case 'internal':
-                    $internalAvatarReq = $db->query("SELECT * FROM internal_user WHERE super_uid='$superUid'");
-                    while($internalAvatar = $internalAvatarReq->fetch()){
-                        $avatars['internal'][] = $internalAvatar['image'];
-                    }
-                    break;
-                case 'google':
-                    $googleAvatarReq = $db->query("SELECT * FROM google_user WHERE super_uid='$superUid'");
-                    while($googleAvatar = $googleAvatarReq->fetch()){
-                        $avatars['google'][] = $googleAvatar['image'];
-                    }
-                    break;
-                case 'kakao':
-                    $kakaoAvatarReq = $db->query("SELECT * FROM kakao_user WHERE super_uid='$superUid'");
-                    while($kakaoAvatar = $kakaoAvatarReq->fetch()){
-                        $avatars['kakao'][] = $kakaoAvatar['image'];
-                    }
-                    break;
+           
+            $avatarReq = $db->query("SELECT * FROM {$account['type']}_user WHERE super_uid='$superUid'");
+            while($avatar = $avatarReq->fetch()){
+                $avatars["{$account['type']}"][] = $avatar['image'];
             }
+                
         }
         return $avatars;
     }
@@ -190,123 +113,45 @@ class User extends ManagerDB{
         // connect to db
         $db = parent::dbConnect();
 
-        switch($userType){
-            case 'internal':
-                $internalSignOutReq = $db->prepare("DELETE FROM internal_user WHERE internal_uid=:uid");
-                $internalSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
-                $superSignOutReq = $db->prepare("DELETE FROM super_user WHERE uid=:uid");
-                $superSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
-                if($internalSignOutReq->execute()&&$superSignOutReq->execute()){
-                    if($_SESSION['avatar']!='public/images/defaultUserImage.svg'){
-                        unlink($_SESSION['avatar']);
-                    }
-                    setcookie('rememberMeToken');
-                    setcookie('firstName');
-                    setcookie('uid');
-                    setcookie('userType');
-                    session_destroy();
-                    return 'success';
-                }else{
-                    return 'failure';
+            $signoutReq = $db->prepare("DELETE FROM {$userType}_user WHERE {$userType}_uid=:uid");
+            $signoutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
+            $superSignOutReq = $db->prepare("DELETE FROM super_user WHERE uid=:uid");
+            $superSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
+            if($signoutReq->execute()&&$superSignOutReq->execute()){
+                if($userType=='internal'&&$_SESSION['avatar']!='public/images/defaultUserImage.svg'){
+                    unlink($_SESSION['avatar']);
                 }
-                break;
-            case 'google':
-                $googleSignOutReq = $db->prepare("DELETE FROM google_user WHERE google_uid=:uid");
-                $googleSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
-                $superSignOutReq = $db->prepare("DELETE FROM super_user WHERE uid=:uid");
-                $superSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
-                if($googleSignOutReq->execute()&&$superSignOutReq->execute()){
-                    setcookie('rememberMeToken');
-                    setcookie('firstName');
-                    setcookie('uid');
-                    setcookie('userType');
-                    session_destroy();
-                    return 'success';
-                }else{
-                    return 'failure';
-                }
-                break;
-
-            case 'kakao':
-                $kakaoSignOutReq = $db->prepare("DELETE FROM kakao_user WHERE kakao_uid=:uid");
-                $kakaoSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
-                $superSignOutReq = $db->prepare("DELETE FROM super_user WHERE uid=:uid");
-                $superSignOutReq->bindParam(":uid", $uid, PDO::PARAM_STR);
-                if($kakaoSignOutReq->execute()&&$superSignOutReq->execute()){
-                    setcookie('rememberMeToken');
-                    setcookie('firstName');
-                    setcookie('uid');
-                    setcookie('userType');
-                    session_destroy();
-                    return 'success';
-                }else{
-                    return 'failure';
-                }
-                break;
-
-            default:
-                return "failure";
-                break;
-        }
+                setcookie('rememberMeToken');
+                setcookie('firstName');
+                setcookie('uid');
+                setcookie('userType');
+                session_destroy();
+                return 'success';
+            }else{
+                return 'failure';
+            }
+                
     }
 
     public function switchAccount($superUid, $type){
 
             $db = parent::dbConnect();
 
-            switch($type){
-                case 'internal':
-                    $internalUserReq = $db->prepare("SELECT internal_uid, first_name, image FROM internal_user WHERE super_uid=:super_uid");
-                    $internalUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
-                    if($internalUserReq->execute()){
-                        $internalUser = $internalUserReq->fetch();
-                        $_SESSION['isLoggedIn']=true;
-                        $_SESSION['uid'] = $internalUser['internal_uid'];
-                        $_SESSION['firstName'] = $internalUser['first_name'];
-                        $_SESSION['userType'] = 'internal';
-                        $_SESSION['avatar'] = $internalUser['image'];
-                        return 'success';
-                        
-                    }else{
-                        return 'failure';
-                    }
-                    break;
-                case 'google':
-                    $googleUserReq = $db->prepare("SELECT google_uid, first_name, image FROM google_user WHERE super_uid=:super_uid");
-                    $googleUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);                    
-                    if($googleUserReq->execute()){
-                        $googleUser = $googleUserReq->fetch();
-                        $_SESSION['isLoggedIn']=true;
-                        $_SESSION['uid'] = $googleUser['google_uid'];
-                        $_SESSION['firstName'] = $googleUser['first_name'];
-                        $_SESSION['userType'] = 'google';
-                        $_SESSION['avatar'] = $googleUser['image'];
-                        return 'success';
-                    }else{
-                        return 'failure';
-                    }
-                    break;
-    
-                case 'kakao':
-                    $kakaoUserReq = $db->prepare("SELECT kakao_uid, first_name, image FROM kakao_user WHERE super_uid=:super_uid");
-                    $kakaoUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);                    
-                    if($kakaoUserReq->execute()){
-                        $kakaoUser = $kakaoUserReq->fetch();
-                        $_SESSION['isLoggedIn']=true;
-                        $_SESSION['uid'] = $kakaoUser['kakao_uid'];
-                        $_SESSION['firstName'] = $kakaoUser['first_name'];
-                        $_SESSION['userType'] = 'kakao';
-                        $_SESSION['avatar'] = $kakaoUser['image'];
-                        return 'success';
-                    }else{
-                        return 'failure';
-                    }
-                    break;
-        
-                default:
-                    return "failure";
-                    break;
+            $userReq = $db->prepare("SELECT {$type}_uid, first_name, image FROM {$type}_user WHERE super_uid=:super_uid");
+            $userReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
+            if($userReq->execute()){
+                $user = $userReq->fetch();
+                $_SESSION['isLoggedIn']=true;
+                $_SESSION['uid'] = $user["{$type}_uid"];
+                $_SESSION['firstName'] = $user['first_name'];
+                $_SESSION['userType'] = $type;
+                $_SESSION['avatar'] = $user['image'];
+                return 'success';
+                
+            }else{
+                return 'failure';
             }
+                   
     }
 
     public function changeUserSetting($value, $type, $userType, $superUid){
@@ -317,47 +162,16 @@ class User extends ManagerDB{
         $db = parent::dbConnect();
         $settingType = "setting_" . $type;
 
-        switch($userType){
-            case 'internal':
-                $internalUserReq = $db->prepare("UPDATE internal_user SET setting_schedule_view=:settingValue WHERE super_uid=:super_uid");
-                $internalUserReq->bindParam(":settingValue", $value, PDO::PARAM_STR);
-                $internalUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
-                if($internalUserReq->execute()){
-                    return 'success';
-                    
-                }else{
-                    return 'failure';
-                }
-                break;
-            case 'google':
-                $googleUserReq = $db->prepare("UPDATE google_user SET setting_schedule_view=:settingValue WHERE super_uid=:super_uid");
-                $googleUserReq->bindParam(":settingValue", $value, PDO::PARAM_STR);
-                $googleUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
-                if($googleUserReq->execute()){
-                    return 'success';
-                    
-                }else{
-                    return 'failure';
-                }
-                break;
-
-            case 'kakao':
-                $kakaoUserReq = $db->prepare("UPDATE kakao_user SET setting_schedule_view=:settingValue WHERE super_uid=:super_uid");
-                $kakaoUserReq->bindParam(":settingValue", $value, PDO::PARAM_STR);
-                $kakaoUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
-                if($kakaoUserReq->execute()){
-                    return 'success';
-                    
-                }else{
-                    return 'failure';
-                }
-                break;
-        
-            default:
-                return "failure";
-                break;
-        }
-}
+        $userReq = $db->prepare("UPDATE {$userType}_user SET ${settingType}=:settingValue WHERE super_uid=:super_uid");
+        $userReq->bindParam(":settingValue", $value, PDO::PARAM_STR);
+        $userReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
+        if($userReq->execute()){
+            return 'success';
+            
+        }else{
+            return 'failure';
+        }      
+    }
 }
 
 ?>
