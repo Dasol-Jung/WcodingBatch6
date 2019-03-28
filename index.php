@@ -25,6 +25,7 @@ try{
                     header("Location: index.php");
                     ob_end_clean();
                 }
+
                 //if the user is not logged in, show login form
                 viewLogin();
                 break;
@@ -69,6 +70,11 @@ try{
                 break;
 
             case 'weeklySchedule':
+                if (isset($_GET['add'])){
+                    if($_GET['add']== 'add'){
+                        displayMain();
+                    } 
+                } 
                 viewWeekly();
                 break;
 
@@ -83,11 +89,21 @@ try{
             case 'switch':
                 switchAccount($_SESSION['superUid'],$_GET['type']);
                 break;
+
+            case 'loadTodoList':
+                loadAllToDoList("5c9af6277acf25.70313808");
+                break;
+
+            case "addEditAppointment":
+                addButton($_POST);
+                viewWeekly();
+                break;
             
             default:
                 break;
         }
-    }else{
+
+    }   else{
         viewHome();
     }
     if (isset($_POST['action'])) {

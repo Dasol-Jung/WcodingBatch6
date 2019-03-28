@@ -8,6 +8,7 @@ require_once('model/frontend/KakaoUser.php');
 require_once("model/frontend/InternalUser.php");
 require_once("model/frontend/GoogleUser.php");
 require_once("model/frontend/User.php");
+require_once('model/frontend/AddModifyDB.php');
 
 
 function viewHome()
@@ -164,3 +165,26 @@ function changeUserSetting($value, $type, $userType, $superUid){
     ob_end_clean();
     echo $result;
 }
+
+function displayMain(){
+    require("view/frontend/addButtonCalendar.php");
+}
+
+function addButton($addWeekly){
+    $addAffLines = new AddModifyDB();
+    $addAffLines-> addInfo($addWeekly);
+}
+
+function modifyButton($modWeekly){
+    $modAffLines = new AddModifyDB();
+    $modAffLines-> modInfo($modWeekly);
+}
+
+function loadAllToDoList($user){
+    $loadAffLines = new AddModifyDB();
+    $loadAffLines-> loadToDoList($user);
+}
+
+// function closeForm() {
+//     require_once("model/frontend/AddModifyDB.php");
+// }

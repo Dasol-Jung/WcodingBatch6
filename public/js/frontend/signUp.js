@@ -20,6 +20,7 @@
 				if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
 					if (xhr.response == 'success') {
 						window.location.href = 'http://localhost:8888/index.php?action=welcome';
+						
 					} else {
 						alert(xhr.response);
 					}
