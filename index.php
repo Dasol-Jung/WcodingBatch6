@@ -58,8 +58,6 @@ try{
         }
         if($_GET['action'] == 'addEditAppointment'){
             addButton($_POST);
-            //loadAllToDoList("5c9af6277acf25.70313808");
-            // print_r(loadAllToDoList("5c9af6277acf25.70313808"));
             viewWeekly();
         }
 

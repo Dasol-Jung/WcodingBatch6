@@ -43,7 +43,6 @@ function generateCalendar (calendarEl) {
 			plugins: [ 'dayGrid' ],
 			defaultView: 'dayGridWeek'
 		});
-		// calendar.events =  eventApp;
 		calendar.render();
 	});
 }

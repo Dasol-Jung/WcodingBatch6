@@ -6,10 +6,10 @@ if(!isset($_SESSION))
 } 
 
 //redirect user if he's not logged in
-// if($_SESSION['isLoggedIn']!=true){
-//    ob_end_clean();
-//    header("Location: http://localhost:8888/index.php");
-// }
+if($_SESSION['isLoggedIn']!=true){
+   ob_end_clean();
+   header("Location: http://localhost:8888/index.php");
+}
 
 //schedule starts from here
 ob_start();
