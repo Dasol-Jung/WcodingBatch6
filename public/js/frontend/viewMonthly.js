@@ -34,16 +34,20 @@ document.addEventListener('DOMContentLoaded', function() {
         text: 'Weekly/Monthly',
         click: function() {
           if(document.body.contains(document.getElementById("monthlyCalendar"))){
-            document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule'
+            document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule'
           } else {
-            document.location.href = 'http://localhost:8888/index.php?action=monlylySchedule'
+            document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule'
           }
         }
       },
       addButton: {
         text: 'Add',
-        click: function(){
-          document.location.href = "http://localhost:8888/index.php?action=weeklySchedule&add=add"
+				click: function() {
+          if(document.body.contains(document.getElementById("monthlyCalendar"))){
+            document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule&add=add'
+          } else {
+            document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add'
+          }
         }
       }
     },
@@ -74,45 +78,13 @@ document.addEventListener('DOMContentLoaded', function() {
 			calendar.fullCalendar('unselect');
 		},
 		editable: true,
-		events: [
-			{
-				title: 'Long Event',
-				start: new Date(y, m, 26),
-				end: new Date(y, m, 28),
-				className: ["event", "high-priority"],
-				editable: true
-			},
-			{
-				title: 'Lunch',
-				start: new Date(y, m, 25),
-				end: new Date(y, m, 25),
-				className: ["event", "medium-priority"]
-			},
-			{
-				title: 'Event 2',
-				start: new Date(y, m, 26),
-				end: new Date(y, m, 26),
-				className: ["event", "medium-priority"]
-			},
-			{
-				title: 'Event 3',
-				start: new Date(y, m, 26),
-				end: new Date(y, m, 28),
-				className: ["event", "low-priority"]
-			},
-			{
-				title: 'Event 4',
-				start: new Date(y, m, 26),
-				end: new Date(y, m, 26),
-				className: ["event", "high-priority"]
-			},
-			{
-				title: 'Event 5',
-				start: new Date(y, m, 26),
-				end: new Date(y, m, 26),
-				className: ["event", "medium-priority"]
+		events:  {
+			url: 'http://localhost:8888/index.php?action=loadTodoList',
+			type: 'GET', // Send post data
+			error: function() {
+				alert('There was an error while fetching events.');
 			}
-		],
+		}
 	});
 
 	calendar.render();

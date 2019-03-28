@@ -79,6 +79,11 @@ try{
                 break;
 
             case 'monthlySchedule':
+                if (isset($_GET['add'])){
+                    if($_GET['add']== 'add'){
+                        displayMain();
+                    } 
+                } 
                 viewMonthly();
                 break;
 
@@ -91,7 +96,7 @@ try{
                 break;
 
             case 'loadTodoList':
-                loadAllToDoList("5c9af6277acf25.70313808");
+                loadAllToDoList($_SESSION['uid']);
                 break;
 
             case "addEditAppointment":

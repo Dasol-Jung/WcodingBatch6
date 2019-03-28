@@ -2,6 +2,7 @@
     <div class="modal-content">
         <span class="close" onclick="closeForm()">&times;</span>
         <form action="http://localhost:8888/index.php?action=addEditAppointment" method="POST">
+            <input type="hidden" name="view" value="<?= $_GET['action']?>">
             <div id="firstBlockForm">
                 <span class="red_star">* </span><label for="title">Title :<br>
                 <input type="text" name="title" id="title"><br>
