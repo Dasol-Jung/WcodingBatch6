@@ -69,7 +69,7 @@ function viewWeekly()
 
 function viewMonthly()
 {
-    require("view/frontend/viewMonthly.php");
+    require('view/frontend/viewMonthly.php');
 }
 
 function loggedInGoogle($googleInfo)

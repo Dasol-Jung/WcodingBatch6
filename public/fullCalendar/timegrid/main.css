@@ -24,7 +24,9 @@ Docs & License: https://fullcalendar.io/
   /* .fc to overcome default cell styles */
   vertical-align: middle;
   padding: 0 4px;
-  white-space: nowrap; }
+  white-space: nowrap; 
+  color: white;
+}
 
 .fc-ltr .fc-axis {
   text-align: right; }
@@ -101,7 +103,9 @@ Docs & License: https://fullcalendar.io/
   /* each cell is responsible for its top border */ }
 
 .fc-time-grid .fc-slats .fc-minor td {
-  border-top-style: dotted; }
+  border-top-style: dotted; 
+  height: 50px;
+}
 
 /* TimeGrid Highlighting Slots
 --------------------------------------------------------------------------------------------------*/

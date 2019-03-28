@@ -112,6 +112,10 @@ hr.fc-divider {
   padding: 0;
   vertical-align: top; }
 
+td.fc-widget-content {
+    height: 20px;
+}
+
 .fc td.fc-today {
   border-style: double;
   /* overcome neighboring borders */ }
@@ -228,7 +232,7 @@ temporary rendered events).
   font-size: .85em;
   line-height: 1.4;
   border-radius: 3px;
-  border: 1px solid #3788d8; }
+  border: 1px solid black; }
 
 .fc-event,
 .fc-event-dot {
@@ -255,6 +259,19 @@ temporary rendered events).
 .fc-event .fc-content {
   position: relative;
   z-index: 2; }
+
+.high-priority{
+  background-color: #d62a2a; 
+}
+
+.medium-priority{
+  /* 63% */
+  background-color: #dd8888;
+}
+
+.low-priority{
+  background-color: #908989;
+}
 
 /* resizer (cursor AND touch devices) */
 .fc-event .fc-resizer {
@@ -440,7 +457,9 @@ a.fc-more {
   margin: 1px 3px;
   font-size: .85em;
   cursor: pointer;
-  text-decoration: none; }
+  text-decoration: none; 
+  color: #eee;
+}
 
 a.fc-more:hover {
   text-decoration: underline; }
@@ -623,7 +642,8 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 .fc-button-primary {
   color: black;
   background-color: lightgray;
-  border-color: lightgray; }
+  border-color: lightgray; 
+}
 
 .fc-button-primary:hover {
   color: white;
@@ -638,7 +658,8 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 .fc-button-primary:disabled {
   color: lightgray;
   background-color: darkgray;
-  border-color:darkgray; }
+  border-color:darkgray; 
+}
 
 .fc-button-primary:not(:disabled):active,
 .fc-button-primary:not(:disabled).fc-button-active {
@@ -671,6 +692,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
   display: inline-flex;
   vertical-align: middle; 
   margin-right: 2em;
+  margin-left: 2em;
 }
 
 .fc-button-group > .fc-button {
@@ -748,6 +770,21 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box; }
+
+.fc-day-grid{
+  position: sticky;
+  height: 24px;
+}
+
+.fc-day-grid span {
+  color: white;
+}
+
+td.fc-axis.fc-widget-content {
+  color: #d3d3d3;
+  text-align: center;
+  padding: 2px;
+}
 
 .fc-view,
 .fc-view > table {
