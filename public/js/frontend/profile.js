@@ -141,7 +141,29 @@
 	let signOutBtn = document.querySelector('button#signOut');
 	if (signOutBtn) {
 		signOutBtn.addEventListener('click', e => {
-			let modalTarget = document.querySelector('.modalTarget.checkSignOut');
+			let checkSignOut = document.querySelector('.modalTarget.checkSignOut');
+			if (checkSignOut) {
+				document.body.appendChild(clientUtils.createModal(checkSignOut));
+				return null;
+			}
+			let checkSignOutInternal = document.querySelector('.modalTarget.checkSignOutInternal');
+			if (checkSignOutInternal) {
+				document.body.appendChild(clientUtils.createModal(checkSignOutInternal));
+				return null;
+			}
+		});
+	}
+})();
+
+/**
+ * adding an event to show modal when an user clicks signout button
+ */
+
+(function() {
+	let signOutBtn = document.querySelector('button#signOut');
+	if (signOutBtn) {
+		signOutBtn.addEventListener('click', e => {
+			let modalTarget = document.querySelector('.modalTarget.checkSignOutInternal');
 			document.body.appendChild(clientUtils.createModal(modalTarget));
 		});
 	}

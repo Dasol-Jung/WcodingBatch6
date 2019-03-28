@@ -106,14 +106,4 @@
   height: 95%;
 }
 
-
-.calWrapper {
-  height: 100%;
-  display: grid;
-  margin-top: 100px;
-  grid-gap: 1rem;
-  grid-template-rows: 30px 9fr;
-  box-sizing: border-box;
-  background-color: #2f2f2f;
-}
 /*# sourceMappingURL=viewWeekly.css.map */
