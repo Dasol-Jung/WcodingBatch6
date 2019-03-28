@@ -49,7 +49,6 @@ class GoogleUserManager extends User
         ON DUPLICATE KEY UPDATE last_login_date = current_timestamp()";
         $reqCreateGoogle = $db->prepare($request);
         $googleAffectedLines = $reqCreateGoogle->execute();
-        // return $this->getGoogle($googleId, $googleEmail);
         return $googleAffectedLines;
     }
 }

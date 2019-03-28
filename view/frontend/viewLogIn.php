@@ -13,7 +13,7 @@
     </div>
     <span class='error' id='error_message'></span>
 
-    <button id="signInBtn">Sign In</button>
+    <button id="signInBtn" >Sign In</button>
     <div class="social-hr">
         <span>Sign in with</span>
     </div>

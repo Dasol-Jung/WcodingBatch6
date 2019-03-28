@@ -27,6 +27,7 @@ try{
             //if the user is not logged in, show login form
             viewLogin();
         }
+       
         if($_GET['action'] == 'logout'){
             logout();
         }
@@ -34,6 +35,11 @@ try{
             viewWelcome();
         }
         if($_GET['action'] == 'weeklySchedule'){
+            if (isset($_GET['add'])){
+                if($_GET['add']== 'add'){
+                    displayMain();
+                } 
+            } 
             viewWeekly();
         }
         if($_GET['action'] == 'monthlySchedule'){
@@ -44,6 +50,16 @@ try{
             loggedInGoogle($googleInfo);
 
         }
+        // this action just give to fullcalendar API the content of events to load
+        if($_GET['action'] == 'loadTodoList'){
+            loadAllToDoList("5c9af6277acf25.70313808");
+        }
+        if($_GET['action'] == 'addEditAppointment'){
+            addButton($_POST);
+            viewWeekly();
+        }
+
+        
     }
     else {
         viewHome();

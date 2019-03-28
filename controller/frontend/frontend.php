@@ -3,6 +3,7 @@ session_start();
 require_once('model/ManagerDB.php');
 require('model/frontend/Kakao.php');
 require_once("model/frontend/InternalUser.php");
+require_once('model/frontend/AddModifyDB.php');
 
 
 function viewHome()
@@ -77,5 +78,27 @@ function loggedInGoogle($googleInfo)
     require("model/frontend/GoogleUserManager.php");
     $googleUser = new GoogleUserManager();
     $googleUser-> makeGoogle($googleInfo);
-
 }
+
+function displayMain(){
+    require("view/frontend/addButtonCalendar.php");
+}
+
+function addButton($addWeekly){
+    $addAffLines = new AddModifyDB();
+    $addAffLines-> addInfo($addWeekly);
+}
+
+function modifyButton($modWeekly){
+    $modAffLines = new AddModifyDB();
+    $modAffLines-> modInfo($modWeekly);
+}
+
+function loadAllToDoList($user){
+    $loadAffLines = new AddModifyDB();
+    $loadAffLines-> loadToDoList($user);
+}
+
+// function closeForm() {
+//     require_once("model/frontend/AddModifyDB.php");
+// }

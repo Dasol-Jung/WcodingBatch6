@@ -1,9 +1,13 @@
-/** add events */
-// (function changeWeeklyMonthly(){
-// 	document.querySelector('#monthlyWeeklyBtn').addEventListener("click",() => {
-// 		window.location.href = 'http://localhost:8888/index.php?action=weeklySchedule'
-// 	})
-// })();
+function changeWeeklyMonthly(){
+	document.querySelector('button.weeklyMonthly');addEventListener("click",() => {
+			if(document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule'){
+				document.location.href= 'http://localhost:8888/index.php?action=weeklySchedule'
+			}else{
+				document.location.href= 'http://localhost:8888/index.php?action=monthlySchedule'
+			}
+		}
+	)
+}
 
 
 /* initialize the calendar
@@ -17,13 +21,32 @@ document.addEventListener('DOMContentLoaded', function() {
 	var y = date.getFullYear();
 
 	var calendar = new FullCalendar.Calendar(calendarEl, {
+    
 		plugins: [ 'dayGrid'],
 		defaultView: 'dayGridMonth',
 		header: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'dayGridMonth'
+			left: 'changeWeeklyMonthly addButton',
+		  center: 'title',
+			right: 'prev,next'
 		},
+    customButtons: {
+      changeWeeklyMonthly: {
+        text: 'Weekly/Monthly',
+        click: function() {
+          if(document.body.contains(document.getElementById("monthlyCalendar"))){
+            document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule'
+          } else {
+            document.location.href = 'http://localhost:8888/index.php?action=monlylySchedule'
+          }
+        }
+      },
+      addButton: {
+        text: 'Add',
+        click: function(){
+          document.location.href = "http://localhost:8888/index.php?action=weeklySchedule&add=add"
+        }
+      }
+    },
 		selectable: true,
 		selectHelper: true,
 		allDayDefault: true,
