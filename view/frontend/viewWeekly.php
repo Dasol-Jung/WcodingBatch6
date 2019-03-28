@@ -16,8 +16,8 @@ ob_start();
 ?>
 <?php $styles[]="<link rel='stylesheet' href='../../public/css/viewWeekly.css'/>"?>
 <link href='../../public/css/addButton.css' rel='stylesheet' />
-<link href='../../public/fullcalendar/core/main.css' rel='stylesheet' />
-<link href='../../public/fullcalendar/daygrid/main.css' rel='stylesheet' />
+<link href='../../public/lib/fullCalendar/core/main.css' rel='stylesheet' />
+<link href='../../public/lib/fullCalendar/daygrid/main.css' rel='stylesheet' />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <div class='bodyWrapper'>
     <section class="listWrapper">
@@ -26,8 +26,8 @@ ob_start();
         <div id='weeklyCalendar'></div>
     </section>
 </div>
-<script src='../../public/fullcalendar/core/main.js'></script>
-<script src='../../public/fullcalendar/daygrid/main.js'></script>
+<script src='../../public/lib/fullCalendar/core/main.js'></script>
+<script src='../../public/lib/fullCalendar/daygrid/main.js'></script>
 <script src= "../../public/js/frontend/viewWeekly.js"></script>
 <script src= "../../public/js/frontend/modifyButton.js"></script>
 <?php

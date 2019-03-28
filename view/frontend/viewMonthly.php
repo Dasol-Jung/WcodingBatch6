@@ -17,8 +17,8 @@ ob_start();
 <?php $styles[]="<link rel='stylesheet' href='../../public/css/viewSchedule.css'/>"?>
 <link rel='stylesheet' href='https://fullcalendar.io/js/fullcalendar-3.1.0/fullcalendar.min.css' />
 
-<link href='../../public/fullcalendar/core/main.css' rel='stylesheet' />
-<link href='../../public/fullcalendar/daygrid/main.css' rel='stylesheet' />
+<link href='../../public/lib/fullCalendar/core/main.css' rel='stylesheet' />
+<link href='../../public/lib/fullCalendar/daygrid/main.css' rel='stylesheet' />
 
 <div class='bodyWrapper'>
     <section class="listWrapper">
@@ -41,8 +41,8 @@ ob_start();
     </section>
 </div>
 
-<script src='../../public/fullcalendar/core/main.js'></script>
-<script src='../../public/fullcalendar/daygrid/main.js'></script>
+<script src='../../public/lib/fullCalendar/core/main.js'></script>
+<script src='../../public/lib/fullCalendar/daygrid/main.js'></script>
 
 <script src= "../../public/js/frontend/viewMonthly.js"></script>
 
