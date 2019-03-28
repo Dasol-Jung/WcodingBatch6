@@ -42,11 +42,9 @@ try{
             } 
             viewWeekly();
         }
-
         if($_GET['action'] == 'monthlySchedule'){
             viewMonthly();
         }
-        
         if($_GET['action'] == 'googleLogin'){
             $googleInfo = json_decode(file_get_contents("php://input"), TRUE);
             loggedInGoogle($googleInfo);
