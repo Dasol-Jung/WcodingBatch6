@@ -52,7 +52,7 @@ const clientUtils = (() => {
 			passwordSpecialReg = /^(?=.*[!@#\$%\^&\*])/,
 			passwordLetterReg = /^(?=.*[a-z])(?=.*[0-9])/,
 			emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-			firstNameReg = /^(?=.{1,})/;
+			firstNameReg = /^[a-z ,.'-]+$/i;
 		inputs.forEach(input => {
 			switch (input.name) {
 				case 'email':
@@ -83,9 +83,24 @@ const clientUtils = (() => {
 
 				case 'firstName':
 					if (!firstNameReg.test(String(input.value))) {
-						errorMsg['firstName'] = "First Name can't be empty";
+						errorMsg['firstName'] = 'Invalid First Name';
 					}
 					break;
+
+				case 'avatar':
+					if (input.files.length == 1) {
+						let file = input.files[0];
+						let ext = file.name.slice(file.name.lastIndexOf('.') + 1);
+						let allowedExt = [ 'jpg', 'jpeg', 'png' ];
+						let isValidExt = allowedExt.includes(ext);
+						if (file.size / 1000 > 500) {
+							errorMsg['avatar'] = 'File size should be smaller than 500KB';
+							break;
+						} else if (!isValidExt) {
+							errorMsg['avatar'] = 'Only jpg, jpeg, png files are allowed';
+							break;
+						}
+					}
 
 				default:
 					break;
@@ -122,8 +137,139 @@ const clientUtils = (() => {
 		});
 	}
 
+	/**
+ * ----------------------------------------------------------------------------------
+ * public
+ * showPopup : show hidden popup menu
+ * @param
+ * -(HTMLelement) : a button to toggle popup menu
+ * -(HTMLelement) : an html element to show
+ * ----------------------------------------------------------------------------------
+ */
+	function togglePopup(button, menu) {
+		button.addEventListener('click', e => {
+			menu.classList.toggle('hidden');
+		});
+	}
+
+	/**
+ * ----------------------------------------------------------------------------------
+ * public
+ * createModal: create Moda
+ * @param
+ * -(HTMLelement) : content to put in the modal
+ * -(array) optional : [width, height]
+ * @return
+ * -(HTMLelement) : modal element to append to body
+ * ----------------------------------------------------------------------------------
+ */
+
+	function createModal(element, sizeArr) {
+		element.style.display = 'block';
+		let modalContainer = document.createElement('div');
+		let modalBackground = document.createElement('div');
+		let closeButton = document.createElement('div');
+
+		closeButton.innerHTML = '<i class="fas fa-times"></i>';
+
+		let body = document.body,
+			html = document.documentElement;
+
+		// get the height of full html document
+		let maxHeight = Math.max(
+			body.scrollHeight,
+			body.offsetHeight,
+			html.clientHeight,
+			html.scrollHeight,
+			html.offsetHeight
+		);
+
+		//modal close button style
+
+		closeButton.style.position = 'absolute';
+		closeButton.style.top = '10px';
+		closeButton.style.right = '10px';
+		closeButton.style.fontSize = '1rem';
+		closeButton.style.display = 'flex';
+		closeButton.style.alignItems = 'flex-start';
+		closeButton.style.cursor = 'pointer';
+
+		//modal background style
+		modalBackground.style.position = 'absolute';
+		modalBackground.style.display = 'flex';
+		modalBackground.style.justifyContent = 'center';
+		modalBackground.style.alignItems = 'flex-start';
+		modalBackground.style.height = '100%';
+		modalBackground.style.width = '100%';
+		modalBackground.style.top = '0';
+		modalBackground.style.left = '0';
+		modalBackground.style.backgroundColor = 'rgba(0,0,0,0.5)';
+
+		//modal container style
+		modalContainer.style.backgroundColor = 'white';
+		modalContainer.style.position = 'relative';
+		modalContainer.style.padding = '40px';
+		modalContainer.style.width = sizeArr ? sizeArr[0] + 'px' : 'max-content';
+		modalContainer.style.height = sizeArr ? sizeArr[1] + 'px' : 'max-content';
+		modalContainer.style.margin = 'auto';
+		modalContainer.style.zIndex = '999';
+
+		// close modal
+
+		modalBackground.addEventListener(
+			'click',
+			e => {
+				if (e.target === e.currentTarget) {
+					e.currentTarget.style.display = 'none';
+					element.style.display = 'none';
+				}
+			},
+			true
+		);
+
+		closeButton.addEventListener('click', e => {
+			modalBackground.style.display = 'none';
+			element.style.display = 'none';
+		});
+
+		//append modal content, close button, and container to modal background
+		modalContainer.appendChild(closeButton);
+		modalContainer.appendChild(element);
+		modalBackground.appendChild(modalContainer);
+
+		return modalBackground;
+	}
+
+	/**
+ * ----------------------------------------------------------------------------------
+ * public
+ * initialize : initialize anything you need
+ * ----------------------------------------------------------------------------------
+ */
+
+	function initialize() {
+		//hide modal contents
+
+		let modalTargets = document.querySelectorAll('.modalTarget');
+		modalTargets.forEach(target => {
+			target.style.display = 'none';
+		});
+
+		//toggle buttons
+
+		let toggleButtons = document.querySelectorAll('.toggleButton');
+		toggleButtons.forEach(toggleBtn => {
+			toggleBtn.addEventListener('click', () => {
+				toggleBtn.classList.toggle('on');
+			});
+		});
+	}
+
 	return {
 		validator,
-		renderErrorMsg
+		renderErrorMsg,
+		togglePopup,
+		createModal,
+		initialize
 	};
 })();

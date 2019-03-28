@@ -1,0 +1,219 @@
+@font-face {
+  font-family: "DIN alternate";
+  src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
+}
+@font-face {
+  font-family: "DIN alternate";
+  src: url("./fonts/DIN Alternate Regular.otf");
+}
+body,
+html {
+  height: 100vh;
+}
+
+.bodyWrapper {
+  height: 92vh;
+  padding: 0;
+  width: 100%;
+  background-color: #2f2f2f;
+  display: grid;
+  align-items: center;
+}
+
+button {
+  color: white;
+  background-color: lightslategrey;
+  width: 130px;
+  font-size: 0.85rem;
+  height: 2.3rem;
+  border: none;
+  cursor: pointer;
+}
+
+label {
+  margin: 1rem 0;
+  display: block;
+}
+
+.modalTarget {
+  font-family: "DIN alternate";
+  height: max-content;
+}
+.modalTarget label {
+  margin-top: 0;
+}
+.modalTarget input[name=currentPW] {
+  display: inline-block;
+  width: 100%;
+}
+.modalTarget .confirmPWBtn {
+  margin: 1rem 0 0 0;
+  float: right;
+}
+
+fieldset {
+  margin: 1rem 0;
+}
+
+input {
+  width: 200px;
+  display: block;
+  border: 1px solid #ccc;
+  height: 2.3rem;
+  font-size: 1rem;
+  padding-left: 0.8rem;
+  box-sizing: border-box;
+}
+input:focus {
+  outline: 2px solid #3f68b5;
+}
+
+.profileForm {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
+  grid-column-gap: 4rem;
+  font-family: "DIN alternate";
+  padding: 1rem 2rem;
+  width: 80%;
+  background-color: white;
+}
+
+.emailpasswordWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+input#email {
+  border: none;
+}
+
+button#changePassword {
+  color: white;
+}
+
+input[type=file] {
+  display: none;
+}
+
+button.changeAvatar {
+  background-color: #888;
+}
+
+input:read-only:focus {
+  outline: none;
+}
+
+.avatarAndSave {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: end;
+}
+.avatarAndSave button.savePersonalInfo {
+  justify-self: end;
+}
+
+.avatarContainer {
+  position: relative;
+  align-self: center;
+}
+.avatarContainer .avatarBox {
+  display: grid;
+  align-items: flex-end;
+  position: relative;
+  width: min-content;
+  height: min-content;
+  margin-left: 0.8rem;
+}
+.avatarContainer .avatarBox label[for=changeAvatar] {
+  margin: 0;
+  padding: 0 0.5rem;
+  position: absolute;
+  background-color: #2f2f2f;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  left: 0;
+  bottom: 0;
+}
+.avatarContainer #profileAvatar {
+  margin-top: auto;
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+#connectKakao {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.kakaoSignin {
+  height: 2.3rem;
+  width: 100%;
+  background-color: #ffce04;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.kakaoSignin img#kakaoLogo {
+  font-family: "Roboto";
+  height: 2rem;
+  margin-right: 0.5rem;
+  position: relative;
+  top: 0.2rem;
+}
+
+.connectButtons {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 0.5rem;
+}
+.connectButtons .googleSignin {
+  background-color: #dbdbdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.connectButtons .googleSignin img#googleLogo {
+  height: 1.3rem;
+  margin-right: 1.5rem;
+}
+
+.connectedAcct .connectedAcctContainer {
+  display: grid;
+  grid-template-rows: repeat(auto, 1fr);
+  grid-gap: 1rem;
+  text-align: center;
+}
+.connectedAcct .connectedAcctContainer div {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #eee;
+  padding: 1rem 1rem 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.connectedAcct .connectedAcctContainer div span {
+  width: 100px;
+}
+.connectedAcct .connectedAcctContainer div button {
+  margin-left: 1rem;
+}
+.connectedAcct img {
+  width: 35px;
+}
+
+/*# sourceMappingURL=login.css.map */
+
+/*# sourceMappingURL=profile.css.map */

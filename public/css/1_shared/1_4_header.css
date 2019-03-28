@@ -36,5 +36,10 @@ header ul .menuLink {
 header ul .menuLink :hover {
   text-decoration: underline;
 }
+header ul .menuLink #avatar {
+  height: 25px !important;
+  width: 25px !important;
+  opacity: 0;
+}
 
 /*# sourceMappingURL=1_4_header.css.map */

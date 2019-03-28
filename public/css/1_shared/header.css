@@ -2,39 +2,117 @@
   font-family: "DIN alternate";
   src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
 }
+@font-face {
+  font-family: "DIN alternate";
+  src: url("http://localhost:8888/public/css/fonts/DIN Alternate Regular.otf");
+}
 header {
-  position: absolute;
+  font-family: "DIN alternate";
+  height: 8vh;
+  background-color: #06030e;
   width: 100%;
 }
+
 header .logoContainer {
   float: left;
   width: 30px;
-  height: 30px;
-  margin: 10px 0 0 10px;
-}
-header .logoContainer #logo {
   height: 100%;
 }
+
+header .logoContainer #logo {
+  height: 70%;
+  box-sizing: border-box;
+  padding: 10px 0 0 10px;
+}
+
 header nav {
   float: right;
 }
+
 header ul {
   display: flex;
   justify-content: flex-end;
   list-style: none;
 }
+
 header ul .menuItem {
   margin: 0 1rem;
+  display: flex;
+  align-items: center;
 }
+
 header ul .menuLink {
-  padding: 1rem;
+  padding: 0 1rem;
   text-decoration: none;
   color: white;
   font-family: "DIN alternate";
   font-weight: bold;
 }
+
 header ul .menuLink :hover {
   text-decoration: underline;
 }
+
+li.avatar.menuItem {
+  display: flex;
+  flex-flow: column;
+  margin-right: 2rem;
+}
+
+#avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  height: 25px;
+  width: 25px;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.avatarPopup {
+  position: absolute;
+  z-index: 100;
+  top: 50px;
+  right: 1.5rem;
+  transition: all 0.1s ease-in;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  border: 3px solid #aaa;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  background-color: white;
+  height: max-content;
+  padding: 0;
+}
+.avatarPopup li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatarPopup li:hover {
+  background-color: #eee;
+}
+.avatarPopup li a {
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+.avatarPopup li img {
+  margin-left: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.hidden {
+  transform: translateY(-150%);
+  opacity: 0;
+  transition: all 0.1s ease-in;
+}
+
+/*# sourceMappingURL=header.css.map */
 
 /*# sourceMappingURL=header.css.map */

@@ -1,56 +1,111 @@
 <?php
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+}
 error_reporting(E_ALL);
 ini_set('display_errors', 1);  
 require('./controller/frontend/frontend.php');
+
 try{
     if (isset($_GET['action'])) {
-        if ($_GET['action'] == 'viewCalendar') {
-            viewCalendar();
-        }
 
-        if ($_GET['action'] == 'loggedUser') {
-            $kakaoInfo = json_decode(file_get_contents("php://input"), TRUE);
-            loggedUser($kakaoInfo);
-            
-        }
-      
-        if($_GET['action'] == 'login'){
-            // redirect to index.php if the user is already logged in
-            if($_SESSION['isLoggedIn']==true){
-                while(ob_get_level()){
+        switch($_GET['action']){
+            case 'viewCalendar': 
+                viewCalendar();
+                break;
+
+            case 'login':
+                // redirect to index.php if the user is already logged in
+                if(isset($_SESSION['isLoggedIn'])&&$_SESSION['isLoggedIn']==true){
+                    while(ob_get_level()){
+                        ob_end_clean();
+                    }
+                    ob_start();
+                    header("Location: index.php");
                     ob_end_clean();
                 }
-                ob_start();
-                header("Location: index.php");
-                ob_end_clean();
-            }
-            //if the user is not logged in, show login form
-            viewLogin();
-        }
-        if($_GET['action'] == 'logout'){
-            logout();
-        }
-        if($_GET['action'] == 'welcome'){
-            viewWelcome();
-        }
-        if($_GET['action'] == 'weeklySchedule'){
-            viewWeekly();
+
+                //if the user is not logged in, show login form
+                viewLogin();
+                break;
+
+            case 'googleLogin':
+                $googleInfo = json_decode(file_get_contents("php://input"), TRUE);
+                switch($_GET['type']){
+
+                    case 'login':
+                        loginWithGoogle($googleInfo);
+                        break;
+
+                    case 'connect':
+                        connectGoogle($googleInfo);
+                        break;
+
+                    default:
+                        break;
+                }
+                break;
+            
+            case 'kakaoLogin':
+                $kakaoInfo = json_decode(file_get_contents("php://input"), TRUE);
+                switch($_GET['type']){
+                    case 'login':
+                        loginWithKakao($kakaoInfo);
+                        break;
+                    case 'connect':
+                        connectKakao($kakaoInfo);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+
+            case 'logout':
+                logout();
+                break;
+
+            case 'welcome':
+                viewWelcome();
+                break;
+
+            case 'weeklySchedule':
+                if (isset($_GET['add'])){
+                    if($_GET['add']== 'add'){
+                        displayMain();
+                    } 
+                } 
+                viewWeekly();
+                break;
+
+            case 'monthlySchedule':
+                viewMonthly();
+                break;
+
+            case 'profile':
+                viewProfile();
+                break;
+            
+            case 'switch':
+                switchAccount($_SESSION['superUid'],$_GET['type']);
+                break;
+
+            case 'loadTodoList':
+                loadAllToDoList("5c9af6277acf25.70313808");
+                break;
+
+            case "addEditAppointment":
+                addButton($_POST);
+                viewWeekly();
+                break;
+            
+            default:
+                break;
         }
 
-        if($_GET['action'] == 'monthlySchedule'){
-            viewMonthly();
-        }
-        
-        if($_GET['action'] == 'googleLogin'){
-            $googleInfo = json_decode(file_get_contents("php://input"), TRUE);
-            loggedInGoogle($googleInfo);
-
-        }
-    }
-    else {
+    }   else{
         viewHome();
     }
-
     if (isset($_POST['action'])) {
 
         switch($_POST['action']){
@@ -75,6 +130,36 @@ try{
                     login($email,$password, $keepLoggedIn);
                 }
 
+            case 'checkCurrentPW':
+
+                if(isset($_POST['currentPW']) && isset($_SESSION['uid'])){
+                    checkCurrentPW($_SESSION['uid'], $_POST['currentPW']);
+                }
+                break;
+            
+            case 'changePassword':
+
+                if(isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_SESSION['isCurrentPasswordCorrect'])){
+                    changePassword($_POST['password'], $_POST['password']);
+                }
+
+            case 'changePersonalInfo':
+
+                changePersonalInfo($_POST['firstName'],$_FILES['avatar']);
+                break;
+
+            case 'signOut':
+                
+                signOut($_SESSION['uid'], $_SESSION['userType']);
+                break;
+
+            case 'changeSetting':
+
+                if(isset($_POST['value']) && isset($_POST['type']) && $_SESSION['userType'] && $_SESSION['superUid'] ){
+                    changeUserSetting($_POST['value'],$_POST['type'], $_SESSION['userType'],$_SESSION['superUid']);
+                }
+                break;            
+                
             default :
                 break;
         }

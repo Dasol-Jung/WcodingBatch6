@@ -1,4 +1,5 @@
 @import '1_shared/1_1_variables.scss';
+// sass viewMonthly.scss ./viewMonthly.css
 
 .bodyWrapper {
 	font-family: $primary-font;
@@ -20,71 +21,102 @@
 .calWrapper {
 	height: 100%;
 	display: grid;
+	margin-top: 100px;
 	grid-gap: 1rem;
-	grid-template-rows: 1fr 9fr;
+	grid-template-rows: 30px 9fr;
 	box-sizing: border-box;
+	background-color: #2f2f2f; 
 }
 
-.utilContainer {
-	justify-self: center;
-	display: flex;
-	flex-flow: row;
-	align-items: center;
-	.showCal {
-		background-image: url("../images/cal_icon.svg");
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position: center;
-		display: flex;
-		flex-flow: column;
-		align-items: center;
-		justify-content: center;
-		height: 3rem;
-		width: 3rem;
-		span#month {
-			font-size: 0.8rem;
-			margin-top: 0.2rem;
-			font-weight: bold;
-		}
-		span#date {
-			font-size: 0.6rem;
-		}
-	}
-	button {
-		height: max-content;
-		background-color: $primary-dark;
-		border: 1px solid $primary-light;
+// .utilContainer {
+// 	justify-self: center;
+// 	display: flex;
+// 	flex-flow: row;
+// 	align-items: right;
+// 	margin: 0;
+// 	height: 15px;
+// 	.showCal {
+// 		background-image: url("../images/cal_icon.svg");
+// 		background-size: contain;
+// 		background-repeat: no-repeat;
+// 		background-position: center;
+// 		display: flex;
+// 		flex-flow: column;
+// 		align-items: center;
+// 		justify-content: center;
+// 		height: 3rem;
+// 		width: 3rem;
+// 		span#month {
+// 			font-size: 0.8rem;
+// 			margin-top: 0.2rem;
+// 			font-weight: bold;
+// 		}
+// 		span#date {
+// 			font-size: 0.6rem;
+// 		}
+// 	}
+// 	button {
+// 		height: max-content;
+// 		background-color: $primary-dark;
+// 		border: 1px solid $primary-light;
+// 		color: $primary-light;
+// 		border-radius: 5px;
+// 		margin: 0 2rem;
+// 		font-size: 1rem;
+// 		cursor: pointer;
+// 		&:hover {
+// 			background-color: $primary-light;
+// 			border: 1px solid $primary-dark;
+// 			color: $primary-dark;
+// 		}
+// 	}
+// }
+
+// .calContainer {
+// 	height: 100%;
+// 	width: 100%;
+// 	padding: 0 1rem 1rem 1rem;
+// 	box-sizing: border-box;
+// 	table {
+// 		width: 100%;
+// 		height: 100%;
+
+// 		th {
+// 			width: 14%;
+// 			background-color: $primary-light;
+// 			color: $primary-dark;
+// 			height: 30px;
+// 		}
+
+// 		td {
+// 			border: 1px solid $primary-light;
+// 		}
+// 	}
+// }
+
+#switchDiv{
+	height: 30px;
+	text-align: right;
+}
+
+#monthlyWeeklyBtn{
+	height: max-content;
+	background-color: $secondary-dark;
+	border: 1px solid $secondary-light;
+	color: $secondary-light;
+	border-radius: 5px;
+	margin: 0 2rem;
+	padding: 3px 10px;
+	font-size: 1rem;
+	height: 30px;
+	cursor: pointer;
+	&:hover {
+		background-color: $primary-red;
+		border: 1px solid $primary-dark;
 		color: $primary-light;
-		border-radius: 5px;
-		margin: 0 2rem;
-		font-size: 1rem;
-		cursor: pointer;
-		&:hover {
-			background-color: $primary-light;
-			border: 1px solid $primary-dark;
-			color: $primary-dark;
-		}
 	}
 }
 
-.calContainer {
-	height: 100%;
-	width: 100%;
-	padding: 0 1rem 1rem 1rem;
-	box-sizing: border-box;
-	table {
-		width: 100%;
-		height: 100%;
-
-		th {
-			width: 14%;
-			background-color: $primary-light;
-			color: $primary-dark;
-			height: 30px;
-		}
-
-		td {
-			border: 1px solid $primary-light;
-		}
-	}
+#monthlyCalendar {
+	margin: 0;
 }

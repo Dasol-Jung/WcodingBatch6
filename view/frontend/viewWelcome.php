@@ -1,5 +1,5 @@
 <?php
-session_start();
+if(!isset($_SESSION)) session_start();
 $styles[]="<link rel='stylesheet' href='../../public/css/welcome.css'/>";
 ob_start();
 ?>
