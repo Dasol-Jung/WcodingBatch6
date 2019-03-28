@@ -5,28 +5,29 @@ require_once('User.php');
 class AddModifyDB extends User{
 
     public function addInfo($addWeekly){
-        $user_id = $_SESSION['internalUid'];
+        $user_id = $_SESSION['uid'];
+        $view = $addWeekly['view'];
         $db= parent::dbConnect();
-        $title = $_POST["title"];
-        $description = $_POST["description"];
-        $priority = $_POST["priority"];
-        $eventDate = $_POST["eventDate"];
-        $done = $_POST["done"];
+        $title = $addWeekly["title"];
+        $description = $addWeekly["description"];
+        $priority = $addWeekly["priority"];
+        $eventDate = $addWeekly["eventDate"];
+        $done = $addWeekly["done"];
         $addRequest = "INSERT INTO schedule(user_id, title, description, priority, event_date, is_done, create_date)
         VALUES('$user_id', '$title', '$description', '$priority', '$eventDate', '$done',NOW())";
         $addToInfo = $db->prepare($addRequest);
         $addAfflines = $addToInfo->execute();
-        header('location:http://localhost:8888/index.php?action=weeklySchedule');
+        header('location:http://localhost:8888/index.php?action='.$view);
     }
 
     public function modifyInfo($modWeekly){
-        $user_id = $_SESSION['internalUid'];
+        $user_id = $_SESSION['uid'];
         $db= parent::dbConnect();
-        $title = $_POST["title"];
-        $description = $_POST["description"];
-        $priority = $_POST["priority"];
-        $eventDate = $_POST["event_date"];
-        $done = $_POST["is_done"];
+        $title = $addWeekly["title"];
+        $description = $addWeekly["description"];
+        $priority = $addWeekly["priority"];
+        $eventDate = $addWeekly["event_date"];
+        $done = $addWeekly["is_done"];
         $modRequest = "UPDATE schedule(user_id, title, description, priority, event_date, is_done, create_date)
         VALUES('$user_id', '$title', '$description', '$priority', '$eventDate', '$done',NOW())";
         $modifytoInfo = $db->prepare($modRequest);
@@ -35,7 +36,7 @@ class AddModifyDB extends User{
     }
 
     public function loadToDoList($user){
-        $user_id = ($_SESSION['internalUid']) ? $_SESSION['internalUid'] : $user ;
+        $user_id = ($_SESSION['uid']) ? $_SESSION['uid'] : $user ;
         $db= $this->dbConnect();
         $req = $db->prepare('SELECT * FROM schedule WHERE user_id = :user_id');
         $req->execute(array( 'user_id' => $user_id ));

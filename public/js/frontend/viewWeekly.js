@@ -1,12 +1,7 @@
 /** add events */
 
 function generateCalendar (calendarEl) {
-	
-	document.addEventListener('DOMContentLoaded', function(){
-		
-	});
-	document.addEventListener('DOMContentLoaded', function() {
-		
+		document.addEventListener('DOMContentLoaded', function() {
 
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			events :  {
@@ -31,7 +26,11 @@ function generateCalendar (calendarEl) {
 				addButton: {
 					text: 'Add',
 					click: function(){
-						location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add'
+						if(document.body.contains(document.getElementById("weeklyCalendar"))){
+							location.href = 'http://localhost:8888/index.php?action=monthlySchedule&add=add'	
+						} else {
+							location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add'
+						}
 					}
 				}
 			},
