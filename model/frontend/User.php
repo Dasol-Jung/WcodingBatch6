@@ -101,7 +101,7 @@ class User extends ManagerDB{
            
             $avatarReq = $db->query("SELECT * FROM {$account['type']}_user WHERE super_uid='$superUid'");
             while($avatar = $avatarReq->fetch()){
-                $avatars["{$account['type']}"][] = $avatar['image'];
+                $avatars["{$account['type']}"][] = ['image'=>$avatar['image'], 'uid'=>$avatar["{$account['type']}_uid"]];
             }
                 
         }
@@ -166,6 +166,33 @@ class User extends ManagerDB{
         $userReq->bindParam(":settingValue", $value, PDO::PARAM_STR);
         $userReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
         if($userReq->execute()){
+            return 'success';
+            
+        }else{
+            return 'failure';
+        }      
+    }
+
+    public function disconnectAccount($userId, $userType, $superUid){
+        $db = parent::dbConnect();
+        $newSuperUid = uniqid("",true);
+
+        //change superuid in super_user table
+        $updateSuper = $db->prepare("UPDATE super_user SET super_uid=:new_super_uid WHERE super_uid=:super_uid AND uid=:uid");
+        $updateSuper->bindValue(":new_super_uid", $newSuperUid, PDO::PARAM_STR);
+        $updateSuper->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
+        $updateSuper->bindParam(":uid", $userId, PDO::PARAM_STR);
+
+        //change superuid in each user table
+        $updateIndividual = $db->prepare("UPDATE {$userType}_user SET super_uid=:new_super_uid WHERE super_uid=:super_uid AND {$userType}_uid=:uid");
+        $updateIndividual->bindValue(":new_super_uid", $newSuperUid, PDO::PARAM_STR);
+        $updateIndividual->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
+        $updateIndividual->bindParam(":uid", $userId, PDO::PARAM_STR);
+
+        if($updateSuper->execute() && $updateIndividual->execute()){
+            if($_SESSION['userType'] == $userType){
+                $_SESSION['superUid'] = $newSuperUid;
+            }
             return 'success';
             
         }else{

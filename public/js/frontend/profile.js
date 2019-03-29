@@ -156,6 +156,28 @@
 })();
 
 /**
+ * adding an event to disconnect account when an user clicks disconnect button
+ */
+
+(function() {
+	let discntBtns = document.querySelectorAll('button.discnt');
+	if (discntBtns) {
+		let nbBtn = discntBtns.length,
+			i;
+		for (i = 0; i < nbBtn; i++) {
+			let discntBtn = discntBtns[i];
+			let userId = discntBtn.getAttribute('userId');
+			let userType = discntBtn.id;
+			discntBtn.addEventListener('click', e => {
+				if (confirm('Do you really want to disconnect this account?')) {
+					disconnectAcct(userId, userType);
+				}
+			});
+		}
+	}
+})();
+
+/**
  * checks if the internal user entered the right password before proceeding to signing out
  */
 
@@ -378,6 +400,41 @@ function changeUserSetting(value, type) {
 		if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
 			switch (xhr.response) {
 				case 'success':
+					break;
+				case 'failure':
+					alert('Something went wrong');
+					break;
+				default:
+					alert('Soemthing went wrong');
+					break;
+			}
+			return;
+		}
+		if (xhr.status >= 400) {
+			//php error page
+			return null;
+		}
+	};
+	xhr.send(formData);
+}
+
+/**
+ * disconnectAcct : a function to send ajax request to disconnect an account
+ * @param : (string) userId to disconnect
+ */
+
+function disconnectAcct(userId, userType) {
+	let xhr = new XMLHttpRequest();
+	let formData = new FormData();
+	formData.append('action', 'disconnect');
+	formData.append('userId', userId);
+	formData.append('userType', userType);
+	xhr.open('POST', 'index.php');
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
+			switch (xhr.response) {
+				case 'success':
+					location.reload();
 					break;
 				case 'failure':
 					alert('Something went wrong');

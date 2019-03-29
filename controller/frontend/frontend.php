@@ -188,3 +188,10 @@ function loadAllToDoList($user){
 // function closeForm() {
 //     require_once("model/frontend/AddModifyDB.php");
 // }
+
+function disconnectAccount($userId, $userType, $superUid){
+    $user = new User();
+    $result=$user->disconnectAccount($userId, $userType, $superUid);
+    ob_end_clean();
+    echo $result;
+}

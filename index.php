@@ -164,6 +164,12 @@ try{
                     changeUserSetting($_POST['value'],$_POST['type'], $_SESSION['userType'],$_SESSION['superUid']);
                 }
                 break;            
+
+            case 'disconnect':
+                if(isset($_POST['userId']) && isset($_POST['userType'])&& isset($_SESSION['superUid'])){
+                    //userId, userType : the id and type of the user account to disconnect respectively
+                    disconnectAccount($_POST['userId'], $_POST['userType'], $_SESSION['superUid']);
+                }
                 
             default :
                 break;

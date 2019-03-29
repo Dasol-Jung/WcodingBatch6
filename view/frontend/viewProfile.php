@@ -73,9 +73,9 @@ ob_start();
                     <div class="internalAcct">
                             <span>Weeky </span>
                         <?php foreach($avatars['internal'] as $internalAvatar):?>
-                            <img src="<?=$internalAvatar?>" alt="">
+                            <img src="<?=$internalAvatar['image']?>" alt="">
+                            <button class='discnt' userId='<?=$internalAvatar['uid']?>' id="internal">Disconnect</button>
                         <?php endforeach?>
-                            <button id="discntInternal">Disconnect</button>
                         
                     </div>
                 <?php endif?>
@@ -83,18 +83,18 @@ ob_start();
                     <div class="googleAcct">
                             <span>Google </span>
                         <?php foreach($avatars['google'] as $googleAvatar):?>
-                            <img src="<?=$googleAvatar?>" alt="">
+                            <img src="<?=$googleAvatar['image']?>" alt="">
+                            <button class='discnt' userId='<?=$googleAvatar['uid']?>' id="google">Disconnect</button>
                         <?php endforeach?>
-                        <button id="discntGoogle">Disconnect</button>
                     </div>
                 <?php endif?>
                 <?php if(isset($avatars['kakao'])):?>
                     <div class="kakaoAcct">
                             <span>Kakao </span>
                         <?php foreach($avatars['kakao'] as $kakaoAvatar):?>
-                            <img src="<?=$kakaoAvatar?>" alt="">
+                            <img src="<?=$kakaoAvatar['image']?>" alt="">
+                            <button class='discnt' userId='<?=$kakaoAvatar['uid']?>' id="kakao">Disconnect</button>
                         <?php endforeach?>
-                        <button id="discntKakao">Disconnect</button>
                     </div>
                 <?php endif?>
             </div>
