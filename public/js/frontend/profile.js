@@ -434,6 +434,7 @@ function disconnectAcct(userId, userType) {
 		if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
 			switch (xhr.response) {
 				case 'success':
+					alert('Your account has been successfully disconnected');
 					location.reload();
 					break;
 				case 'failure':

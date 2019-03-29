@@ -56,8 +56,8 @@ ob_start();
             </div>
         </div>
         <div class="signOutContainer">
-            <label for="connectAcct">Sign out</label>
-            <button id="signOut">Sign out</button>
+            <label for="connectAcct">Delete account</label>
+            <button id="signOut">Delete</button>
         </div>
     </div>
 
@@ -125,8 +125,8 @@ ob_start();
         </form>
     <?php else:?>
         <form class="checkSignOut modalTarget">
-            <label for="confirmSignOut">Do you really want to sign out?</label>
-            <button class='confirmSignOut'>Sign Out</button>
+            <label for="confirmSignOut">Do you really want to delete your account?</label>
+            <button class='confirmSignOut'>Delete account</button>
         </form>
     <?php endif?>
 
