@@ -16,7 +16,7 @@ function viewHome()
     $internalUser = new InternalUser();
     $internalUser->checkRememberMe();
     $user = new User();
-    if(isset($_SESSION['uid'])&&isset($_SESSION['userType'])){
+    if(isset($_SESSION['uid'])&&!empty($_SESSION['uid'])&&isset($_SESSION['userType'])&&!empty($_SESSION['uid'])){
         $userInfo = $user->getUserInfo($_SESSION['uid'],$_SESSION['userType']);
         $avatars = $user->getAvatars($_SESSION['superUid']);
     }

@@ -1,6 +1,4 @@
 <?php $styles[]='<link rel="stylesheet" href="public/css/signIn.css"/>'?>
-<script src="https://apis.google.com/js/api:client.js"></script>
-<script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <form class="loginForm" action="index.php" method="POST">
 
     <label for="email">Email</label>
@@ -34,7 +32,4 @@
     </div>
 </form>
 <script src= "../../public/js/frontend/login.js"></script>
-<script src= "../../public/js/frontend/google.js"></script>
-<script src="../../public/js/frontend/kakaoAcct.js"></script>
-<script>startApp();</script>
 

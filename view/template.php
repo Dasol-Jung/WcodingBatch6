@@ -9,7 +9,8 @@
     <title>Weeky</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
     <link rel="stylesheet" href="public/css/style.css"/>
-
+    <script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="https://apis.google.com/js/api:client.js"></script>
     <?php if(isset($styles)):?>
         <?php foreach($styles as $style):?>
             <?=$style?>
@@ -20,6 +21,9 @@
 <body>
 <?php require_once "view/frontend/header.php"?>
     <?= $content ?>
+    <script src= "../../public/js/frontend/google.js"></script>
+    <script src="../../public/js/frontend/kakaoAcct.js"></script>
+    <script>startApp();</script>
     <script src= "public/js/frontend/utils.js"></script>
     <script src= "public/js/frontend/header.js"></script>
     <script>

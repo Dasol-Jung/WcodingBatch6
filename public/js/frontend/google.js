@@ -97,11 +97,7 @@ function onFailure(error) {
  */
 function googleLogOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
-	if (googleIdSession) {
-		auth2.signOut().then(function() {
-			console.log('User signed out.');
-		});
-	} else {
-		console.log('Not logged in.');
-	}
+	auth2.signOut().then(function() {
+		console.log('User signed out.');
+	});
 }
