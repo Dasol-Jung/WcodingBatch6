@@ -96,6 +96,8 @@ function onFailure(error) {
  * NO USE for now we'll see later if we need
  */
 function googleLogOut() {
+	// google oAuth logout link
+	// https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=[http://www.mysite.com]
 	var auth2 = gapi.auth2.getAuthInstance();
 	auth2.signOut().then(function() {
 		console.log('User signed out.');
