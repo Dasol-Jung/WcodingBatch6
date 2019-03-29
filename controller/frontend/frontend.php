@@ -53,8 +53,15 @@ function signUp($email,$password,$confirmPassword,$firstName){
 function login($email, $password, $keepLoggedIn){
     $internalUser = new InternalUser();
     $result = $internalUser->login($email,$password,$keepLoggedIn);
-    ob_end_clean();
-    echo $result;
+    $user = new User();
+    if($result=='success'){
+        $userInfo = $user->getUserInfo($_SESSION['uid'],$_SESSION['userType']);
+        ob_end_clean();
+        echo $userInfo['setting_schedule_view'];
+    }else{
+        ob_end_clean();
+        echo $result;
+    }
 }
 
 /**
@@ -65,16 +72,30 @@ function login($email, $password, $keepLoggedIn){
 function loginWithKakao($kakaoUserInfo){
     $kakaoUser = new KakaoUser();
     $kakaoLoginResult = $kakaoUser->registerKakaoUser($kakaoUserInfo);
-    ob_end_clean();
-    echo $kakaoLoginResult;
+    $user = new User();
+    if($kakaoLoginResult=='success'){
+        $userInfo = $user->getUserInfo($_SESSION['uid'],$_SESSION['userType']);
+        ob_end_clean();
+        echo $userInfo['setting_schedule_view'];
+    }else{
+        ob_end_clean();
+        echo $kakaoLoginResult;
+    }
 }
 
 function loginWithGoogle($googleInfo)
 {
     $googleUser = new GoogleUser();
+    $user = new User();
     $googleLoginResult = $googleUser-> registerGoogleUser($googleInfo);
-    ob_end_clean();
-    echo $googleLoginResult;
+    if($googleLoginResult=='success'){
+        $userInfo = $user->getUserInfo($_SESSION['uid'],$_SESSION['userType']);
+        ob_end_clean();
+        echo $userInfo['setting_schedule_view'];
+    }else{
+        ob_end_clean();
+        echo $googleLoginResult;
+    }
 }
 
 function logout(){

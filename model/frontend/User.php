@@ -28,7 +28,6 @@ class User extends ManagerDB{
         $userType= htmlspecialchars($userType);
         $findUser = $db->query("SELECT email, first_name, setting_schedule_view FROM {$userType}_user WHERE {$userType}_uid='$uid'");
         return $findUser->fetchAll()[0];
-               
     }
 
     public function changePersonalInfo($firstName, $avatar){

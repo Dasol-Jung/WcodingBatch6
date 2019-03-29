@@ -63,10 +63,18 @@ function onSuccess(googleUser, type) {
 	ajax.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var googleLoginResult = this.response;
+
 			if (type == 'login') {
-				googleLoginResult == 'success'
-					? (window.location.href = 'index.php?action=weeklySchedule')
-					: alert('Google Login failed');
+				switch (googleLoginResult) {
+					case 'w':
+						window.location.href = 'index.php?action=weeklySchedule';
+						break;
+					case 'm':
+						window.location.href = 'index.php?action=monthlySchedule';
+						break;
+					default:
+						alert('Google login failed');
+				}
 			} else if (type == 'connect') {
 				if (googleLoginResult == 'success') {
 					alert('Your Google account has been successfully connected');
