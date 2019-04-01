@@ -15,8 +15,8 @@ if($_SESSION['isLoggedIn']!=true){
 ob_start();
 ?>
 <?php $styles[]="<link rel='stylesheet' href='../../public/css/viewSchedule.css'/>"?>
+<?php $styles[]="<link rel='stylesheet' href='../../public/css/viewMonthly.css'/>"?>
 <link rel='stylesheet' href='https://fullcalendar.io/js/fullcalendar-3.1.0/fullcalendar.min.css' />
-
 <link href='../../public/lib/fullCalendar/core/main.css' rel='stylesheet' />
 <link href='../../public/lib/fullCalendar/daygrid/main.css' rel='stylesheet' />
 

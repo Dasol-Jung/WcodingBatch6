@@ -1,14 +1,13 @@
-function changeWeeklyMonthly(){
-	document.querySelector('button.weeklyMonthly');addEventListener("click",() => {
-			if(document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule'){
-				document.location.href= 'http://localhost:8888/index.php?action=weeklySchedule'
-			}else{
-				document.location.href= 'http://localhost:8888/index.php?action=monthlySchedule'
-			}
+function changeWeeklyMonthly() {
+	document.querySelector('button.weeklyMonthly');
+	addEventListener('click', () => {
+		if ((document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule')) {
+			document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule';
+		} else {
+			document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule';
 		}
-	)
+	});
 }
-
 
 /* initialize the calendar
 -----------------------------------------------------------------*/
@@ -21,36 +20,35 @@ document.addEventListener('DOMContentLoaded', function() {
 	var y = date.getFullYear();
 
 	var calendar = new FullCalendar.Calendar(calendarEl, {
-    
-		plugins: [ 'dayGrid'],
+		plugins: [ 'dayGrid' ],
 		defaultView: 'dayGridMonth',
 		header: {
 			left: 'changeWeeklyMonthly addButton',
-		  center: 'title',
-			right: 'prev,next'
+			center: 'prev,title,next',
+			right: null
 		},
-    customButtons: {
-      changeWeeklyMonthly: {
-        text: 'Weekly/Monthly',
-        click: function() {
-          if(document.body.contains(document.getElementById("monthlyCalendar"))){
-            document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule'
-          } else {
-            document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule'
-          }
-        }
-      },
-      addButton: {
-        text: 'Add',
+		customButtons: {
+			changeWeeklyMonthly: {
+				text: 'Weekly/Monthly',
 				click: function() {
-          if(document.body.contains(document.getElementById("monthlyCalendar"))){
-            document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule&add=add'
-          } else {
-            document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add'
-          }
-        }
-      }
-    },
+					if (document.body.contains(document.getElementById('monthlyCalendar'))) {
+						document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule';
+					} else {
+						document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule';
+					}
+				}
+			},
+			addButton: {
+				text: 'Add',
+				click: function() {
+					if (document.body.contains(document.getElementById('monthlyCalendar'))) {
+						document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule&add=add';
+					} else {
+						document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add';
+					}
+				}
+			}
+		},
 		selectable: true,
 		selectHelper: true,
 		allDayDefault: true,
@@ -59,13 +57,14 @@ document.addEventListener('DOMContentLoaded', function() {
 		eventLimit: true, // for all non-TimeGrid views
 		views: {
 			timeGrid: {
-				eventLimit: 5 
+				eventLimit: 5
 			}
 		},
 		select: function(start, end, allDay) {
 			var title = prompt('Event Title:');
 			if (title) {
-				calendar.fullCalendar('renderEvent',
+				calendar.fullCalendar(
+					'renderEvent',
 					{
 						title: title,
 						start: start,
@@ -78,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			calendar.fullCalendar('unselect');
 		},
 		editable: true,
-		events:  {
+		events: {
 			url: 'http://localhost:8888/index.php?action=loadTodoList',
 			type: 'GET', // Send post data
 			error: function() {
@@ -95,11 +94,11 @@ function allowDrop(ev) {
 }
 
 function drag(ev) {
-	ev.dataTransfer.setData("text", ev.target.id);
+	ev.dataTransfer.setData('text', ev.target.id);
 }
 
 function drop(ev) {
 	ev.preventDefault();
-	var data = ev.dataTransfer.getData("text");
+	var data = ev.dataTransfer.getData('text');
 	ev.target.appendChild(document.getElementById(data));
 }

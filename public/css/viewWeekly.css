@@ -4,7 +4,7 @@
 }
 .bodyWrapper {
   font-family: "DIN alternate";
-  height: 100%;
+  height: min-content;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 7.5fr;
@@ -20,12 +20,11 @@
 }
 
 .calWrapper {
-  padding-top: 3rem;
   height: 100%;
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-rows: 1fr 9fr;
   box-sizing: border-box;
+  background-color: #2f2f2f;
+  margin-top: 0;
+  padding-top: 20px;
 }
 
 .utilContainer .calendarCtrl {
@@ -104,6 +103,47 @@
 }
 .calContainer .dayContainer .calbody {
   height: 95%;
+}
+
+.fc-header-toolbar {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+}
+.fc-header-toolbar .fc-left {
+  padding-left: 2rem;
+  align-self: end;
+}
+.fc-header-toolbar .fc-center {
+  display: flex !important;
+  justify-content: center;
+}
+.fc-header-toolbar .fc-center h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+.fc-header-toolbar .fc-center div {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+.fc-header-toolbar .fc-center div button {
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 2.1rem;
+  background-color: #2f2f2f;
+  border: white 1px solid;
+  color: white;
+  text-transform: capitalize;
+  position: relative;
+  border-radius: 10px;
+  top: 2px;
+}
+.fc-header-toolbar .fc-center div button:hover {
+  color: black;
+  background-color: white;
+}
+.fc-header-toolbar .fc-view-container span.fc-day-number {
+  vertical-align: bottom;
 }
 
 /*# sourceMappingURL=viewWeekly.css.map */

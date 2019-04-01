@@ -1,10 +1,9 @@
 /** add events */
 
-function generateCalendar (calendarEl) {
-		document.addEventListener('DOMContentLoaded', function() {
-
+function generateCalendar(calendarEl) {
+	document.addEventListener('DOMContentLoaded', function() {
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			events :  {
+			events: {
 				url: 'http://localhost:8888/index.php?action=loadTodoList',
 				type: 'GET', // Send post data
 				error: function() {
@@ -16,28 +15,28 @@ function generateCalendar (calendarEl) {
 				changeWeeklyMonthly: {
 					text: 'Weekly/Monthly',
 					click: function() {
-						if(document.body.contains(document.getElementById("weeklyCalendar"))){
-							location.href = 'http://localhost:8888/index.php?action=monthlySchedule'	
+						if (document.body.contains(document.getElementById('weeklyCalendar'))) {
+							location.href = 'http://localhost:8888/index.php?action=monthlySchedule';
 						} else {
-							location.href = 'http://localhost:8888/index.php?action=weeklySchedule'
+							location.href = 'http://localhost:8888/index.php?action=weeklySchedule';
 						}
 					}
 				},
 				addButton: {
 					text: 'Add',
-					click: function(){
-						if(document.body.contains(document.getElementById("weeklyCalendar"))){
-							location.href = 'http://localhost:8888/index.php?action=monthlySchedule&add=add'	
+					click: function() {
+						if (document.body.contains(document.getElementById('weeklyCalendar'))) {
+							location.href = 'http://localhost:8888/index.php?action=monthlySchedule&add=add';
 						} else {
-							location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add'
+							location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add';
 						}
 					}
 				}
 			},
 			header: {
 				left: 'changeWeeklyMonthly addButton',
-				center: 'title',
-				right: 'prev,next'
+				center: 'prev,title,next',
+				right: null
 			},
 			plugins: [ 'dayGrid' ],
 			defaultView: 'dayGridWeek'
@@ -48,17 +47,17 @@ function generateCalendar (calendarEl) {
 
 // When the user clicks on <span> (x), close the modal
 // When the user clicks anywhere outside of the modal, close it
-function closeForm(){
-	var span = document.getElementsByClassName("close")[0];
+function closeForm() {
+	var span = document.getElementsByClassName('close')[0];
 	var modal = document.getElementById('myModal');
 	window.onclick = function(e) {
 		if (e.target == modal) {
-		  modal.style.display = "none";
+			modal.style.display = 'none';
 		}
-	}
+	};
 	span.onclick = function() {
-		modal.style.display = "none";
-	}
+		modal.style.display = 'none';
+	};
 }
 
 /**
@@ -72,8 +71,7 @@ function closeForm(){
 
 /**
  * Disiplay errors on the check of the form
- */ 
-
+ */
 
 /**
  * ajax refreshing the page 
@@ -86,7 +84,7 @@ function closeForm(){
 // 	if (this.readyState == 4 && this.status == 200) {
 // 		var appointments = JSON.parse(this.responseText);
 // 		//console.log(appointments);
-		
+
 // 		if(appointments.length>0) {
 // 			for (var i in appointments) {
 // 				var event = {
@@ -108,22 +106,22 @@ function closeForm(){
 
 // window.onload = loadPage();
 // function loadPage(){
-	// var ajax = new XMLHttpRequest();
-	// ajax.onreadystatechange = function() {
-	// 	if (this.readyState == 4 && this.status == 200) {
-	// 		console.log("test");
-	// 		var appointment = JSON.parse(this.responseText);
-	// 		console.log(this.responseText);
-	// 		var eventApp = [];
-	// 		if(appointment.user_id)
-	// 		for(var i=0; i < appointment.length; i++){
-	// 			eventApp += appointment.title;
-	// 			eventApp += appointment.priority;
-	// 			eventApp += appointment.event_date;
-	// 			eventApp += appointment.is_done;
-	// 		}
-	// 	}
-	// };
-	// ajax.open("GET", "http://localhost:8888/index.php?action=loadTodoList", true);
-	// ajax.send();
+// var ajax = new XMLHttpRequest();
+// ajax.onreadystatechange = function() {
+// 	if (this.readyState == 4 && this.status == 200) {
+// 		console.log("test");
+// 		var appointment = JSON.parse(this.responseText);
+// 		console.log(this.responseText);
+// 		var eventApp = [];
+// 		if(appointment.user_id)
+// 		for(var i=0; i < appointment.length; i++){
+// 			eventApp += appointment.title;
+// 			eventApp += appointment.priority;
+// 			eventApp += appointment.event_date;
+// 			eventApp += appointment.is_done;
+// 		}
+// 	}
+// };
+// ajax.open("GET", "http://localhost:8888/index.php?action=loadTodoList", true);
+// ajax.send();
 // }

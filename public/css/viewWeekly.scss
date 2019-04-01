@@ -2,7 +2,7 @@
 
 .bodyWrapper {
 	font-family: $primary-font;
-	height: 100%;
+	height: min-content;
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 7.5fr;
@@ -18,12 +18,11 @@
 }
 
 .calWrapper {
-	padding-top: 3rem;
 	height: 100%;
-	display: grid;
-	grid-gap: 1rem;
-	grid-template-rows: 1fr 9fr;
 	box-sizing: border-box;
+	background-color: #2f2f2f;
+	margin-top: 0;
+	padding-top: 20px;
 }
 
 .utilContainer {
@@ -102,6 +101,53 @@
 		}
 		.calbody {
 			height: 95%;
+		}
+	}
+}
+
+.fc-header-toolbar {
+	display: grid !important;
+	grid-template-columns: 1fr 1fr 1fr !important;
+
+	.fc-left {
+		padding-left: 2rem;
+		align-self: end;
+	}
+
+	.fc-center {
+		display: flex !important;
+		justify-content: center;
+		h2 {
+			margin: 0;
+			font-size: 1rem;
+		}
+	}
+
+	.fc-center div {
+		display: flex;
+		flex-flow: row;
+		align-items: center;
+		button {
+			padding-top: 0;
+			padding-bottom: 0;
+			height: 2.1rem;
+			background-color: $primary-dark;
+			border: white 1px solid;
+			color: white;
+			text-transform: capitalize;
+			position: relative;
+			border-radius: 10px;
+			top: 2px;
+			&:hover {
+				color: black;
+				background-color: white;
+			}
+		}
+	}
+
+	.fc-view-container {
+		span.fc-day-number {
+			vertical-align: bottom;
 		}
 	}
 }

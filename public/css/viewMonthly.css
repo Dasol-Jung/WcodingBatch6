@@ -4,7 +4,7 @@
 }
 .bodyWrapper {
   font-family: "DIN alternate";
-  height: 100%;
+  height: min-content;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 7.5fr;
@@ -21,12 +21,10 @@
 
 .calWrapper {
   height: 100%;
-  display: grid;
-  margin-top: 100px;
-  grid-gap: 1rem;
-  grid-template-rows: 30px 9fr;
   box-sizing: border-box;
   background-color: #2f2f2f;
+  margin-top: 0;
+  padding-top: 20px;
 }
 
 #switchDiv {
@@ -54,6 +52,43 @@
 
 #monthlyCalendar {
   margin: 0;
+}
+
+.fc-header-toolbar {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+}
+.fc-header-toolbar .fc-left {
+  padding-left: 2rem;
+  align-self: end;
+}
+.fc-header-toolbar .fc-center {
+  display: flex !important;
+  justify-content: center;
+}
+.fc-header-toolbar .fc-center #calIcon {
+  margin: 0 1rem;
+}
+.fc-header-toolbar .fc-center div {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+.fc-header-toolbar .fc-center div button {
+  background-color: #2f2f2f;
+  border: white 1px solid;
+  color: white;
+  text-transform: capitalize;
+  position: relative;
+  border-radius: 10px;
+  top: 2px;
+}
+.fc-header-toolbar .fc-center div button:hover {
+  color: black;
+  background-color: white;
+}
+.fc-header-toolbar .fc-view-container span.fc-day-number {
+  vertical-align: bottom;
 }
 
 /*# sourceMappingURL=viewMonthly.css.map */
