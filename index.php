@@ -69,21 +69,11 @@ try{
                 viewWelcome();
                 break;
 
-            case 'weeklySchedule':
-                if (isset($_GET['add'])){
-                    if($_GET['add']== 'add'){
-                        displayMain();
-                    } 
-                } 
+            case 'weeklySchedule': 
                 viewWeekly();
                 break;
 
             case 'monthlySchedule':
-                if (isset($_GET['add'])){
-                    if($_GET['add']== 'add'){
-                        displayMain();
-                    } 
-                } 
                 viewMonthly();
                 break;
 

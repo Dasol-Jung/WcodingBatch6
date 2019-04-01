@@ -2,7 +2,6 @@
 
 function generateCalendar (calendarEl) {
 		document.addEventListener('DOMContentLoaded', function() {
-
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			events :  {
 				url: 'http://localhost:8888/index.php?action=loadTodoList',
@@ -11,7 +10,18 @@ function generateCalendar (calendarEl) {
 					alert('There was an error while fetching events.');
 				}
 			},
-
+			eventRender : function(info) {
+				console.log(info);
+				info.el.setAttribute("marie", info.event.extendedProps.user_id)
+				console.log(info.event.extendedProps.description);
+				// if you want to create a tooltip
+				// var tooltip = new Tooltip(info.el, {
+				// 	title: info.event.extendedProps.description,
+				// 	placement: 'top',
+				// 	trigger: 'hover',
+				// 	container: 'body'
+				//   });
+			},
 			customButtons: {
 				changeWeeklyMonthly: {
 					text: 'Weekly/Monthly',
@@ -25,12 +35,15 @@ function generateCalendar (calendarEl) {
 				},
 				addButton: {
 					text: 'Add',
-					click: function(){
-						if(document.body.contains(document.getElementById("weeklyCalendar"))){
-							location.href = 'http://localhost:8888/index.php?action=monthlySchedule&add=add'	
-						} else {
-							location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add'
-						}
+						click: function() {
+						// if(document.body.contains(document.getElementById("weeklyCalendar"))){
+						// document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add'
+						// } else {
+						// document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule&add=add'
+						// }
+						let modalTarget = document.querySelector('#myModal.modalTarget');
+						document.body.appendChild(clientUtils.createModal(modalTarget, [350]));
+		
 					}
 				}
 			},
@@ -61,6 +74,15 @@ function closeForm(){
 	}
 }
 
+// (function() {
+// 	let addInfoModal = document.querySelectorAll('.fc-addButton-button');
+// 	if (addInfoModal) {
+// 		addInfoModal.addEventListener('click', e => {
+// 			let modalTarget = document.querySelector('.modalTarget.addInfoModal');
+// 			document.body.appendChild(clientUtils.createModal(modalTarget));
+// 		});
+// 	}
+// })();
 /**
  * EXECUTION OF THE SCRIPT 
  */

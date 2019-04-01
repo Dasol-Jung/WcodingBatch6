@@ -1,7 +1,7 @@
-<div id="myModal" class="modal">
+<link rel='stylesheet' href='../../public/css/viewWeekly.css'/>
+<div id="myModal" class="modalTarget">
     <div class="modal-content">
-        <span class="close" onclick="closeForm()">&times;</span>
-        <form action="http://localhost:8888/index.php?action=addEditAppointment" method="POST">
+        <form action="http://localhost:8888/index.php?action=addEditAppointment" class="addInfoModal" method="POST">
             <input type="hidden" name="view" value="<?= $_GET['action']?>">
             <div id="firstBlockForm">
                 <span class="red_star">* </span><label for="title">Title :<br>

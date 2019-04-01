@@ -1,10 +1,3 @@
-form {
-  max-width: 250px;
-  position: relative;
-  margin: 50px auto 0;
-  font-size: 15px;
-}
-
 .radiobtn {
   position: relative;
   display: block;
@@ -90,50 +83,8 @@ form {
     background-color: #8077fd;
   }
 }
-/* The Modal (background) */
-.modal {
-  display: block;
-  /* Hidden by default */
-  position: fixed;
-  /* Stay in place */
-  z-index: 100;
-  /* Sit on top */
-  padding-top: 100px;
-  /* Location of the box */
-  left: 25%;
-  top: -1%;
-  width: 60%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-  /* background-color: rgb(0,0,0); Fallback color */
-  /* background-color: rgba(0,0,0,0.4); Black w/ opacity */
-}
 
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
 
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
 
 /*# sourceMappingURL=addButton.css.map */

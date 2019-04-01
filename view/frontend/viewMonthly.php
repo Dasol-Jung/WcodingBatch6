@@ -15,6 +15,7 @@ if($_SESSION['isLoggedIn']!=true){
 ob_start();
 ?>
 <?php $styles[]="<link rel='stylesheet' href='../../public/css/viewSchedule.css'/>"?>
+<link href='../../public/css/addButton.css' rel='stylesheet' />
 <link rel='stylesheet' href='https://fullcalendar.io/js/fullcalendar-3.1.0/fullcalendar.min.css' />
 
 <link href='../../public/lib/fullCalendar/core/main.css' rel='stylesheet' />
@@ -37,17 +38,16 @@ ob_start();
         </div>
     </section>
     <section class="calWrapper">
-        <div id="calendarSchedule"></div>
+        <div id="monthlyCalendar"></div>
     </section>
 </div>
 
 <script src='../../public/lib/fullCalendar/core/main.js'></script>
 <script src='../../public/lib/fullCalendar/daygrid/main.js'></script>
-
 <script src= "../../public/js/frontend/viewMonthly.js"></script>
-
+<script src= "../../public/js/frontend/modifyButton.js"></script>
 <?php
-
+require("view/frontend/addButtonCalendar.php");
 //schedule ends here
 $content=ob_get_clean();
 

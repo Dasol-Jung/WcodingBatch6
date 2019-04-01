@@ -31,7 +31,7 @@ ob_start();
 <script src= "../../public/js/frontend/viewWeekly.js"></script>
 <script src= "../../public/js/frontend/modifyButton.js"></script>
 <?php
-
+require("view/frontend/addButtonCalendar.php");
 //schedule ends here
 $content=ob_get_clean();
 

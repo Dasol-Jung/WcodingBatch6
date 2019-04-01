@@ -7,7 +7,7 @@ class AddModifyDB extends User{
     public function addInfo($addWeekly){
         $user_id = $_SESSION['uid'];
         $view = $addWeekly['view'];
-        $db= parent::dbConnect();
+        $db= $this->dbConnect();
         $title = $addWeekly["title"];
         $description = $addWeekly["description"];
         $priority = $addWeekly["priority"];
@@ -22,12 +22,12 @@ class AddModifyDB extends User{
 
     public function modifyInfo($modWeekly){
         $user_id = $_SESSION['uid'];
-        $db= parent::dbConnect();
-        $title = $addWeekly["title"];
-        $description = $addWeekly["description"];
-        $priority = $addWeekly["priority"];
-        $eventDate = $addWeekly["event_date"];
-        $done = $addWeekly["is_done"];
+        $db= $this->dbConnect();
+        $title = $modWeekly["title"];
+        $description = $modWeekly["description"];
+        $priority = $modWeekly["priority"];
+        $eventDate = $modWeekly["event_date"];
+        $done = $modWeekly["is_done"];
         $modRequest = "UPDATE schedule(user_id, title, description, priority, event_date, is_done, create_date)
         VALUES('$user_id', '$title', '$description', '$priority', '$eventDate', '$done',NOW())";
         $modifytoInfo = $db->prepare($modRequest);
@@ -42,15 +42,21 @@ class AddModifyDB extends User{
         $req->execute(array( 'user_id' => $user_id ));
         $events = array();
         while($data = $req -> fetch()){
+            $extProps = [];
+            $extProps['user_id'] = $data['user_id'];
+            $extProps['description'] = $data['description'];
+
+            $eventsArray =[];
             $eventsArray['id'] =  $data['schedule_id'];
-            $eventsArray['user_id'] = $data['user_id'];
             $eventsArray['title'] = $data['title'];
-            $eventsArray['description'] = $data['description'];
-            $eventsArray['priority'] = $data['priority'];
+            $classStatus = ($data['is_done']) ? "isDone" : "notDone";
+            $eventsArray['classNames'] = $data['priority']."-priority " . $classStatus ;
             $eventsArray['start'] = $data['event_date'];
-            $eventsArray['is_done'] = $data['is_done'];
+            $eventsArray['extendedProps'] = $extProps;
+
             $events[] = $eventsArray;
         }
+       
         echo json_encode($events);
     }
 

@@ -13,7 +13,7 @@ function changeWeeklyMonthly(){
 /* initialize the calendar
 -----------------------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', function() {
-	var calendarEl = document.getElementById('calendarSchedule');
+	var calendarEl = document.getElementById('monthlyCalendar');
 
 	var date = new Date();
 	var d = date.getDate();
@@ -29,25 +29,39 @@ document.addEventListener('DOMContentLoaded', function() {
 		  center: 'title',
 			right: 'prev,next'
 		},
+		eventRender : function(info) {
+			console.log(info);
+			info.el.setAttribute("marie", info.event.extendedProps.user_id)
+			console.log(info.event.extendedProps.description);
+			// if you want to create a tooltip
+			// var tooltip = new Tooltip(info.el, {
+			// 	title: info.event.extendedProps.description,
+			// 	placement: 'top',
+			// 	trigger: 'hover',
+			// 	container: 'body'
+			//   });
+		},
     customButtons: {
       changeWeeklyMonthly: {
         text: 'Weekly/Monthly',
         click: function() {
           if(document.body.contains(document.getElementById("monthlyCalendar"))){
-            document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule'
-          } else {
             document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule'
+          } else {
+            document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule'
           }
         }
       },
       addButton: {
         text: 'Add',
 				click: function() {
-          if(document.body.contains(document.getElementById("monthlyCalendar"))){
-            document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule&add=add'
-          } else {
-            document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add'
-          }
+          // if(document.body.contains(document.getElementById("monthlyCalendar"))){
+          //   document.location.href = 'http://localhost:8888/index.php?action=monthlySchedule&add=add'
+          // } else {
+          //   document.location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add'
+					// }
+					let modalTarget = document.querySelector('#myModal.modalTarget');
+					document.body.appendChild(clientUtils.createModal(modalTarget, [350]));
         }
       }
     },

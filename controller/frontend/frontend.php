@@ -166,8 +166,8 @@ function changeUserSetting($value, $type, $userType, $superUid){
     echo $result;
 }
 
-function displayMain(){
-    require("view/frontend/addButtonCalendar.php");
+function displayAddModal(){
+   // require("view/frontend/addButtonCalendar.php");
 }
 
 function addButton($addWeekly){
