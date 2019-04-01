@@ -67,14 +67,18 @@ ob_start();
         <div class="connectedAcct">
             <label for="connectAcct">Connected Acccounts</label>
             <div class="connectedAcctContainer">
+                <?php $totalAccounts = 0 ; foreach($avatars as $accountType):?>
+                <?php $totalAccounts += count($accountType)?>
+                <?php endforeach?>
                 <?php if(isset($avatars['internal'])):?>
                     <div class="internalAcct">
                             <span>Weeky </span>
                         <?php foreach($avatars['internal'] as $internalAvatar):?>
                             <img src="<?=$internalAvatar['image']?>" alt="">
-                            <button class='discnt' userId='<?=$internalAvatar['uid']?>' id="internal">Disconnect</button>
+                            <?php if($totalAccounts!=1):?>
+                                <button class='discnt' userId='<?=$internalAvatar['uid']?>' id="internal">Disconnect</button>
+                            <?php endif?>
                         <?php endforeach?>
-                        
                     </div>
                 <?php endif?>
                 <?php if(isset($avatars['google'])):?>
@@ -82,7 +86,9 @@ ob_start();
                             <span>Google </span>
                         <?php foreach($avatars['google'] as $googleAvatar):?>
                             <img src="<?=$googleAvatar['image']?>" alt="">
-                            <button class='discnt' userId='<?=$googleAvatar['uid']?>' id="google">Disconnect</button>
+                            <?php if($totalAccounts!=1):?>
+                                <button class='discnt' userId='<?=$googleAvatar['uid']?>' id="google">Disconnect</button>
+                            <?php endif?>
                         <?php endforeach?>
                     </div>
                 <?php endif?>
@@ -91,7 +97,9 @@ ob_start();
                             <span>Kakao </span>
                         <?php foreach($avatars['kakao'] as $kakaoAvatar):?>
                             <img src="<?=$kakaoAvatar['image']?>" alt="">
-                            <button class='discnt' userId='<?=$kakaoAvatar['uid']?>' id="kakao">Disconnect</button>
+                            <?php if($totalAccounts!=1):?>
+                                <button class='discnt' userId='<?=$kakaoAvatar['uid']?>' id="kakao">Disconnect</button>
+                            <?php endif?>
                         <?php endforeach?>
                     </div>
                 <?php endif?>

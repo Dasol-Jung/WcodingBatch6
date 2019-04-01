@@ -203,13 +203,18 @@ input:read-only {
 			box-sizing: border-box;
 			background-color: #eee;
 			padding: 1rem 1rem 1rem 0;
-			display: flex;
+			display: grid;
+			grid-template-columns: 40% 20% 40%;
 			align-items: center;
-			justify-content: space-around;
 			span {
 				width: 100px;
+				justify-self: center;
+			}
+			img {
+				justify-self: center;
 			}
 			button {
+				justify-self: center;
 				margin-left: 1rem;
 			}
 		}
