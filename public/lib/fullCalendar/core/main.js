@@ -6288,7 +6288,6 @@ Docs & License: https://fullcalendar.io/
 		};
 		Toolbar.prototype.updateTitle = function(text) {
 			findElements(this.el, 'h2').forEach(function(titleEl) {
-				console.log(text);
 				if (!text.includes(',')) {
 					// let calIcon = document.createElement('div');
 					titleEl.id = 'calIcon';
@@ -6297,7 +6296,32 @@ Docs & License: https://fullcalendar.io/
 					)}`;
 					// titleEl.parentElement.replaceChild(calIcon, titleEl);
 				} else {
-					titleEl.innerText = text;
+					titleEl.id = 'calIcon';
+					if (text.length <= 20) {
+						let parts = text.split(',');
+						let year = parts[1].trim();
+						let days = parts[0].trim();
+						titleEl.innerHTML = `
+					<div class='year'>${year}</div>
+					<div class='days'>${days}</div>
+					`;
+					} else {
+						titleEl.id = 'calIcon-year';
+						let parts = text.split('–');
+						let firstYearParts = parts[0].split(',');
+						let secondYearParts = parts[1].split(',');
+						titleEl.innerHTML = `
+						<div class='firstYear'>
+							<span>${firstYearParts[1].trim()}</span>
+							<span class='month-day'>${firstYearParts[0].trim()}</span>
+						</div>
+						<div><span>-</span></div>
+						<div class='secondYear'>
+							<span>${secondYearParts[1].trim()}</span>
+							<span class='month-day'>${secondYearParts[0].trim()}</span>
+						</div>
+						`;
+					}
 				}
 			});
 		};

@@ -860,13 +860,6 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 	margin-left: .75em;
 }
 
-.fc-toolbar h2 {
-	font-size: 1.75em;
-	margin: 0 0 0 30px;
-	color: black;
-	text-align: center;
-}
-
 /* View Structure
 --------------------------------------------------------------------------------------------------*/
 .fc-view-container {
@@ -1098,27 +1091,4 @@ td.fc-axis.fc-widget-content {
 		display: none;
 		/* don't display any button-related controls */
 	}
-}
-
-/* custom css */
-
-#calIcon {
-	background-image: url("../../../images/cal_icon.svg");
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
-	height: 80px;
-	width: 80px;
-	display: grid;
-	justify-content: center;
-	font-weight: bold;
-	font-size: 1.2rem;
-}
-
-#calIcon .month {
-	margin-top: 5px;
-	align-self: end;
-}
-#calIcon .year {
-	align-self: start;
 }

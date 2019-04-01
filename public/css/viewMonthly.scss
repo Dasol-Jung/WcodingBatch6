@@ -161,3 +161,26 @@
 		}
 	}
 }
+
+/* custom css */
+
+#calIcon {
+	background-image: url("../images/cal_icon.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 80px;
+	width: 80px;
+	display: grid;
+	justify-content: center;
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+#calIcon .month {
+	margin-top: 5px;
+	align-self: end;
+}
+#calIcon .year {
+	align-self: start;
+}

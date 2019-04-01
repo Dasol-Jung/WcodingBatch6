@@ -113,20 +113,37 @@
   padding-left: 2rem;
   align-self: end;
 }
-.fc-header-toolbar .fc-center {
-  display: flex !important;
-  justify-content: center;
-}
-.fc-header-toolbar .fc-center h2 {
-  margin: 0;
-  font-size: 1rem;
-}
 .fc-header-toolbar .fc-center div {
+  color: white;
   display: flex;
   flex-flow: row;
+  justify-content: center;
   align-items: center;
+  font-size: 1rem;
+}
+.fc-header-toolbar .fc-center div h2 {
+  margin: 0 0.8rem;
+  min-width: 120px;
+}
+.fc-header-toolbar .fc-center div h2 div.days {
+  font-size: 1.2rem;
+}
+.fc-header-toolbar .fc-center div #calIcon-year {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+}
+.fc-header-toolbar .fc-center div #calIcon-year div.firstYear,
+.fc-header-toolbar .fc-center div #calIcon-year div.secondYear {
+  text-align: center;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+.fc-header-toolbar .fc-center div #calIcon-year div.firstYear .month-day,
+.fc-header-toolbar .fc-center div #calIcon-year div.secondYear .month-day {
+  font-size: 1.1rem;
 }
 .fc-header-toolbar .fc-center div button {
+  font-size: 1rem;
   padding-top: 0;
   padding-bottom: 0;
   height: 2.1rem;

@@ -114,20 +114,35 @@
 		align-self: end;
 	}
 
-	.fc-center {
-		display: flex !important;
-		justify-content: center;
-		h2 {
-			margin: 0;
-			font-size: 1rem;
-		}
-	}
-
 	.fc-center div {
+		color: white;
 		display: flex;
 		flex-flow: row;
+		justify-content: center;
 		align-items: center;
+		font-size: 1rem;
+		h2 {
+			margin: 0 0.8rem;
+			min-width: 120px;
+			div.days {
+				font-size: 1.2rem;
+			}
+		}
+		#calIcon-year {
+			display: grid;
+			grid-template-columns: repeat(3, auto);
+			div.firstYear,
+			div.secondYear {
+				text-align: center;
+				display: grid;
+				grid-template-rows: 1fr 1fr;
+				.month-day {
+					font-size: 1.1rem;
+				}
+			}
+		}
 		button {
+			font-size: 1rem;
 			padding-top: 0;
 			padding-bottom: 0;
 			height: 2.1rem;
