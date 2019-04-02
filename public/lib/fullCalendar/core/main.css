@@ -876,11 +876,11 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 }
-
+/* 
 .fc-day-grid {
 	position: sticky;
 	height: 24px;
-}
+} */
 
 .fc-day-grid span {
 	color: white;
