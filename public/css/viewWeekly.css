@@ -266,4 +266,10 @@ form.addSimpleSchedule label:not(:nth-child(2)) {
   background-color: #007e00;
 }
 
+#external-events {
+  height: 80%;
+  border: none;
+  background-color: black;
+}
+
 /*# sourceMappingURL=viewWeekly.css.map */

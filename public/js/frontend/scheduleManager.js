@@ -2,28 +2,31 @@
 
 let scheduleManager = (function() {
 	/**
-     * getSchedule : get schedule from
-     * @params
-     * -startDate : the starting date in a mysql string form year-month-day ex)2019-03-29
-     * -finishDate : the finishing date(inclusive) in a mysql string form year-month-day ex)2019-03-29
+     * getSchedule : get simple schedule from db
      */
-	let getSchedule = function(startDate, finishDate) {
+	let getSchedule = function() {
 		let xhr = new XMLHttpRequest();
-		let newForm = new FormData();
-		xhr.open('POST', `index.php`);
-		newForm.append('action', 'addSimple');
-		newForm.append('start', startDate);
-		newForm.append('finish', finishDate);
+		xhr.open('GET', `index.php?action=getSimple`);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
-				console.log(xhr.response);
+				renderSimple(JSON.parse(xhr.response));
 			}
 			if (xhr.status >= 400) {
 				//php error page
 				return;
 			}
 		};
-		xhr.send(newForm);
+		xhr.send();
+	};
+
+	let renderSimple = function(events) {
+		let dragContainer = document.querySelector('#external-events-listing');
+		events.forEach(event => {
+			let eventElement = document.createElement('div');
+			eventElement.textContent = event['title'];
+			eventElement.className = 'fc-event';
+			dragContainer.appendChild(eventElement);
+		});
 	};
 
 	return { getSchedule };

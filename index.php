@@ -103,6 +103,10 @@ try{
                 addButton($_POST);
                 viewWeekly();
                 break;
+
+            case "getSimple":
+                getSimpleSchedule($_SESSION['uid']);
+                break;
             
             default:
                 break;

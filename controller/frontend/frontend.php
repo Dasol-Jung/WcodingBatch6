@@ -216,3 +216,10 @@ function disconnectAccount($userId, $userType, $superUid){
     ob_end_clean();
     echo $result;
 }
+
+function getSimpleSchedule($uid){
+    $getSchedule = new AddModifyDB();
+    $eventData = $getSchedule->getSimpleSchedule($uid);
+    ob_end_clean();
+    print_r($eventData);
+}
