@@ -22,6 +22,7 @@ ob_start();
 
 <div class='bodyWrapper'>
     <section class="listWrapper">
+    <button class='addEvent'><i class='fas fa-plus'></i></button>
         <div id='external-events'>
             <div id='external-events-listing' ondrop="drop(event)" ondragover="allowDrop(event)">
                 <h4>Draggable Events</h4>
@@ -40,7 +41,15 @@ ob_start();
         <div id="calendarSchedule"></div>
     </section>
 </div>
-
+<!-- modal -->
+<form class="modalTarget addSimpleSchedule">
+    <h2>Add a simple schedule</h2>
+    <label for="scheduleName">Name</label>
+    <input id='scheduleName' type="text" >
+    <label for="scheduleDesc">Description</label>
+    <input id='scheduleDesc' type="text" >
+    <button class="addSimpleBtn">Add</button>
+</form>
 <script src='../../public/lib/fullCalendar/core/main.js'></script>
 <script src='../../public/lib/fullCalendar/daygrid/main.js'></script>
 

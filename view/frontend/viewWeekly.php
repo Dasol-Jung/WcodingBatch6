@@ -21,11 +21,34 @@ ob_start();
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <div class='bodyWrapper'>
     <section class="listWrapper">
+        <button class='addEvent'><i class='fas fa-plus'></i></button>
+        <div id='external-events'>
+            <div id='external-events-listing' ondrop="drop(event)" ondragover="allowDrop(event)">
+                <h4>Draggable Events</h4>
+                <div class='fc-event' id="1" draggable="true" ondragstart="drag(event)" >My Event 1</div>
+                <div class='fc-event' id="2" draggable="true" ondragstart="drag(event)">My Event 2</div>
+                <div class='fc-event' id="3" draggable="true" ondragstart="drag(event)">My Event 3</div>
+                <div class='fc-event' id="4" draggable="true" ondragstart="drag(event)">My Event 4</div>
+                <div class='fc-event' id="5" draggable="true" ondragstart="drag(event)">My Event 5</div>
+            </div>
+        </div>
+        <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h4>Drag to here</h4>
+        </div>
     </section>
     <section class="calWrapper">
         <div id='weeklyCalendar'></div>
     </section>
 </div>
+<!-- modal -->
+<form class="modalTarget addSimpleSchedule">
+    <h2>Add a simple schedule</h2>
+    <label for="scheduleName">Name</label>
+    <input id='scheduleName' type="text" >
+    <label for="scheduleDesc">Description</label>
+    <input id='scheduleDesc' type="text" >
+    <button class="addSimpleBtn">Add</button>
+</form>
 <script src='../../public/lib/fullCalendar/core/main.js'></script>
 <script src='../../public/lib/fullCalendar/daygrid/main.js'></script>
 <script src= "../../public/js/frontend/viewWeekly.js"></script>

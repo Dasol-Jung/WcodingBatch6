@@ -7,6 +7,9 @@ $primary-font: "DIN alternate";
 $primary-dark: #2f2f2f;
 $primary-light: white;
 $primary-red: #d56c6c;
+$high: rgb(184, 14, 14);
+$medium: rgb(240, 196, 0);
+$low: rgb(0, 126, 0);
 
 $secondary-dark: #404040;
 $secondary-light: #dbdbdb;
@@ -37,4 +40,3 @@ $carouselColor: #f2f2f2;
 @mixin boxShadow($box-shadow) {
 	box-shadow: $box-shadow;
 }
-

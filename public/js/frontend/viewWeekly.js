@@ -69,59 +69,13 @@ function closeForm() {
 	generateCalendar(calendarEl);
 }
 
-/**
- * Disiplay errors on the check of the form
- */
+//add an event to 'add-simple-event' button
 
-/**
- * ajax refreshing the page 
- * delayed*
- */
-
-// var eventApp = [];
-// var xhr =  new XMLHttpRequest();
-// xhr.onreadystatechange = function() {
-// 	if (this.readyState == 4 && this.status == 200) {
-// 		var appointments = JSON.parse(this.responseText);
-// 		//console.log(appointments);
-
-// 		if(appointments.length>0) {
-// 			for (var i in appointments) {
-// 				var event = {
-// 					'title' : appointments[i].title,
-// 					'start' : appointments[i].event_date
-// 				}
-// 				// eventApp += ;
-// 				// eventApp += appointment.priority;
-// 				// eventApp += appointment.event_date;
-// 				// eventApp += appointment.is_done;
-// 				eventApp[i] = event;
-// 			}
-// 		}
-// 		console.log(eventApp);
-// 	}
-// };
-// xhr.open("GET", "http://localhost:8888/index.php?action=loadTodoList", true);
-// xhr.send();
-
-// window.onload = loadPage();
-// function loadPage(){
-// var ajax = new XMLHttpRequest();
-// ajax.onreadystatechange = function() {
-// 	if (this.readyState == 4 && this.status == 200) {
-// 		console.log("test");
-// 		var appointment = JSON.parse(this.responseText);
-// 		console.log(this.responseText);
-// 		var eventApp = [];
-// 		if(appointment.user_id)
-// 		for(var i=0; i < appointment.length; i++){
-// 			eventApp += appointment.title;
-// 			eventApp += appointment.priority;
-// 			eventApp += appointment.event_date;
-// 			eventApp += appointment.is_done;
-// 		}
-// 	}
-// };
-// ajax.open("GET", "http://localhost:8888/index.php?action=loadTodoList", true);
-// ajax.send();
-// }
+(function() {
+	let addBtn = document.querySelector('button.addEvent');
+	addBtn.addEventListener('click', e => {
+		let addSimpleScheduleForm = document.querySelector('form.addSimpleSchedule');
+		document.querySelector('.fc-view-container').style.zIndex = 0;
+		document.body.appendChild(clientUtils.createModal(addSimpleScheduleForm));
+	});
+})();
