@@ -23,9 +23,16 @@ if (document.querySelector('#kakaoLogin')) {
 					xhr.addEventListener('readystatechange', function() {
 						if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
 							var kakaoLoginResult = this.response;
-							kakaoLoginResult == 'success'
-								? (window.location.href = 'index.php?action=weeklySchedule')
-								: alert('Kakao Login failed');
+							switch (kakaoLoginResult) {
+								case 'w':
+									window.location.href = 'index.php?action=weeklySchedule';
+									break;
+								case 'm':
+									window.location.href = 'index.php?action=monthlySchedule';
+									break;
+								default:
+									alert('Kakao Login failed');
+							}
 						}
 					});
 					xhr.send(JSON.stringify(params));

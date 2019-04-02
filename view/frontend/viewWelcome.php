@@ -1,6 +1,6 @@
 <?php
 if(!isset($_SESSION)) session_start();
-$styles[]="<link rel='stylesheet' href='../../public/css/welcome.css'/>";
+$styles[]="<link rel='stylesheet' href='public/css/welcome.css'/>";
 ob_start();
 ?>
 <div class="bodyWrapper">
@@ -18,11 +18,11 @@ ob_start();
                 <span class="nameBody"><?=$_SESSION['firstName']?></span>
                 <span class="nameShadow"><?=$_SESSION['firstName']?></span>
             </div>
-            <button class='start'>START</button>
+            <button class='start'><a href='index.php'>START</a></button>
         </div>
     </div>
 </div>
 <?php
 $content = ob_get_clean();
-require('view/template.php');
+require_once("view/template.php");
 ?>

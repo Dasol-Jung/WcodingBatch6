@@ -72,6 +72,10 @@
 				background-color: $primary-dark;
 				cursor: pointer;
 				box-shadow: $box-shadow;
+				a {
+					text-decoration: none !important;
+					color: white !important;
+				}
 			}
 		}
 	}

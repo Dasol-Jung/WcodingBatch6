@@ -8,8 +8,6 @@ ob_start();
 ?>
 
 <div class="bodyWrapper">
-<script src="https://apis.google.com/js/api:client.js"></script>
-<script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <div class="profileForm" action="index.php" method="POST">
     <div class="leftCol">
         <label for="email">Email</label>
@@ -56,8 +54,8 @@ ob_start();
             </div>
         </div>
         <div class="signOutContainer">
-            <label for="connectAcct">Sign out</label>
-            <button id="signOut">Sign out</button>
+            <label for="connectAcct">Delete account</label>
+            <button id="signOut">Delete</button>
         </div>
     </div>
 
@@ -69,32 +67,40 @@ ob_start();
         <div class="connectedAcct">
             <label for="connectAcct">Connected Acccounts</label>
             <div class="connectedAcctContainer">
+                <?php $totalAccounts = 0 ; foreach($avatars as $accountType):?>
+                <?php $totalAccounts += count($accountType)?>
+                <?php endforeach?>
                 <?php if(isset($avatars['internal'])):?>
                     <div class="internalAcct">
                             <span>Weeky </span>
                         <?php foreach($avatars['internal'] as $internalAvatar):?>
-                            <img src="<?=$internalAvatar?>" alt="">
+                            <img src="<?=$internalAvatar['image']?>" alt="">
+                            <?php if($totalAccounts!=1):?>
+                                <button class='discnt' userId='<?=$internalAvatar['uid']?>' id="internal">Disconnect</button>
+                            <?php endif?>
                         <?php endforeach?>
-                            <button id="discntInternal">Disconnect</button>
-                        
                     </div>
                 <?php endif?>
                 <?php if(isset($avatars['google'])):?>
                     <div class="googleAcct">
                             <span>Google </span>
                         <?php foreach($avatars['google'] as $googleAvatar):?>
-                            <img src="<?=$googleAvatar?>" alt="">
+                            <img src="<?=$googleAvatar['image']?>" alt="">
+                            <?php if($totalAccounts!=1):?>
+                                <button class='discnt' userId='<?=$googleAvatar['uid']?>' id="google">Disconnect</button>
+                            <?php endif?>
                         <?php endforeach?>
-                        <button id="discntGoogle">Disconnect</button>
                     </div>
                 <?php endif?>
                 <?php if(isset($avatars['kakao'])):?>
                     <div class="kakaoAcct">
                             <span>Kakao </span>
                         <?php foreach($avatars['kakao'] as $kakaoAvatar):?>
-                            <img src="<?=$kakaoAvatar?>" alt="">
+                            <img src="<?=$kakaoAvatar['image']?>" alt="">
+                            <?php if($totalAccounts!=1):?>
+                                <button class='discnt' userId='<?=$kakaoAvatar['uid']?>' id="kakao">Disconnect</button>
+                            <?php endif?>
                         <?php endforeach?>
-                        <button id="discntKakao">Disconnect</button>
                     </div>
                 <?php endif?>
             </div>
@@ -125,8 +131,8 @@ ob_start();
         </form>
     <?php else:?>
         <form class="checkSignOut modalTarget">
-            <label for="confirmSignOut">Do you really want to sign out?</label>
-            <button class='confirmSignOut'>Sign Out</button>
+            <label for="confirmSignOut">Do you really want to delete your account?</label>
+            <button class='confirmSignOut'>Delete account</button>
         </form>
     <?php endif?>
 
@@ -138,9 +144,6 @@ ob_start();
     </form>
 </div>
 <script src='public/js/frontend/profile.js'></script>
-<script src="../../public/js/frontend/google.js"></script>
-<script src="../../public/js/frontend/kakaoAcct.js"></script>
-<script>startApp();</script>
 <?php
 $content = ob_get_clean();
 require('view/template.php');

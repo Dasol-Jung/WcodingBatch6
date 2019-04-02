@@ -200,14 +200,19 @@ input:read-only:focus {
   box-sizing: border-box;
   background-color: #eee;
   padding: 1rem 1rem 1rem 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
   align-items: center;
-  justify-content: space-around;
 }
 .connectedAcct .connectedAcctContainer div span {
   width: 100px;
+  justify-self: center;
+}
+.connectedAcct .connectedAcctContainer div img {
+  justify-self: center;
 }
 .connectedAcct .connectedAcctContainer div button {
+  justify-self: center;
   margin-left: 1rem;
 }
 .connectedAcct img {

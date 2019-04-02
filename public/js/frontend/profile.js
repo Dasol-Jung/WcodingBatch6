@@ -141,9 +141,39 @@
 	let signOutBtn = document.querySelector('button#signOut');
 	if (signOutBtn) {
 		signOutBtn.addEventListener('click', e => {
-			let modalTarget = document.querySelector('.modalTarget.checkSignOut');
-			document.body.appendChild(clientUtils.createModal(modalTarget));
+			let checkSignOut = document.querySelector('.modalTarget.checkSignOut');
+			if (checkSignOut) {
+				document.body.appendChild(clientUtils.createModal(checkSignOut));
+				return null;
+			}
+			let checkSignOutInternal = document.querySelector('.modalTarget.checkSignOutInternal');
+			if (checkSignOutInternal) {
+				document.body.appendChild(clientUtils.createModal(checkSignOutInternal));
+				return null;
+			}
 		});
+	}
+})();
+
+/**
+ * adding an event to disconnect account when an user clicks disconnect button
+ */
+
+(function() {
+	let discntBtns = document.querySelectorAll('button.discnt');
+	if (discntBtns) {
+		let nbBtn = discntBtns.length,
+			i;
+		for (i = 0; i < nbBtn; i++) {
+			let discntBtn = discntBtns[i];
+			let userId = discntBtn.getAttribute('userId');
+			let userType = discntBtn.id;
+			discntBtn.addEventListener('click', e => {
+				if (confirm('Do you really want to disconnect this account?')) {
+					disconnectAcct(userId, userType);
+				}
+			});
+		}
 	}
 })();
 
@@ -370,6 +400,42 @@ function changeUserSetting(value, type) {
 		if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
 			switch (xhr.response) {
 				case 'success':
+					break;
+				case 'failure':
+					alert('Something went wrong');
+					break;
+				default:
+					alert('Soemthing went wrong');
+					break;
+			}
+			return;
+		}
+		if (xhr.status >= 400) {
+			//php error page
+			return null;
+		}
+	};
+	xhr.send(formData);
+}
+
+/**
+ * disconnectAcct : a function to send ajax request to disconnect an account
+ * @param : (string) userId to disconnect
+ */
+
+function disconnectAcct(userId, userType) {
+	let xhr = new XMLHttpRequest();
+	let formData = new FormData();
+	formData.append('action', 'disconnect');
+	formData.append('userId', userId);
+	formData.append('userType', userType);
+	xhr.open('POST', 'index.php');
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
+			switch (xhr.response) {
+				case 'success':
+					alert('Your account has been successfully disconnected');
+					location.reload();
 					break;
 				case 'failure':
 					alert('Something went wrong');
