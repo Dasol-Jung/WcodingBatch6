@@ -2,6 +2,24 @@
 
 function generateCalendar(calendarEl) {
 	document.addEventListener('DOMContentLoaded', function() {
+		var Draggable = FullCalendarInteraction.Draggable;
+
+		var containerEl = document.getElementById('external-events');
+		// var calendarEl = document.getElementById('weeklyCalendar');
+		var checkbox = document.getElementById('drop-remove');
+
+		// initialize the external events
+		// -----------------------------------------------------------------
+
+		new Draggable(containerEl, {
+			itemSelector: '.fc-event',
+			containers: [ calendarEl ],
+			eventData: function(eventEl) {
+				return {
+					title: eventEl.innerText
+				};
+			}
+		});
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			events: {
 				url: 'http://localhost:8888/index.php?action=loadTodoList',
@@ -38,8 +56,19 @@ function generateCalendar(calendarEl) {
 				center: 'prev,title,next',
 				right: null
 			},
-			plugins: [ 'dayGrid' ],
-			defaultView: 'dayGridWeek'
+			plugins: [ 'dayGrid', 'interaction' ],
+			defaultView: 'dayGridWeek',
+			editable: true,
+			selectable: true,
+			droppable: true,
+			drop: function(info) {
+				console.log(info.view);
+				// is the "remove after drop" checkbox checked?
+				if (checkbox.checked) {
+					// if so, remove the element from the "Draggable Events" list
+					info.draggedEl.parentNode.removeChild(info.draggedEl);
+				}
+			}
 		});
 		calendar.render();
 	});
