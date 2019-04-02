@@ -12,12 +12,15 @@ function changeWeeklyMonthly() {
 /* initialize the calendar
 -----------------------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', function() {
-	var calendarEl = document.getElementById('calendarSchedule');
+	var Calendar = FullCalendar.Calendar;
+  var Draggable = FullCalendarInteraction.Draggable;
 
-	var date = new Date();
-	var d = date.getDate();
-	var m = date.getMonth();
-	var y = date.getFullYear();
+	var containerEl = document.getElementById('external-events');
+	var calendarEl = document.getElementById('calendarSchedule');
+  var checkbox = document.getElementById('drop-remove');
+
+	// initialize the external events
+  // -----------------------------------------------------------------
 
 	var calendar = new FullCalendar.Calendar(calendarEl, {
 		plugins: [ 'dayGrid' ],
@@ -51,15 +54,23 @@ document.addEventListener('DOMContentLoaded', function() {
 		},
 		selectable: true,
 		selectHelper: true,
-		allDayDefault: true,
+		editable: true,
 		droppable: true, // this allows things to be dropped onto the calendar
-		dragRevertDuration: 0,
+		drop: function(info) {
+			console.log(info.view);
+      // is the "remove after drop" checkbox checked?
+      if (checkbox.checked) {
+        // if so, remove the element from the "Draggable Events" list
+				info.draggedEl.parentNode.removeChild(info.draggedEl);
+      }
+    },
 		eventLimit: true, // for all non-TimeGrid views
 		views: {
 			timeGrid: {
 				eventLimit: 5
 			}
 		},
+<<<<<<< HEAD
 		select: function(start, end, allDay) {
 			var title = prompt('Event Title:');
 			if (title) {
@@ -78,6 +89,24 @@ document.addEventListener('DOMContentLoaded', function() {
 		},
 		editable: true,
 		events: {
+=======
+		// select: function(start, end, allDay) {
+		// 	var title = prompt('Event Title:');
+		// 	if (title) {
+		// 		calendar.fullCalendar('renderEvent',
+		// 			{
+		// 				title: title,
+		// 				start: start,
+		// 				end: end,
+		// 				allDay: allDay
+		// 			},
+		// 			true // make the event "stick"
+		// 		);
+		// 	}
+		// 	calendar.fullCalendar('unselect');
+		// },
+		events:  {
+>>>>>>> 77b6a9da3e00745936f9e8d5046b33f1216c1edd
 			url: 'http://localhost:8888/index.php?action=loadTodoList',
 			type: 'GET', // Send post data
 			error: function() {
@@ -89,10 +118,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	calendar.render();
 });
 
-function allowDrop(ev) {
-	ev.preventDefault();
-}
+// function allowDrop(ev) {
+// 	ev.preventDefault();
+// }
 
+<<<<<<< HEAD
 function drag(ev) {
 	ev.dataTransfer.setData('text', ev.target.id);
 }
@@ -102,3 +132,14 @@ function drop(ev) {
 	var data = ev.dataTransfer.getData('text');
 	ev.target.appendChild(document.getElementById(data));
 }
+=======
+// function drag(ev) {
+// 	ev.dataTransfer.setData("text", ev.target.id);
+// }
+
+// function drop(ev) {
+// 	ev.preventDefault();
+// 	var data = ev.dataTransfer.getData("text");
+// 	ev.target.appendChild(document.getElementById(data));
+// }
+>>>>>>> 77b6a9da3e00745936f9e8d5046b33f1216c1edd

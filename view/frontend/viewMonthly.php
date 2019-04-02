@@ -24,14 +24,18 @@ ob_start();
     <section class="listWrapper">
     <button class='addEvent'><i class='fas fa-plus'></i></button>
         <div id='external-events'>
-            <div id='external-events-listing' ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id='external-events-listing'>
                 <h4>Draggable Events</h4>
-                <div class='fc-event' id="1" draggable="true" ondragstart="drag(event)" >My Event 1</div>
-                <div class='fc-event' id="2" draggable="true" ondragstart="drag(event)">My Event 2</div>
-                <div class='fc-event' id="3" draggable="true" ondragstart="drag(event)">My Event 3</div>
-                <div class='fc-event' id="4" draggable="true" ondragstart="drag(event)">My Event 4</div>
-                <div class='fc-event' id="5" draggable="true" ondragstart="drag(event)">My Event 5</div>
+                <div class='fc-event' >My Event 1</div>
+                <div class='fc-event' >My Event 2</div>
+                <div class='fc-event' >My Event 3</div>
+                <div class='fc-event' >My Event 4</div>
+                <div class='fc-event' >My Event 5</div>
             </div>
+            <p>
+                <input type='checkbox' id='drop-remove' />
+                <label for='drop-remove'>remove after drop</label>
+            </p>
         </div>
         <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
             <h4>Drag to here</h4>
@@ -52,9 +56,8 @@ ob_start();
 </form>
 <script src='../../public/lib/fullCalendar/core/main.js'></script>
 <script src='../../public/lib/fullCalendar/daygrid/main.js'></script>
-
+<script src='../../public/lib/fullCalendar/interaction/main.js'></script>
 <script src= "../../public/js/frontend/viewMonthly.js"></script>
-
 <?php
 
 //schedule ends here
