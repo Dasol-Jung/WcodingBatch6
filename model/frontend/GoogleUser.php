@@ -69,8 +69,7 @@ class GoogleUser extends User
         //update super_user table
         $userType = 'google';
         $superUserReq = $db->prepare("INSERT INTO super_user (super_uid, type, uid) VALUES (:super_uid, :type, :uid)
-        ON DUPLICATE KEY UPDATE super_uid = super_uid
-        ");
+        ON DUPLICATE KEY UPDATE super_uid = super_uid");
         $superUserReq->bindParam(":super_uid", $superUid, PDO::PARAM_STR);
         $superUserReq->bindParam(":type", $userType, PDO::PARAM_STR);
         $superUserReq->bindParam(":uid", $googleId, PDO::PARAM_STR);

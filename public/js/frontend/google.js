@@ -63,10 +63,18 @@ function onSuccess(googleUser, type) {
 	ajax.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var googleLoginResult = this.response;
+
 			if (type == 'login') {
-				googleLoginResult == 'success'
-					? (window.location.href = 'index.php?action=weeklySchedule')
-					: alert('Google Login failed');
+				switch (googleLoginResult) {
+					case 'w':
+						window.location.href = 'index.php?action=weeklySchedule';
+						break;
+					case 'm':
+						window.location.href = 'index.php?action=monthlySchedule';
+						break;
+					default:
+						alert('Google login failed');
+				}
 			} else if (type == 'connect') {
 				if (googleLoginResult == 'success') {
 					alert('Your Google account has been successfully connected');
@@ -96,12 +104,10 @@ function onFailure(error) {
  * NO USE for now we'll see later if we need
  */
 function googleLogOut() {
+	// google oAuth logout link
+	// https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=[http://www.mysite.com]
 	var auth2 = gapi.auth2.getAuthInstance();
-	if (googleIdSession) {
-		auth2.signOut().then(function() {
-			console.log('User signed out.');
-		});
-	} else {
-		console.log('Not logged in.');
-	}
+	auth2.signOut().then(function() {
+		console.log('User signed out.');
+	});
 }

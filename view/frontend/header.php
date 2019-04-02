@@ -23,7 +23,7 @@
                         <a class='switchAccount' user='internal' href="index.php?action=switch&type=internal">
                             <span>WEEKY </span>
                             <?php foreach($avatars['internal'] as $internalAvatar):?>
-                                <img src="<?=$internalAvatar?>" alt="">
+                                <img src="<?=$internalAvatar['image']?>" alt="">
                             <?php endforeach?>
                             
                         </a>
@@ -34,7 +34,7 @@
                         <a class='switchAccount' user='google' href="index.php?action=switch&type=google">  
                             <span>GOOGLE </span>
                             <?php foreach($avatars['google'] as $googleAvatar):?>
-                                <img src="<?=$googleAvatar?>" alt="">
+                                <img src="<?=$googleAvatar['image']?>" alt="">
                             <?php endforeach?>
                            
                         </a>
@@ -46,13 +46,13 @@
                         
                             <span>KAKAO </span>
                             <?php foreach($avatars['kakao'] as $kakaoAvatar):?>
-                                <img src="<?=$kakaoAvatar?>" alt="">
+                                <img src="<?=$kakaoAvatar['image']?>" alt="">
                             <?php endforeach?>
                            
                         </a>
                     </li>
                     <?php endif?>
-                    <li><a class='menuLink logout' href="index.php?action=logout">LOGOUT</a></li>
+                    <li><a class='menuLink logout' id='logout' href="index.php?action=logout">LOGOUT</a></li>
                 </ul>
             <?php else :?>
                 <li class="menuItem"><a class='menuLink' href="index.php">HOME</a></li>

@@ -3,7 +3,7 @@
 
 .bodyWrapper {
 	font-family: $primary-font;
-	height: 100%;
+	height: min-content;
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 7.5fr;
@@ -20,12 +20,10 @@
 
 .calWrapper {
 	height: 100%;
-	display: grid;
-	margin-top: 100px;
-	grid-gap: 1rem;
-	grid-template-rows: 30px 9fr;
 	box-sizing: border-box;
-	background-color: #2f2f2f; 
+	background-color: #2f2f2f;
+	margin-top: 0;
+	padding-top: 20px;
 }
 
 // .utilContainer {
@@ -94,12 +92,12 @@
 // 	}
 // }
 
-#switchDiv{
+#switchDiv {
 	height: 30px;
 	text-align: right;
 }
 
-#monthlyWeeklyBtn{
+#monthlyWeeklyBtn {
 	height: max-content;
 	background-color: $secondary-dark;
 	border: 1px solid $secondary-light;
@@ -119,4 +117,190 @@
 
 #monthlyCalendar {
 	margin: 0;
+}
+
+.fc-header-toolbar {
+	display: grid !important;
+	grid-template-columns: 1fr 1fr 1fr !important;
+
+	.fc-left {
+		padding-left: 2rem;
+		align-self: end;
+	}
+
+	.fc-center {
+		display: flex !important;
+		justify-content: center;
+		#calIcon {
+			margin: 0 1rem;
+		}
+	}
+
+	.fc-center div {
+		display: flex;
+		flex-flow: row;
+		align-items: center;
+		button {
+			background-color: $primary-dark;
+			border: white 1px solid;
+			color: white;
+			text-transform: capitalize;
+			position: relative;
+			border-radius: 10px;
+			top: 2px;
+			&:hover {
+				color: black;
+				background-color: white;
+			}
+		}
+	}
+
+	.fc-view-container {
+		span.fc-day-number {
+			vertical-align: bottom;
+		}
+	}
+}
+
+/* custom css */
+
+#calIcon {
+	background-image: url("../images/cal_icon.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 80px;
+	width: 80px;
+	display: grid;
+	justify-content: center;
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+#calIcon .month {
+	margin-top: 5px;
+	align-self: end;
+}
+#calIcon .year {
+	align-self: start;
+}
+
+// add simple schedule
+
+button.addEvent {
+	padding: 0;
+	float: right;
+	margin-right: 0.5rem;
+	height: 30px;
+	width: 30px;
+	border: none;
+	cursor: pointer;
+	border-radius: 50%;
+	font-size: 1rem;
+	transition: all 0.2s ease-in-out;
+	&:hover {
+		transform: scale(1.1, 1.1);
+		background-color: rgb(51, 99, 230);
+		color: white;
+	}
+}
+form.addSimpleSchedule {
+	margin: 0;
+	font-family: "DIN alternate";
+
+	h2 {
+		margin-top: 0;
+	}
+
+	input {
+		display: block;
+		width: 100%;
+		border: 1px solid #ccc;
+		height: 2.3rem;
+		font-size: 1rem;
+		box-sizing: border-box;
+		margin-top: 0.4rem;
+	}
+
+	button {
+		float: right;
+		color: white;
+		background-color: lightslategrey;
+		width: 130px;
+		font-size: 0.85rem;
+		height: 2.3rem;
+		border: none;
+		cursor: pointer;
+		margin-top: 1rem;
+	}
+
+	label {
+		display: block;
+	}
+
+	label:not(:nth-child(2)) {
+		margin-top: 0.8rem;
+	}
+}
+
+//styling schedule(event) sticker
+
+.calWrapper {
+	.fc-content {
+		display: grid;
+		align-items: center;
+		grid-template-columns: 20px auto auto;
+		position: relative;
+		z-index: 2;
+		background-color: white;
+		span {
+			color: black;
+		}
+	}
+
+	.fc-event {
+		width: 90%;
+		margin: 0 auto;
+		border-radius: 0;
+		height: 25px;
+		border: none;
+	}
+
+	.fc-event,
+	.fc-event-dot {
+		background-color: white;
+		padding: 0;
+	}
+
+	span.isDone[data-isDone="0"] i {
+		display: none;
+	}
+
+	a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
+		padding-left: 0;
+		span.isDone {
+			text-align: right;
+			padding-right: 3px;
+		}
+	}
+
+	div.priority {
+		height: 100%;
+		min-height: 25px;
+		float: left;
+		margin-right: 6px;
+		width: 15px;
+	}
+
+	div.priority[data-priority='high'] {
+		background-color: $high;
+	}
+
+	div.priority[data-priority='medium'] {
+		background-color: $medium;
+	}
+
+	div.priority[data-priority='low'] {
+		background-color: $low;
+	}
 }

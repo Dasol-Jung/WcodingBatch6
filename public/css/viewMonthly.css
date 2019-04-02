@@ -4,7 +4,7 @@
 }
 .bodyWrapper {
   font-family: "DIN alternate";
-  height: 100%;
+  height: min-content;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 7.5fr;
@@ -21,12 +21,10 @@
 
 .calWrapper {
   height: 100%;
-  display: grid;
-  margin-top: 100px;
-  grid-gap: 1rem;
-  grid-template-rows: 30px 9fr;
   box-sizing: border-box;
   background-color: #2f2f2f;
+  margin-top: 0;
+  padding-top: 20px;
 }
 
 #switchDiv {
@@ -54,6 +52,168 @@
 
 #monthlyCalendar {
   margin: 0;
+}
+
+.fc-header-toolbar {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+}
+.fc-header-toolbar .fc-left {
+  padding-left: 2rem;
+  align-self: end;
+}
+.fc-header-toolbar .fc-center {
+  display: flex !important;
+  justify-content: center;
+}
+.fc-header-toolbar .fc-center #calIcon {
+  margin: 0 1rem;
+}
+.fc-header-toolbar .fc-center div {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+.fc-header-toolbar .fc-center div button {
+  background-color: #2f2f2f;
+  border: white 1px solid;
+  color: white;
+  text-transform: capitalize;
+  position: relative;
+  border-radius: 10px;
+  top: 2px;
+}
+.fc-header-toolbar .fc-center div button:hover {
+  color: black;
+  background-color: white;
+}
+.fc-header-toolbar .fc-view-container span.fc-day-number {
+  vertical-align: bottom;
+}
+
+/* custom css */
+#calIcon {
+  background-image: url("../images/cal_icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 80px;
+  width: 80px;
+  display: grid;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+#calIcon .month {
+  margin-top: 5px;
+  align-self: end;
+}
+
+#calIcon .year {
+  align-self: start;
+}
+
+button.addEvent {
+  padding: 0;
+  float: right;
+  margin-right: 0.5rem;
+  height: 30px;
+  width: 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+button.addEvent:hover {
+  transform: scale(1.1, 1.1);
+  background-color: #3363e6;
+  color: white;
+}
+
+form.addSimpleSchedule {
+  margin: 0;
+  font-family: "DIN alternate";
+}
+form.addSimpleSchedule h2 {
+  margin-top: 0;
+}
+form.addSimpleSchedule input {
+  display: block;
+  width: 100%;
+  border: 1px solid #ccc;
+  height: 2.3rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  margin-top: 0.4rem;
+}
+form.addSimpleSchedule button {
+  float: right;
+  color: white;
+  background-color: lightslategrey;
+  width: 130px;
+  font-size: 0.85rem;
+  height: 2.3rem;
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+form.addSimpleSchedule label {
+  display: block;
+}
+form.addSimpleSchedule label:not(:nth-child(2)) {
+  margin-top: 0.8rem;
+}
+
+.calWrapper .fc-content {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 20px auto auto;
+  position: relative;
+  z-index: 2;
+  background-color: white;
+}
+.calWrapper .fc-content span {
+  color: black;
+}
+.calWrapper .fc-event {
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 0;
+  height: 25px;
+  border: none;
+}
+.calWrapper .fc-event,
+.calWrapper .fc-event-dot {
+  background-color: white;
+  padding: 0;
+}
+.calWrapper span.isDone[data-isDone="0"] i {
+  display: none;
+}
+.calWrapper a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
+  padding-left: 0;
+}
+.calWrapper a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end span.isDone {
+  text-align: right;
+  padding-right: 3px;
+}
+.calWrapper div.priority {
+  height: 100%;
+  min-height: 25px;
+  float: left;
+  margin-right: 6px;
+  width: 15px;
+}
+.calWrapper div.priority[data-priority=high] {
+  background-color: #b80e0e;
+}
+.calWrapper div.priority[data-priority=medium] {
+  background-color: #f0c400;
+}
+.calWrapper div.priority[data-priority=low] {
+  background-color: #007e00;
 }
 
 /*# sourceMappingURL=viewMonthly.css.map */

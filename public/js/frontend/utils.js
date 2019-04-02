@@ -263,6 +263,32 @@ const clientUtils = (() => {
 				toggleBtn.classList.toggle('on');
 			});
 		});
+
+		// adding click event to logout button
+
+		let logoutBtn = document.querySelector('#logout');
+
+		if (logoutBtn) {
+			logoutBtn.addEventListener('click', e => {
+				e.preventDefault();
+				// Kakao.init();
+				googleLogOut();
+				Kakao.Auth.logout(() => console.log('hey'));
+				let xhr = new XMLHttpRequest();
+				xhr.open('GET', 'index.php?action=logout');
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
+						// Kakao.Auth.logout(() => console.log('hey'));
+						window.location.href = 'index.php';
+					}
+					if (xhr.status >= 400) {
+						//php error page
+						return;
+					}
+				};
+				xhr.send();
+			});
+		}
 	}
 
 	return {
