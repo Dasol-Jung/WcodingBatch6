@@ -55,6 +55,9 @@ let scheduleManager = (function() {
 		};
 		xhr.send();
 	};
+	/**
+     * renderSimple : render simple schedules in the DOM
+     */
 
 	let renderSimple = function(events) {
 		let dragContainer = document.querySelector('#external-events-listing');
@@ -70,6 +73,7 @@ let scheduleManager = (function() {
 			isDone.className = 'isDone';
 			isDone.innerHTML = '<i class="fas fa-check-circle" />';
 			eventElement.setAttribute('data-edit', 'true');
+			eventElement.setAttribute('data-scheduleId', event['schedule_id']);
 			eventElement.appendChild(priority);
 			eventElement.appendChild(text);
 			eventElement.className = 'fc-event';
@@ -78,5 +82,25 @@ let scheduleManager = (function() {
 		});
 	};
 
-	return { getSchedule };
+	let changeDate = function(scheduleId, date) {
+		let xhr = new XMLHttpRequest();
+		let formToSend = new FormData();
+		formToSend.append('action', 'changeDate');
+		formToSend.append('scheduleId', scheduleId);
+		formToSend.append('date', date);
+		xhr.open('POST', `index.php`);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
+				if (xhr.response == 'success') {
+				}
+			}
+			if (xhr.status >= 400) {
+				//php error page
+				return;
+			}
+		};
+		xhr.send(formToSend);
+	};
+
+	return { getSchedule, changeDate };
 })();

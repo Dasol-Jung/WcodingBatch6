@@ -62,7 +62,7 @@ class AddModifyDB extends User{
         $req->execute(array( 'user_id' => $user_id ));
         $events = array();
         while($data = $req -> fetch()){
-            $eventsArray['id'] =  $data['schedule_id'];
+            $eventsArray['schedule_id'] =  $data['schedule_id'];
             $eventsArray['user_id'] = $data['user_id'];
             $eventsArray['title'] = $data['title'];
             $eventsArray['description'] = $data['description'];
@@ -97,4 +97,26 @@ class AddModifyDB extends User{
         return 'success';
     }
 
+    public function changeDate($scheduleId,$date, $uid){
+
+        $scheduleId=htmlspecialchars($scheduleId);
+        $date=htmlspecialchars($date);
+        $user_id = ($_SESSION['uid']) ? $_SESSION['uid'] : $uid ;
+        $db= $this->dbConnect();
+        try{
+            $req = $db->prepare('UPDATE schedule SET event_date=:date, is_simple=0 WHERE user_id=:user_id AND schedule_id=:schedule_id');
+        }
+        catch(Exception $e){
+            return $e;
+        }
+        $req->bindParam(":date",$date,PDO::PARAM_STR);
+        $req->bindParam(":user_id",$user_id,PDO::PARAM_STR);
+        $req->bindParam(":schedule_id",$scheduleId,PDO::PARAM_STR);
+        try{
+            $req->execute();
+        }catch(Exception $e){
+            return $e;
+        }
+        return 'success';
+    }
 }

@@ -27,9 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		eventData: function(eventEl) {
 			let priority = eventEl.querySelector('.priority').getAttribute('data-priority');
 			let isDone = eventEl.querySelector('.isDone').getAttribute('data-isDone');
+			let scheduleId = eventEl.getAttribute('data-scheduleId');
 			return {
 				title: eventEl.innerText,
-				extendedProps: { priority: priority, isDone: isDone }
+				extendedProps: { priority: priority, isDone: isDone, schedule_id: scheduleId }
 			};
 		}
 	});
@@ -66,11 +67,27 @@ document.addEventListener('DOMContentLoaded', function() {
 				}
 			}
 		},
-		allDayDefault: true,
 		selectable: true,
-		selectHelper: true,
 		editable: true,
 		droppable: true, // this allows things to be dropped onto the calendar
+		eventDrop: function(info) {
+			let newDate = new Date(info.event.start);
+			let year = newDate.getFullYear();
+			let month = newDate.getMonth() + 1;
+			let day = newDate.getDate();
+			newDate = `${year}-${month}-${day}`;
+			console.log(newDate);
+			scheduleManager.changeDate(info.event._def.extendedProps['schedule_id'], newDate);
+		},
+		eventReceive: function(info) {
+			let newDate = new Date(info.event.start);
+			let year = newDate.getFullYear();
+			let month = newDate.getMonth() + 1;
+			let day = newDate.getDate();
+			newDate = `${year}-${month}-${day}`;
+			console.log(newDate);
+			scheduleManager.changeDate(info.event._def.extendedProps['schedule_id'], newDate);
+		},
 		drop: function(info) {
 			info.draggedEl.parentNode.removeChild(info.draggedEl);
 		},

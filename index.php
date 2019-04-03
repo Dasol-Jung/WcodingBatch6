@@ -179,6 +179,11 @@ try{
                 if(isset($_POST['scheduleName']) && isset($_POST['scheduleDesc'])&& isset($_SESSION['uid'])){
                     addSimpleSchedule($_POST['scheduleName'],$_POST['scheduleDesc'],$_SESSION['uid']);
                 }
+
+            case 'changeDate':
+            if(isset($_POST['scheduleId']) && isset($_POST['date']) && isset($_SESSION['uid'])){
+                changeDate($_POST['scheduleId'],$_POST['date'],$_SESSION['uid']);
+            }
                 
             default :
                 break;

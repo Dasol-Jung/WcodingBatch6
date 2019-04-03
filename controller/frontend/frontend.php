@@ -230,3 +230,10 @@ function addSimpleSchedule($title,$desc,$uid){
     ob_end_clean();
     print_r($result);
 }
+
+function changeDate($scheduleId,$date,$uid){
+    $changeDate = new AddModifyDB();
+    $result = $changeDate->changeDate($scheduleId,$date,$uid);
+    ob_end_clean();
+    print_r($result);
+}
