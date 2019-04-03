@@ -37,9 +37,9 @@ ob_start();
 <form class="modalTarget addSimpleSchedule">
     <h2>Add a simple schedule</h2>
     <label for="scheduleName">Name</label>
-    <input id='scheduleName' type="text" >
+    <input name ='scheduleName' id='scheduleName' type="text" >
     <label for="scheduleDesc">Description</label>
-    <input id='scheduleDesc' type="text" >
+    <input name='scheduleDesc' id='scheduleDesc' type="text" >
     <button class="addSimpleBtn">Add</button>
 </form>
 <script src='../../public/lib/fullCalendar/core/main.js'></script>

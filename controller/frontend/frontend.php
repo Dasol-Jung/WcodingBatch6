@@ -223,3 +223,10 @@ function getSimpleSchedule($uid){
     ob_end_clean();
     print_r($eventData);
 }
+
+function addSimpleSchedule($title,$desc,$uid){
+    $addSchedule = new AddModifyDB();
+    $result = $addSchedule->addSimpleSchedule($title,$desc,$uid);
+    ob_end_clean();
+    print_r($result);
+}

@@ -25,20 +25,8 @@ ob_start();
     <button class='addEvent'><i class='fas fa-plus'></i></button>
         <div id='external-events'>
             <div id='external-events-listing'>
-                <h4>Draggable Events</h4>
-                <div class='fc-event' >My Event 1</div>
-                <div class='fc-event' >My Event 2</div>
-                <div class='fc-event' >My Event 3</div>
-                <div class='fc-event' >My Event 4</div>
-                <div class='fc-event' >My Event 5</div>
+
             </div>
-            <p>
-                <input type='checkbox' id='drop-remove' />
-                <label for='drop-remove'>remove after drop</label>
-            </p>
-        </div>
-        <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <h4>Drag to here</h4>
         </div>
     </section>
     <section class="calWrapper">
@@ -47,17 +35,19 @@ ob_start();
 </div>
 <!-- modal -->
 <form class="modalTarget addSimpleSchedule">
-    <h2>Add a simple schedule</h2>
+<h2>Add a simple schedule</h2>
     <label for="scheduleName">Name</label>
-    <input id='scheduleName' type="text" >
+    <input name ='scheduleName' id='scheduleName' type="text" >
     <label for="scheduleDesc">Description</label>
-    <input id='scheduleDesc' type="text" >
+    <input name='scheduleDesc' id='scheduleDesc' type="text" >
     <button class="addSimpleBtn">Add</button>
 </form>
 <script src='../../public/lib/fullCalendar/core/main.js'></script>
 <script src='../../public/lib/fullCalendar/daygrid/main.js'></script>
 <script src='../../public/lib/fullCalendar/interaction/main.js'></script>
+<script src= "../../public/js/frontend/scheduleManager.js"></script>
 <script src= "../../public/js/frontend/viewMonthly.js"></script>
+<script>scheduleManager.getSchedule();</script>
 <?php
 
 //schedule ends here

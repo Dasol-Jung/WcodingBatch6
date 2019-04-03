@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	var containerEl = document.getElementById('external-events');
 	var calendarEl = document.getElementById('calendarSchedule');
-	var checkbox = document.getElementById('drop-remove');
 
 	// initialize the external events
 	// -----------------------------------------------------------------
@@ -26,8 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		itemSelector: '.fc-event',
 		containers: [ calendarEl ],
 		eventData: function(eventEl) {
+			let priority = eventEl.querySelector('.priority').getAttribute('data-priority');
+			let isDone = eventEl.querySelector('.isDone').getAttribute('data-isDone');
 			return {
-				title: eventEl.innerText
+				title: eventEl.innerText,
+				extendedProps: { priority: priority, isDone: isDone }
 			};
 		}
 	});
@@ -70,12 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		editable: true,
 		droppable: true, // this allows things to be dropped onto the calendar
 		drop: function(info) {
-			console.log(info.view);
-			// is the "remove after drop" checkbox checked?
-			if (checkbox.checked) {
-				// if so, remove the element from the "Draggable Events" list
-				info.draggedEl.parentNode.removeChild(info.draggedEl);
-			}
+			info.draggedEl.parentNode.removeChild(info.draggedEl);
 		},
 		eventLimit: true, // for all non-TimeGrid views
 		views: {

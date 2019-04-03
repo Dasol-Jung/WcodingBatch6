@@ -42,7 +42,7 @@ class AddModifyDB extends User{
         $req->execute(array( 'user_id' => $user_id ));
         $events = array();
         while($data = $req -> fetch()){
-            $eventsArray['id'] =  $data['schedule_id'];
+            $eventsArray['schedule_id'] = $data['schedule_id'];
             $eventsArray['user_id'] = $data['user_id'];
             $eventsArray['title'] = $data['title'];
             $eventsArray['description'] = $data['description'];
@@ -72,6 +72,29 @@ class AddModifyDB extends User{
             $events[] = $eventsArray;
         }
         return json_encode($events);
+    }
+
+    public function addSimpleSchedule($title,$desc, $uid){
+
+        $title=htmlspecialchars($title);
+        $desc=htmlspecialchars($desc);
+        $user_id = ($_SESSION['uid']) ? $_SESSION['uid'] : $uid ;
+        $db= $this->dbConnect();
+        try{
+            $req = $db->prepare('INSERT INTO schedule (title,description,is_simple,user_id) VALUES(:title,:desc, "1",:user_id)');
+        }
+        catch(Exception $e){
+            return $e;
+        }
+        $req->bindParam(":title",$title,PDO::PARAM_STR);
+        $req->bindParam(":desc",$desc,PDO::PARAM_STR);
+        $req->bindParam(":user_id",$user_id,PDO::PARAM_STR);
+        try{
+            $req->execute();
+        }catch(Exception $e){
+            return $e;
+        }
+        return 'success';
     }
 
 }

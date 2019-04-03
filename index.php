@@ -174,6 +174,11 @@ try{
                     //userId, userType : the id and type of the user account to disconnect respectively
                     disconnectAccount($_POST['userId'], $_POST['userType'], $_SESSION['superUid']);
                 }
+
+            case 'addSimple':
+                if(isset($_POST['scheduleName']) && isset($_POST['scheduleDesc'])&& isset($_SESSION['uid'])){
+                    addSimpleSchedule($_POST['scheduleName'],$_POST['scheduleDesc'],$_SESSION['uid']);
+                }
                 
             default :
                 break;

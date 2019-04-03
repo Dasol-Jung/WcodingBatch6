@@ -12,8 +12,11 @@ function generateCalendar(calendarEl) {
 			itemSelector: '.fc-event',
 			containers: [ calendarEl ],
 			eventData: function(eventEl) {
+				let priority = eventEl.querySelector('.priority').getAttribute('data-priority');
+				let isDone = eventEl.querySelector('.isDone').getAttribute('data-isDone');
 				return {
-					title: eventEl.innerText
+					title: eventEl.innerText,
+					extendedProps: { priority: priority, isDone: isDone }
 				};
 			}
 		});
@@ -90,14 +93,3 @@ function closeForm() {
 	var calendarEl = document.getElementById('weeklyCalendar');
 	generateCalendar(calendarEl);
 }
-
-//add an event to 'add-simple-event' button
-
-(function() {
-	let addBtn = document.querySelector('button.addEvent');
-	addBtn.addEventListener('click', e => {
-		let addSimpleScheduleForm = document.querySelector('form.addSimpleSchedule');
-		document.querySelector('.fc-view-container').style.zIndex = 0;
-		document.body.appendChild(clientUtils.createModal(addSimpleScheduleForm));
-	});
-})();

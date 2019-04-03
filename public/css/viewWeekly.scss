@@ -114,6 +114,11 @@
 		align-self: end;
 	}
 
+	.fc-center {
+		display: grid !important;
+		justify-content: center !important;
+	}
+
 	.fc-center div {
 		color: white;
 		display: flex;
@@ -293,4 +298,92 @@ form.addSimpleSchedule {
 	height: 80%;
 	border: none;
 	background-color: black;
+}
+
+.listWrapper {
+	.fc-event {
+		width: 100%;
+		margin: 0 auto;
+		border-radius: 0;
+		height: 40px;
+		border: none;
+		background-color: white;
+		color: black;
+		display: grid;
+		align-items: center;
+		grid-template-columns: 20px auto auto;
+		position: relative;
+	}
+
+	span.isDone[data-isDone="0"] i {
+		display: none;
+	}
+
+	span.isDone {
+		text-align: right;
+		padding-right: 3px;
+	}
+
+	div.priority {
+		height: 100%;
+		min-height: 40px;
+		float: left;
+		margin-right: 6px;
+		width: 15px;
+	}
+
+	div.priority[data-priority='high'] {
+		background-color: $high;
+	}
+
+	div.priority[data-priority='medium'] {
+		background-color: $medium;
+	}
+
+	div.priority[data-priority='low'] {
+		background-color: $low;
+	}
+}
+
+body > .fc-event.fc-dragging {
+	font-family: $primary-font;
+	width: 100%;
+	margin: 0 auto;
+	border-radius: 0;
+	height: 40px;
+	border: none;
+	background-color: white;
+	color: black;
+	display: grid;
+	align-items: center;
+	grid-template-columns: 20px auto auto;
+
+	span.isDone[data-isDone="0"] i {
+		display: none;
+	}
+
+	span.isDone {
+		text-align: right;
+		padding-right: 3px;
+	}
+
+	div.priority {
+		height: 100%;
+		min-height: 40px;
+		float: left;
+		margin-right: 6px;
+		width: 15px;
+	}
+
+	div.priority[data-priority='high'] {
+		background-color: $high;
+	}
+
+	div.priority[data-priority='medium'] {
+		background-color: $medium;
+	}
+
+	div.priority[data-priority='low'] {
+		background-color: $low;
+	}
 }

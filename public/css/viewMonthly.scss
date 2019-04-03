@@ -26,72 +26,6 @@
 	padding-top: 20px;
 }
 
-// .utilContainer {
-// 	justify-self: center;
-// 	display: flex;
-// 	flex-flow: row;
-// 	align-items: right;
-// 	margin: 0;
-// 	height: 15px;
-// 	.showCal {
-// 		background-image: url("../images/cal_icon.svg");
-// 		background-size: contain;
-// 		background-repeat: no-repeat;
-// 		background-position: center;
-// 		display: flex;
-// 		flex-flow: column;
-// 		align-items: center;
-// 		justify-content: center;
-// 		height: 3rem;
-// 		width: 3rem;
-// 		span#month {
-// 			font-size: 0.8rem;
-// 			margin-top: 0.2rem;
-// 			font-weight: bold;
-// 		}
-// 		span#date {
-// 			font-size: 0.6rem;
-// 		}
-// 	}
-// 	button {
-// 		height: max-content;
-// 		background-color: $primary-dark;
-// 		border: 1px solid $primary-light;
-// 		color: $primary-light;
-// 		border-radius: 5px;
-// 		margin: 0 2rem;
-// 		font-size: 1rem;
-// 		cursor: pointer;
-// 		&:hover {
-// 			background-color: $primary-light;
-// 			border: 1px solid $primary-dark;
-// 			color: $primary-dark;
-// 		}
-// 	}
-// }
-
-// .calContainer {
-// 	height: 100%;
-// 	width: 100%;
-// 	padding: 0 1rem 1rem 1rem;
-// 	box-sizing: border-box;
-// 	table {
-// 		width: 100%;
-// 		height: 100%;
-
-// 		th {
-// 			width: 14%;
-// 			background-color: $primary-light;
-// 			color: $primary-dark;
-// 			height: 30px;
-// 		}
-
-// 		td {
-// 			border: 1px solid $primary-light;
-// 		}
-// 	}
-// }
-
 #switchDiv {
 	height: 30px;
 	text-align: right;
@@ -204,6 +138,7 @@ button.addEvent {
 		color: white;
 	}
 }
+
 form.addSimpleSchedule {
 	margin: 0;
 	font-family: "DIN alternate";
@@ -241,6 +176,12 @@ form.addSimpleSchedule {
 	label:not(:nth-child(2)) {
 		margin-top: 0.8rem;
 	}
+}
+
+#external-events {
+	height: 80%;
+	border: none;
+	background-color: black;
 }
 
 //styling schedule(event) sticker
@@ -282,6 +223,94 @@ form.addSimpleSchedule {
 			text-align: right;
 			padding-right: 3px;
 		}
+	}
+
+	div.priority {
+		height: 100%;
+		min-height: 25px;
+		float: left;
+		margin-right: 6px;
+		width: 15px;
+	}
+
+	div.priority[data-priority='high'] {
+		background-color: $high;
+	}
+
+	div.priority[data-priority='medium'] {
+		background-color: $medium;
+	}
+
+	div.priority[data-priority='low'] {
+		background-color: $low;
+	}
+}
+
+.listWrapper {
+	.fc-event {
+		width: 100%;
+		margin: 0 auto;
+		border-radius: 0;
+		height: 25px;
+		border: none;
+		background-color: white;
+		color: black;
+		display: grid;
+		align-items: center;
+		grid-template-columns: 20px auto auto;
+		position: relative;
+	}
+
+	span.isDone[data-isDone="0"] i {
+		display: none;
+	}
+
+	span.isDone {
+		text-align: right;
+		padding-right: 3px;
+	}
+
+	div.priority {
+		height: 100%;
+		min-height: 25px;
+		float: left;
+		margin-right: 6px;
+		width: 15px;
+	}
+
+	div.priority[data-priority='high'] {
+		background-color: $high;
+	}
+
+	div.priority[data-priority='medium'] {
+		background-color: $medium;
+	}
+
+	div.priority[data-priority='low'] {
+		background-color: $low;
+	}
+}
+
+body > .fc-event.fc-dragging {
+	font-family: $primary-font;
+	width: 100%;
+	margin: 0 auto;
+	border-radius: 0;
+	height: 25px;
+	border: none;
+	background-color: white;
+	color: black;
+	display: grid;
+	align-items: center;
+	grid-template-columns: 20px auto auto;
+	position: relative;
+	span.isDone[data-isDone="0"] i {
+		display: none;
+	}
+
+	span.isDone {
+		text-align: right;
+		padding-right: 3px;
 	}
 
 	div.priority {

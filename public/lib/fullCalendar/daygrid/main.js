@@ -234,8 +234,6 @@ Docs & License: https://fullcalendar.io/
 		}
 		// Builds the HTML to be used for the default element for an individual segment
 		SimpleDayGridEventRenderer.prototype.renderSegHtml = function(seg, mirrorInfo) {
-			console.log(seg);
-			console.log(mirrorInfo);
 			var options = this.context.options;
 			var eventRange = seg.eventRange;
 			var eventDef = eventRange.def;
@@ -252,6 +250,7 @@ Docs & License: https://fullcalendar.io/
 			var titleHtml;
 			var priority = eventDef.extendedProps['priority'];
 			var isDone = eventDef.extendedProps['is_done'];
+			var scheduleId = eventDef.extendedProps['schedule_id'];
 			var description = eventDef.extendedProps['description'];
 			classes.unshift('fc-day-grid-event', 'fc-h-event');
 			// Only display a timed events time if it is the starting segment
@@ -266,7 +265,7 @@ Docs & License: https://fullcalendar.io/
 				(core.htmlEscape(eventDef.title || '') || '&nbsp;') + // we always want one line of height
 				'</span>';
 			return (
-				`<a data-description=${description} class="` +
+				`<a data-edit="true" data-eventId=${scheduleId} data-description=${description} class="` +
 				classes.join(' ') +
 				'"' +
 				(eventDef.url ? ' href="' + core.htmlEscape(eventDef.url) + '"' : '') +

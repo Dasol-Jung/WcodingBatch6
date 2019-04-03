@@ -113,6 +113,10 @@
   padding-left: 2rem;
   align-self: end;
 }
+.fc-header-toolbar .fc-center {
+  display: grid !important;
+  justify-content: center !important;
+}
 .fc-header-toolbar .fc-center div {
   color: white;
   display: flex;
@@ -270,6 +274,80 @@ form.addSimpleSchedule label:not(:nth-child(2)) {
   height: 80%;
   border: none;
   background-color: black;
+}
+
+.listWrapper .fc-event {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 0;
+  height: 40px;
+  border: none;
+  background-color: white;
+  color: black;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 20px auto auto;
+  position: relative;
+}
+.listWrapper span.isDone[data-isDone="0"] i {
+  display: none;
+}
+.listWrapper span.isDone {
+  text-align: right;
+  padding-right: 3px;
+}
+.listWrapper div.priority {
+  height: 100%;
+  min-height: 40px;
+  float: left;
+  margin-right: 6px;
+  width: 15px;
+}
+.listWrapper div.priority[data-priority=high] {
+  background-color: #b80e0e;
+}
+.listWrapper div.priority[data-priority=medium] {
+  background-color: #f0c400;
+}
+.listWrapper div.priority[data-priority=low] {
+  background-color: #007e00;
+}
+
+body > .fc-event.fc-dragging {
+  font-family: "DIN alternate";
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 0;
+  height: 40px;
+  border: none;
+  background-color: white;
+  color: black;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 20px auto auto;
+}
+body > .fc-event.fc-dragging span.isDone[data-isDone="0"] i {
+  display: none;
+}
+body > .fc-event.fc-dragging span.isDone {
+  text-align: right;
+  padding-right: 3px;
+}
+body > .fc-event.fc-dragging div.priority {
+  height: 100%;
+  min-height: 40px;
+  float: left;
+  margin-right: 6px;
+  width: 15px;
+}
+body > .fc-event.fc-dragging div.priority[data-priority=high] {
+  background-color: #b80e0e;
+}
+body > .fc-event.fc-dragging div.priority[data-priority=medium] {
+  background-color: #f0c400;
+}
+body > .fc-event.fc-dragging div.priority[data-priority=low] {
+  background-color: #007e00;
 }
 
 /*# sourceMappingURL=viewWeekly.css.map */
