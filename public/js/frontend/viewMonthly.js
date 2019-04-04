@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			let scheduleId = eventEl.getAttribute('data-scheduleId');
 			return {
 				title: eventEl.innerText,
-				extendedProps: { priority: priority, isDone: isDone, schedule_id: scheduleId }
+				extendedProps: { priority: priority, is_done: isDone, schedule_id: scheduleId }
 			};
 		}
 	});

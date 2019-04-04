@@ -199,6 +199,7 @@ form.addSimpleSchedule label:not(:nth-child(2)) {
   display: none;
 }
 .calWrapper a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
+  margin-bottom: 0.2rem;
   padding-left: 0;
 }
 .calWrapper a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end span.isDone {
@@ -273,7 +274,7 @@ body > .fc-event.fc-dragging {
   grid-template-columns: 20px auto auto;
   position: relative;
 }
-body > .fc-event.fc-dragging span.isDone[data-isDone="0"] i {
+body > .fc-event.fc-dragging span.isDone[data-isdone="0"] i {
   display: none;
 }
 body > .fc-event.fc-dragging span.isDone {

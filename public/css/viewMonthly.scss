@@ -218,6 +218,7 @@ form.addSimpleSchedule {
 	}
 
 	a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end {
+		margin-bottom: 0.2rem;
 		padding-left: 0;
 		span.isDone {
 			text-align: right;
@@ -304,7 +305,8 @@ body > .fc-event.fc-dragging {
 	align-items: center;
 	grid-template-columns: 20px auto auto;
 	position: relative;
-	span.isDone[data-isDone="0"] i {
+
+	span.isDone[data-isdone="0"] i {
 		display: none;
 	}
 

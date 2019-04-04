@@ -279,7 +279,7 @@ Docs & License: https://fullcalendar.io/
 						timeHtml +
 						' ' +
 						titleHtml +
-						`<span class="isDone"data-isDone=${isDone}><i class="fas fa-check-circle"></i></span>`) + //
+						`<span class="isDone" data-isDone="${isDone}"><i class="fas fa-check-circle"></i></span>`) + //
 				'</div>' +
 				(isResizableFromStart ? '<div class="fc-resizer fc-start-resizer"></div>' : '') +
 				(isResizableFromEnd ? '<div class="fc-resizer fc-end-resizer"></div>' : '') +

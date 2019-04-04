@@ -108,6 +108,7 @@
 .fc-header-toolbar {
   display: grid !important;
   grid-template-columns: 1fr 1fr 1fr !important;
+  min-height: 80px;
 }
 .fc-header-toolbar .fc-left {
   padding-left: 2rem;
