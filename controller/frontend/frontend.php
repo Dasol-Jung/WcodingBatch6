@@ -191,9 +191,9 @@ function displayMain(){
     require("view/frontend/addButtonCalendar.php");
 }
 
-function addButton($addWeekly){
+function addEditSchedule($data,$uid){
     $addAffLines = new AddModifyDB();
-    $addAffLines-> addInfo($addWeekly);
+    $addAffLines-> addEditSchedule($data,$uid);
 }
 
 function modifyButton($modWeekly){
@@ -213,6 +213,8 @@ function loadAllToDoList($user){
 function disconnectAccount($userId, $userType, $superUid){
     $user = new User();
     $result=$user->disconnectAccount($userId, $userType, $superUid);
+    $userInfo = $user->getUserInfo($_SESSION['uid'],$_SESSION['userType']);
+    $avatars = $user->getAvatars($_SESSION['superUid']);
     ob_end_clean();
     echo $result;
 }

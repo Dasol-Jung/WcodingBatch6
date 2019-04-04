@@ -1,5 +1,33 @@
 /** add events */
 
+function sendScheduleForm(form) {
+	form.addEventListener('submit', e => {
+		e.preventDefault();
+		let xhr = new XMLHttpRequest();
+		let formData = new FormData(form);
+		formData.append('action', 'addEditAppointment');
+		xhr.open('POST', 'index.php');
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
+				form.reset();
+				switch (xhr.response) {
+					case 'success':
+						location.reload();
+						break;
+
+					default:
+						break;
+				}
+			}
+			if (xhr.status >= 400) {
+				//php error page
+				return;
+			}
+		};
+		xhr.send(formData);
+	});
+}
+
 function generateCalendar(calendarEl) {
 	document.addEventListener('DOMContentLoaded', function() {
 		var Draggable = FullCalendarInteraction.Draggable;
@@ -45,11 +73,24 @@ function generateCalendar(calendarEl) {
 				addButton: {
 					text: 'Add',
 					click: function() {
-						if (document.body.contains(document.getElementById('weeklyCalendar'))) {
-							location.href = 'http://localhost:8888/index.php?action=monthlySchedule&add=add';
-						} else {
-							location.href = 'http://localhost:8888/index.php?action=weeklySchedule&add=add';
-						}
+						let detailedSchedule = document.querySelector('.modalTarget.detailedSchedule');
+						detailedSchedule
+							.querySelectorAll('.labelChecked')
+							.forEach(label => label.classList.remove('.labelChecked'));
+						detailedSchedule.querySelector('input[name="scheduleId"]').value = '';
+						detailedSchedule.querySelector('label[for="medium"]').classList.add('labelChecked');
+						detailedSchedule.querySelector('input[id="medium"]').checked = 'true';
+						detailedSchedule.querySelector('label[for="notDone"]').classList.add('labelChecked');
+						detailedSchedule.querySelector('input[id="notDone"]').checked = 'true';
+						detailedSchedule.querySelector(`button#submit`).innerText = 'add';
+						detailedSchedule.querySelector('button#discard').addEventListener('click', e => {
+							e.preventDefault();
+							if (confirm('Do you really want to discard this schedule?')) {
+								detailedSchedule.parentNode.parentNode.style.display = 'none';
+							}
+						});
+						document.body.appendChild(clientUtils.createModal(detailedSchedule, [ '70%' ]));
+						sendScheduleForm(detailedSchedule);
 					}
 				}
 			},
@@ -63,6 +104,45 @@ function generateCalendar(calendarEl) {
 			editable: true,
 			selectable: true,
 			droppable: true,
+			eventClick: function(info) {
+				let { schedule_id, description, is_done, priority } = info.event._def.extendedProps;
+				let title = info.event._def.title;
+				let newDate = new Date(info.event._instance.range.start);
+				let year = newDate.getFullYear();
+				let month = '0' + (newDate.getMonth() + 1);
+				month.length > 2 ? (month = month.slice(1)) : null;
+				let day = '0' + newDate.getDate();
+				day.length > 2 ? (day = day.slice(1)) : null;
+				let eventDate = `${year}-${month}-${day}`;
+				let detailedSchedule = document.querySelector('.modalTarget.detailedSchedule');
+				detailedSchedule
+					.querySelectorAll('.labelChecked')
+					.forEach(label => label.classList.remove('.labelChecked'));
+				detailedSchedule.querySelector(`textarea[name="description"]`).value = description;
+				detailedSchedule.querySelector(`input[name="scheduleId"]`).value = schedule_id;
+				detailedSchedule.querySelector(`input[name="title"]`).value = title;
+				detailedSchedule.querySelector(`button#submit`).innerText = 'update';
+				detailedSchedule.querySelector(`input[name="eventDate"]`).value = eventDate;
+				detailedSchedule.querySelector(`label[for="${priority}"]`).classList.add('labelChecked');
+				detailedSchedule.querySelector(`input[value="${priority}"]`).checked = 'true';
+				if (is_done == '1') {
+					detailedSchedule.querySelector(`label[for="done"]`).classList.add('labelChecked');
+					detailedSchedule.querySelector('input[id="done"]').checked = 'true';
+				} else {
+					detailedSchedule.querySelector(`label[for="notDone"]`).classList.add('labelChecked');
+					detailedSchedule.querySelector('input[id="notDone"]').checked = 'true';
+				}
+
+				detailedSchedule.querySelector('button#discard').addEventListener('click', e => {
+					e.preventDefault();
+					if (confirm('Do you really want to discard this schedule?')) {
+						detailedSchedule.parentNode.parentNode.style.display = 'none';
+					}
+				});
+				console.log(detailedSchedule);
+				document.body.appendChild(clientUtils.createModal(detailedSchedule, [ '70%' ]));
+				sendScheduleForm(detailedSchedule);
+			},
 			eventDrop: function(info) {
 				let newDate = new Date(info.event.start);
 				let year = newDate.getFullYear();

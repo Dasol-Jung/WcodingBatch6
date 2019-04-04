@@ -204,30 +204,32 @@ const clientUtils = (() => {
 		modalBackground.style.top = '0';
 		modalBackground.style.left = '0';
 		modalBackground.style.backgroundColor = 'rgba(0,0,0,0.5)';
+		modalBackground.style.zIndex = '10000';
 
 		//modal container style
 		modalContainer.style.backgroundColor = 'white';
 		modalContainer.style.position = 'relative';
 		modalContainer.style.padding = '40px';
-		modalContainer.style.width = sizeArr ? sizeArr[0] + 'px' : 'max-content';
-		modalContainer.style.height = sizeArr ? sizeArr[1] + 'px' : 'max-content';
+		modalContainer.style.width = sizeArr ? sizeArr[0] : 'max-content';
+		modalContainer.style.height = sizeArr ? sizeArr[1] : 'max-content';
 		modalContainer.style.margin = 'auto';
-		modalContainer.style.zIndex = '999';
 
 		// close modal
 
-		modalBackground.addEventListener(
-			'click',
-			e => {
-				if (e.target === e.currentTarget) {
-					e.currentTarget.style.display = 'none';
-					element.style.display = 'none';
-				}
-			},
-			true
-		);
+		// modalBackground.addEventListener(
+		// 	'click',
+		// 	e => {
+		// 		if (e.target === e.currentTarget) {
+		// 			element.querySelectorAll('form').forEach(form => form.reset());
+		// 			e.currentTarget.style.display = 'none';
+		// 			element.style.display = 'none';
+		// 		}
+		// 	},
+		// 	true
+		// );
 
 		closeButton.addEventListener('click', e => {
+			element.querySelectorAll('form').forEach(form => form.reset());
 			modalBackground.style.display = 'none';
 			element.style.display = 'none';
 		});
@@ -289,6 +291,34 @@ const clientUtils = (() => {
 				xhr.send();
 			});
 		}
+
+		// adding click event to priority buttons
+
+		let priorityLabels = document.querySelectorAll('.priorityContainer label');
+		priorityLabels.forEach(label => {
+			label.addEventListener('click', e => {
+				e.preventDefault();
+				let relatedInputId = label.getAttribute('for');
+				let relatedInput = document.querySelector('input#' + relatedInputId);
+				priorityLabels.forEach(label => label.classList.remove('labelChecked'));
+				label.classList.add('labelChecked');
+				relatedInput.checked = 'true';
+			});
+		});
+
+		// adding click event to isDone buttons
+
+		let isDoneLabels = document.querySelectorAll('.isDoneContainer label');
+		isDoneLabels.forEach(label => {
+			label.addEventListener('click', e => {
+				e.preventDefault();
+				let relatedInputId = label.getAttribute('for');
+				let relatedInput = document.querySelector('input#' + relatedInputId);
+				isDoneLabels.forEach(label => label.classList.remove('labelChecked'));
+				label.classList.add('labelChecked');
+				relatedInput.checked = 'true';
+			});
+		});
 	}
 
 	return {

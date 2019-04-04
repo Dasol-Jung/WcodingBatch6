@@ -4,35 +4,39 @@ require_once('User.php');
 
 class AddModifyDB extends User{
 
-    public function addInfo($addWeekly){
-        $user_id = $_SESSION['uid'];
-        $view = $addWeekly['view'];
-        $db= parent::dbConnect();
-        $title = $addWeekly["title"];
-        $description = $addWeekly["description"];
-        $priority = $addWeekly["priority"];
-        $eventDate = $addWeekly["eventDate"];
-        $done = $addWeekly["done"];
-        $addRequest = "INSERT INTO schedule(user_id, title, description, priority, event_date, is_done, create_date)
-        VALUES('$user_id', '$title', '$description', '$priority', '$eventDate', '$done',NOW())";
-        $addToInfo = $db->prepare($addRequest);
-        $addAfflines = $addToInfo->execute();
-        header('location:http://localhost:8888/index.php?action='.$view);
-    }
+    public function addEditSchedule($date,$uid){
 
-    public function modifyInfo($modWeekly){
-        $user_id = $_SESSION['uid'];
+        $user_id = isset($_SESSION['uid']) ? $_SESSION['uid'] : $uid;
+        $title = htmlspecialchars($date["title"]);
+        $scheduleId = htmlspecialchars($date["scheduleId"]);
+        $description = htmlspecialchars($date["description"]);
+        $priority = htmlspecialchars($date["priority"]);
+        $eventDate = htmlspecialchars($date["eventDate"]);
+        $isDone = htmlspecialchars($date["done"]);
+        // find current schedule
         $db= parent::dbConnect();
-        $title = $addWeekly["title"];
-        $description = $addWeekly["description"];
-        $priority = $addWeekly["priority"];
-        $eventDate = $addWeekly["event_date"];
-        $done = $addWeekly["is_done"];
-        $modRequest = "UPDATE schedule(user_id, title, description, priority, event_date, is_done, create_date)
-        VALUES('$user_id', '$title', '$description', '$priority', '$eventDate', '$done',NOW())";
-        $modifytoInfo = $db->prepare($modRequest);
-        $modAffLines = $modifytoInfo->execute();
-        return $modAffLines;
+        $findCurrent = $db->prepare("SELECT * FROM schedule WHERE user_id=:user_id AND schedule_id=:schedule_id");
+        $findCurrent->bindParam(":user_id",$user_id,PDO::PARAM_STR);
+        $findCurrent->bindParam(":schedule_id",$scheduleId,PDO::PARAM_STR);
+        $findCurrent->execute();
+        if($findCurrent->fetch()){
+            $updateReq = "UPDATE schedule SET title=:title, description=:description, priority=:priority, event_date=:event_date, is_done=:is_done, create_date=NOW() WHERE user_id=:user_id AND schedule_id=:schedule_id";
+            $updateSchedule = $db->prepare($updateReq);
+            $updateSchedule->bindParam(":title",$title,PDO::PARAM_STR);
+            $updateSchedule->bindParam(":description",$description,PDO::PARAM_STR);
+            $updateSchedule->bindParam(":priority",$priority,PDO::PARAM_STR);
+            $updateSchedule->bindParam(":event_date",$eventDate,PDO::PARAM_STR);
+            $updateSchedule->bindParam(":is_done",$isDone,PDO::PARAM_STR);
+            $updateSchedule->bindParam(":user_id",$user_id,PDO::PARAM_STR);
+            $updateSchedule->bindParam(":schedule_id",$scheduleId,PDO::PARAM_STR);
+            $updateSchedule->execute();
+        }else{
+            $addRequest = "INSERT INTO schedule(user_id, title, description, priority, event_date, is_done, create_date)
+            VALUES('$user_id', '$title', '$description', '$priority', '$eventDate', '$isDone',NOW())";
+            $addSchedule = $db->prepare($addRequest);
+            $addSchedule->execute();
+        }
+        // header("Location:http://localhost:8888/index.php?action=monthlySchedule");
     }
 
     public function loadToDoList($user){

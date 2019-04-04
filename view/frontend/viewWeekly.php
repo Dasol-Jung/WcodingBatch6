@@ -34,6 +34,7 @@ ob_start();
     </section>
 </div>
 <!-- modal -->
+<!-- simple schedule modal -->
 <form class="modalTarget addSimpleSchedule">
     <h2>Add a simple schedule</h2>
     <label for="scheduleName">Name</label>
@@ -42,6 +43,8 @@ ob_start();
     <input name='scheduleDesc' id='scheduleDesc' type="text" >
     <button class="addSimpleBtn">Add</button>
 </form>
+<!-- detailed schedule modal -->
+<?php require_once('view/frontend/addButtonCalendar.php')?>
 <script src='../../public/lib/fullCalendar/core/main.js'></script>
 <script src='../../public/lib/fullCalendar/daygrid/main.js'></script>
 <script src='../../public/lib/fullCalendar/interaction/main.js'></script>
@@ -50,8 +53,6 @@ ob_start();
 <script src= "../../public/js/frontend/modifyButton.js"></script>
 <script>scheduleManager.getSchedule();</script>
 <?php
-
-//schedule ends here
 $content=ob_get_clean();
 
 require_once("view/template.php");

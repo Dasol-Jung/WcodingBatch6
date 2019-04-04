@@ -100,8 +100,7 @@ try{
                 break;
 
             case "addEditAppointment":
-                addButton($_POST);
-                viewWeekly();
+                addEditSchedule($_POST,$_SESSION['uid']);
                 break;
 
             case "getSimple":

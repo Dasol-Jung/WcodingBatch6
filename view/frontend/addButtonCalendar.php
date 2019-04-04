@@ -1,34 +1,42 @@
-<div id="myModal" class="modal">
+<div class="modalTarget detailedSchedule">
     <div class="modal-content">
-        <span class="close" onclick="closeForm()">&times;</span>
-        <form action="http://localhost:8888/index.php?action=addEditAppointment" method="POST">
-            <input type="hidden" name="view" value="<?= $_GET['action']?>">
-            <div id="firstBlockForm">
-                <span class="red_star">* </span><label for="title">Title :<br>
-                <input type="text" name="title" id="title"><br>
-                <span class="red_star">* </span><label for="description">Description :<br>
-                <textarea rows="4" cols="25"name="description" id="description"></textarea><br>
-                <span class="red_star">* </span><label for="date">Date :<br>
-                <input type="date" name="eventDate" id="date"><br>
-            </div>
-            <div id="secondBlockForm">            
-                <span class="red_star">* </span>Priority :<br>
-                <span class="radiobtn">
-                    <input type="radio" name="priority" class="priority" id="high" value="high"><label for="high">High</label><br>
-                </span>
-                <span class="radiobtn">
-                    <input type="radio" name="priority" class="priority" id="medium" value="medium" checked><label for="medium">Medium</label><br>
-                </span>
-                <span class="radiobtn">
-                    <input type="radio" name="priority" class="priority" id="low" value="low"><label for="low">Low</label><br>
-                </span>
-                <span class="red_star">* </span>Done :<br>
-                <input type="radio" name="done" value="1" class="status" id="done"><label for="done">Done<br>
-                <input type="radio" name="done" value="0" class="status" id="not" checked><label for="not">Not done<br>
-            </div>
-            <button id="submit" type="submit">Add</button>
-            <button type="button" onclick="modifyInfo($modWeekly)">Modify</button><br>
-            <div id="error_message"></div>
+        <form id="addEditScheduleForm" action="http://localhost:8888/index.php?action=addEditAppointment" method="POST">
+            <section id="left">
+            <input type="hidden" name="scheduleId">
+                <div id="firstBlockForm">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title">
+                    <label for="description">Description</label>
+                    <textarea rows="4" cols="25" name="description" id="description"></textarea>
+                    <label for="date">Date :</label>
+                    <input type="date" name="eventDate" id="date">
+                </div>
+            </section>
+            <section id="right">
+                <div id="secondBlockForm">            
+                    <label>Priority</label>
+                        <div class="priorityContainer">
+                            <label for="high"><div class='priorityColor high'></div><span>High</span></label>
+                            <input type="radio" name="priority" class="priority" id="high" value="high"/>
+                            <label for="medium"><div class='priorityColor medium'></div><span>Medium</span></label>
+                            <input type="radio" name="priority" class="priority" id="medium" value="medium"/>
+                            <label for="low"><div class='priorityColor low'></div><span>Low</span></label>
+                            <input type="radio" name="priority" class="priority" id="low" value="low"/>
+                        </div>
+                    <label>Done</label>
+                    <div class="isDoneContainer">
+                        <label for="done"><div class="iconBg doneIcon"><img src="public/images/Done.svg" alt=""></div></label>
+                        <input type="radio" name="done" value="1" class="status" id="done"/>
+                        
+                        <label for="notDone"><div class="iconBg notDoneIcon"><img src="public/images/notDone.svg" alt=""></div></label>
+                        <input type="radio" name="done" value="0" class="status" id="notDone"/>
+                    </div>
+                </div>
+                <div class="btns">
+                    <button id='discard' type="button">Discard</button>
+                    <button id="submit" type="submit">Add</button>
+                </div>
+            </section> 
         </form>
     </div>
 </div>

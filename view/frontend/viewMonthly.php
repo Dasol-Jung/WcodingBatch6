@@ -19,6 +19,7 @@ ob_start();
 <link rel='stylesheet' href='https://fullcalendar.io/js/fullcalendar-3.1.0/fullcalendar.min.css' />
 <link href='../../public/lib/fullCalendar/core/main.css' rel='stylesheet' />
 <link href='../../public/lib/fullCalendar/daygrid/main.css' rel='stylesheet' />
+<link href='../../public/css/addButton.css' rel='stylesheet' />
 
 <div class='bodyWrapper'>
     <section class="listWrapper">
@@ -42,6 +43,8 @@ ob_start();
     <input name='scheduleDesc' id='scheduleDesc' type="text" >
     <button class="addSimpleBtn">Add</button>
 </form>
+<!-- detailed schedule modal -->
+<?php require_once('view/frontend/addButtonCalendar.php')?>
 <script src='../../public/lib/fullCalendar/core/main.js'></script>
 <script src='../../public/lib/fullCalendar/daygrid/main.js'></script>
 <script src='../../public/lib/fullCalendar/interaction/main.js'></script>
