@@ -66,4 +66,15 @@ class Utils{
 
     }
 
+    public function redirectIfNotLoggedIn(){
+        if(!isset($_SESSION['isLoggedIn'])||$_SESSION['isLoggedIn']==false){
+            while(ob_get_level()){
+                ob_end_clean();
+            }
+            ob_start();
+            header("Location: index.php");
+            ob_end_clean();
+        }
+    }
+
 }
