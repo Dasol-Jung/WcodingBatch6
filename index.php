@@ -93,10 +93,12 @@ try{
                 break;
 
             case 'weeklySchedule':
+                $util->redirectIfNotLoggedIn();
                 viewWeekly();
                 break;
 
             case 'monthlySchedule':
+                $util->redirectIfNotLoggedIn();
                 viewMonthly();
                 break;
 
@@ -146,6 +148,7 @@ try{
                     $keepLoggedIn = $_POST['keepLoggedIn']=="1" ? true : false;
                     login($email,$password, $keepLoggedIn);
                 }
+                break;
 
             case 'checkCurrentPW':
 
@@ -159,6 +162,7 @@ try{
                 if(isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_SESSION['isCurrentPasswordCorrect'])){
                     changePassword($_POST['password'], $_POST['password']);
                 }
+                break;
 
             case 'changePersonalInfo':
 
@@ -182,16 +186,19 @@ try{
                     //userId, userType : the id and type of the user account to disconnect respectively
                     disconnectAccount($_POST['userId'], $_POST['userType'], $_SESSION['superUid']);
                 }
+                break;
 
             case 'addSimple':
                 if(isset($_POST['scheduleName']) && isset($_POST['scheduleDesc'])&& isset($_SESSION['uid'])){
                     addSimpleSchedule($_POST['scheduleName'],$_POST['scheduleDesc'],$_SESSION['uid']);
                 }
+                break;
 
             case 'changeDate':
-            if(isset($_POST['scheduleId']) && isset($_POST['date']) && isset($_SESSION['uid'])){
-                changeDate($_POST['scheduleId'],$_POST['date'],$_SESSION['uid']);
-            }
+                if(isset($_POST['scheduleId']) && isset($_POST['date']) && isset($_SESSION['uid'])){
+                    changeDate($_POST['scheduleId'],$_POST['date'],$_SESSION['uid']);
+                }
+                break;
 
             case "addEditAppointment":
                 addEditSchedule($_POST,$_SESSION['uid']);

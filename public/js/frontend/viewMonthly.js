@@ -40,6 +40,18 @@ function sendScheduleForm(form) {
 /* initialize the calendar
 -----------------------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', function() {
+	var isEventOverDiv = function(x, y) {
+		var external_events = $('#external-events');
+		var offset = external_events.offset();
+		offset.right = external_events.width() + offset.left;
+		offset.bottom = external_events.height() + offset.top;
+
+		// Compare
+		if (x >= offset.left && y >= offset.top && x <= offset.right && y <= offset.bottom) {
+			return true;
+		}
+		return false;
+	};
 	var Calendar = FullCalendar.Calendar;
 	var Draggable = FullCalendarInteraction.Draggable;
 	var containerEl = document.getElementById('external-events');
@@ -50,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	new Draggable(containerEl, {
 		itemSelector: '.fc-event',
-		containers: [ calendarEl ],
 		eventData: function(eventEl) {
 			let priority = eventEl.querySelector('.priority').getAttribute('data-priority');
 			let isDone = eventEl.querySelector('.isDone').getAttribute('data-isDone');
@@ -121,9 +132,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			detailedSchedule
 				.querySelectorAll('.labelChecked')
 				.forEach(label => label.classList.remove('.labelChecked'));
-			detailedSchedule.querySelector(`textarea[name="description"]`).value = description;
-			detailedSchedule.querySelector(`input[name="scheduleId"]`).value = schedule_id;
-			detailedSchedule.querySelector(`input[name="title"]`).value = title;
+			detailedSchedule.querySelector(`textarea[name="description"]`).value = description ? description : '';
+			detailedSchedule.querySelector(`input[name="scheduleId"]`).value = schedule_id ? schedule_id : '';
+			detailedSchedule.querySelector(`input[name="title"]`).value = title ? title : '';
 			detailedSchedule.querySelector(`button#submit`).innerText = 'update';
 			detailedSchedule.querySelector(`input[name="eventDate"]`).value = eventDate;
 			detailedSchedule.querySelector(`label[for="${priority}"]`).classList.add('labelChecked');
@@ -166,6 +177,35 @@ document.addEventListener('DOMContentLoaded', function() {
 		},
 		drop: function(info) {
 			info.draggedEl.parentNode.removeChild(info.draggedEl);
+		},
+		dragRevertDuration: 0,
+		eventDragStop: function(info) {
+			console.log('calendar 1 eventDragStop');
+
+			if (isEventOverDiv(info.jsEvent.clientX, info.jsEvent.clientY)) {
+				info.event.remove();
+				console.log(info.event);
+				let eventElement = document.createElement('a');
+				let isDone = document.createElement('span');
+				let priority = document.createElement('div');
+				let text = document.createTextNode(info.event['title']);
+				priority.setAttribute('data-priority', info.event._def.extendedProps['priority']);
+				priority.className = 'priority';
+				isDone.setAttribute('data-isDone', info.event._def.extendedProps['is_done']);
+				isDone.className = 'isDone';
+				isDone.innerHTML = '<i class="fas fa-check-circle" />';
+				eventElement.setAttribute('data-edit', 'true');
+				eventElement.setAttribute('data-scheduleId', info.event._def.extendedProps['schedule_id']);
+				eventElement.appendChild(priority);
+				eventElement.appendChild(text);
+				eventElement.className = 'fc-event';
+				eventElement.appendChild(isDone);
+				// define new event here
+				let newEvent = document.querySelector('#external-events-listing').appendChild(eventElement);
+			}
+
+			// calEventStatus = []; // Empty
+			// makeEventsDraggable();
 		},
 		eventLimit: true, // for all non-TimeGrid views
 		views: {

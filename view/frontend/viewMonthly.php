@@ -26,7 +26,7 @@ ob_start();
     <button class='addEvent'><i class='fas fa-plus'></i></button>
         <div id='external-events'>
             <div id='external-events-listing'>
-
+                
             </div>
         </div>
     </section>
@@ -45,6 +45,8 @@ ob_start();
 </form>
 <!-- detailed schedule modal -->
 <?php require_once('view/frontend/addButtonCalendar.php')?>
+<script src="../../public/js/frontend/jquery.js"></script>
+<script src="../../public/js/frontend/jquery-ui.js"></script>
 <script src='../../public/lib/fullCalendar/core/main.js'></script>
 <script src='../../public/lib/fullCalendar/daygrid/main.js'></script>
 <script src='../../public/lib/fullCalendar/interaction/main.js'></script>

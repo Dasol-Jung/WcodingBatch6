@@ -38,7 +38,6 @@ function generateCalendar(calendarEl) {
 
 		new Draggable(containerEl, {
 			itemSelector: '.fc-event',
-			containers: [ calendarEl ],
 			eventData: function(eventEl) {
 				let priority = eventEl.querySelector('.priority').getAttribute('data-priority');
 				let isDone = eventEl.querySelector('.isDone').getAttribute('data-isDone');

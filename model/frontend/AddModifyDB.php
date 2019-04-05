@@ -44,7 +44,6 @@ class AddModifyDB extends User{
         }
         catch(Exception $e){
             $db->rollBack();
-            ob_end_clean();
             return "failure";
         }
         
@@ -106,10 +105,10 @@ class AddModifyDB extends User{
         $req->bindParam(":user_id",$user_id,PDO::PARAM_STR);
         try{
             $req->execute();
+            return 'success';
         }catch(Exception $e){
             return $e;
         }
-        return 'success';
     }
 
     public function changeDate($scheduleId,$date, $uid){
