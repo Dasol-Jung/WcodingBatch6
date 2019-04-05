@@ -9,10 +9,10 @@ function sendScheduleForm(form) {
 		xhr.open('POST', 'index.php');
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
-				form.reset();
 				switch (xhr.response) {
 					case 'success':
 						location.reload();
+						form.reset();
 						break;
 
 					default:
@@ -90,7 +90,7 @@ function generateCalendar(calendarEl) {
 							}
 						});
 						document.body.appendChild(clientUtils.createModal(detailedSchedule, [ '70%' ]));
-						sendScheduleForm(detailedSchedule);
+						sendScheduleForm(detailedSchedule.querySelector('form'));
 					}
 				}
 			},
@@ -139,9 +139,8 @@ function generateCalendar(calendarEl) {
 						detailedSchedule.parentNode.parentNode.style.display = 'none';
 					}
 				});
-				console.log(detailedSchedule);
 				document.body.appendChild(clientUtils.createModal(detailedSchedule, [ '70%' ]));
-				sendScheduleForm(detailedSchedule);
+				sendScheduleForm(detailedSchedule.querySelector('form'));
 			},
 			eventDrop: function(info) {
 				let newDate = new Date(info.event.start);

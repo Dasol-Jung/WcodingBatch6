@@ -1,4 +1,6 @@
 <?php
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);   
 session_start();
 $time = $_SERVER['REQUEST_TIME'];
 /**
@@ -13,7 +15,6 @@ $timeout_duration = 3600;
 */
 if (isset($_SESSION['LAST_ACTIVITY']) && 
    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-       echo "lee";
     session_unset();
     session_destroy();
     session_start();
@@ -92,37 +93,26 @@ try{
                 break;
 
             case 'weeklySchedule':
-                $util->redirectIfNotLoggedIn();
                 viewWeekly();
                 break;
 
             case 'monthlySchedule':
-                $util->redirectIfNotLoggedIn();
                 viewMonthly();
                 break;
 
             case 'profile':
-                $util->redirectIfNotLoggedIn();
                 viewProfile();
                 break;
             
             case 'switch':
-                $util->redirectIfNotLoggedIn();
                 switchAccount($_SESSION['superUid'],$_GET['type']);
                 break;
 
             case 'loadTodoList':
-                $util->redirectIfNotLoggedIn();
                 loadAllToDoList($_SESSION['uid']);
                 break;
 
-            case "addEditAppointment":
-                $util->redirectIfNotLoggedIn();
-                addEditSchedule($_POST,$_SESSION['uid']);
-                break;
-
             case "getSimple":
-                $util->redirectIfNotLoggedIn();
                 getSimpleSchedule($_SESSION['uid']);
                 break;
             
@@ -158,53 +148,54 @@ try{
                 }
 
             case 'checkCurrentPW':
-                $util->redirectIfNotLoggedIn();
+
                 if(isset($_POST['currentPW']) && isset($_SESSION['uid'])){
                     checkCurrentPW($_SESSION['uid'], $_POST['currentPW']);
                 }
                 break;
             
             case 'changePassword':
-                $util->redirectIfNotLoggedIn();
+
                 if(isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_SESSION['isCurrentPasswordCorrect'])){
                     changePassword($_POST['password'], $_POST['password']);
                 }
 
             case 'changePersonalInfo':
-                $util->redirectIfNotLoggedIn();
+
                 changePersonalInfo($_POST['firstName'],$_FILES['avatar']);
                 break;
 
             case 'signOut':
-                $util->redirectIfNotLoggedIn();
+                
                 signOut($_SESSION['uid'], $_SESSION['userType']);
                 break;
 
             case 'changeSetting':
-                $util->redirectIfNotLoggedIn();
+
                 if(isset($_POST['value']) && isset($_POST['type']) && $_SESSION['userType'] && $_SESSION['superUid'] ){
                     changeUserSetting($_POST['value'],$_POST['type'], $_SESSION['userType'],$_SESSION['superUid']);
                 }
                 break;            
 
             case 'disconnect':
-                $util->redirectIfNotLoggedIn();
                 if(isset($_POST['userId']) && isset($_POST['userType'])&& isset($_SESSION['superUid'])){
                     //userId, userType : the id and type of the user account to disconnect respectively
                     disconnectAccount($_POST['userId'], $_POST['userType'], $_SESSION['superUid']);
                 }
 
             case 'addSimple':
-                $util->redirectIfNotLoggedIn();
                 if(isset($_POST['scheduleName']) && isset($_POST['scheduleDesc'])&& isset($_SESSION['uid'])){
                     addSimpleSchedule($_POST['scheduleName'],$_POST['scheduleDesc'],$_SESSION['uid']);
                 }
 
             case 'changeDate':
-                $util->redirectIfNotLoggedIn();
-                if(isset($_POST['scheduleId']) && isset($_POST['date']) && isset($_SESSION['uid'])){
-                    changeDate($_POST['scheduleId'],$_POST['date'],$_SESSION['uid']);
-                }
+            if(isset($_POST['scheduleId']) && isset($_POST['date']) && isset($_SESSION['uid'])){
+                changeDate($_POST['scheduleId'],$_POST['date'],$_SESSION['uid']);
+            }
+
+            case "addEditAppointment":
+                addEditSchedule($_POST,$_SESSION['uid']);
+                break;
                 
             default :
                 break;

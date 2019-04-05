@@ -193,7 +193,9 @@ function displayMain(){
 
 function addEditSchedule($data,$uid){
     $addAffLines = new AddModifyDB();
-    $addAffLines-> addEditSchedule($data,$uid);
+    $result = $addAffLines-> addEditSchedule($data,$uid);
+    ob_end_clean();
+    echo $result;
 }
 
 function modifyButton($modWeekly){

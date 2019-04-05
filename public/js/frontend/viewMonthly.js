@@ -18,10 +18,10 @@ function sendScheduleForm(form) {
 		xhr.open('POST', 'index.php');
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
-				form.reset();
 				switch (xhr.response) {
 					case 'success':
 						location.reload();
+						form.reset();
 						break;
 
 					default:
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						}
 					});
 					document.body.appendChild(clientUtils.createModal(detailedSchedule, [ '70%' ]));
-					sendScheduleForm(detailedSchedule);
+					sendScheduleForm(detailedSchedule.querySelector('form'));
 				}
 			}
 		},
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				}
 			});
 			document.body.appendChild(clientUtils.createModal(detailedSchedule, [ '70%' ]));
-			sendScheduleForm(detailedSchedule);
+			sendScheduleForm(detailedSchedule.querySelector('form'));
 		},
 		selectable: true,
 		editable: true,

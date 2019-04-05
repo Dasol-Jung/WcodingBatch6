@@ -3,24 +3,14 @@
  * This class is for CRUD communication with database via kakao chatbot.
  * Response and request body will be only json.
  */
-class ScheduleManager{
-
-    private function dbConnect(){
-        try{
-            $db = new PDO('mysql:host=192.168.1.250:3306;dbname=weekly_scheduler;charset=utf8', 'weekly_scheduler_admin', 'forestOrange43Vita',array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
-            return $db;
-        }
-        catch(Exception $e){
-            $errorMessage = $e->getMessage();
-            require('view/frontend/errorView.php');
-        }
-    }
+require_once('model/ManagerDB.php');
+class ScheduleManager extends ManagerDB{
 
     //read one day schedule from db
 
     public function readOneSchedule($userId, $date){
 
-        $db= $this->dbConnect();
+        $db= parent::dbConnect();
         $isAuthenticated = $this->authenticate($db,$userId);
         if($isAuthenticated===true){
             $getSchedule = $db->prepare("SELECT title, description FROM schedule WHERE user_id=:user_id AND event_date = :event_date");
@@ -76,7 +66,7 @@ class ScheduleManager{
 
     public function createSchedule($userId, $title, $date){
 
-        $db= $this->dbConnect();
+        $db= parent::dbConnect();
         $isAuthenticated = $this->authenticate($db,$userId);
         if($isAuthenticated===true){
             $addSchedule = $db->prepare("INSERT INTO schedule (title, event_date, user_id) VALUES(:title, :event_date, :user_id)");

@@ -7,8 +7,8 @@ class ManagerDB {
             return $db;
         }
         catch(Exception $e){
-            $errorMessage = $e->getMessage();
-            require('view/frontend/errorView.php');
+            ob_end_clean();
+            require_once('view/frontend/errorView.php');
         }
     }
 }
